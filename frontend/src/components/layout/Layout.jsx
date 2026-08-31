@@ -15,6 +15,7 @@ export default function Layout({ onScenarioChange, lastUpdated, activeScenario }
   };
 
   const handleSimulated = (scenario) => {
+    setRefreshTrigger((prev) => prev + 1);
     if (onScenarioChange) onScenarioChange(scenario);
   };
 
@@ -34,7 +35,10 @@ export default function Layout({ onScenarioChange, lastUpdated, activeScenario }
         />
 
         <main className="flex-1 p-4 md:p-8 max-w-7xl w-full mx-auto space-y-6">
-          <Outlet context={{ refreshTrigger, onRefresh: handleRefresh }} />
+          <Outlet
+            key={`${activeScenario}-${refreshTrigger}`}
+            context={{ refreshTrigger, onRefresh: handleRefresh, activeScenario }}
+          />
         </main>
       </div>
 
