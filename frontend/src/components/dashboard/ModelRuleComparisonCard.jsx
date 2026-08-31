@@ -7,20 +7,20 @@ export default function ModelRuleComparisonCard({ disagreementData }) {
   const item = disagreementData?.disagreements?.[0];
 
   return (
-    <div className="p-6 md:p-7 rounded-2xl bg-gradient-to-br from-cyber-brown-950 via-cyber-black to-cyber-amber-950 border border-cyber-brown-800 shadow-2xl flex flex-col justify-between space-y-5 backdrop-blur-md">
+    <div className="p-6 md:p-7 rounded-2xl bg-white border border-[#ebdcc7] shadow-xs flex flex-col justify-between space-y-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-cyber-brown-900 border border-cyber-brown-700/80 flex items-center justify-center text-amber-400 shadow-md">
+          <div className="w-9 h-9 rounded-xl bg-[#fef3c7] border border-[#fde68a] flex items-center justify-center text-[#b45309]">
             <GitCompare className="w-4 h-4" />
           </div>
           <div>
-            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+            <h3 className="text-sm font-bold text-[#221207] flex items-center gap-2">
               Model vs Rule Verification
-              <span className="text-[10px] font-normal text-cyber-beige-400 font-mono">
+              <span className="text-[10px] font-normal text-[#7a644c] font-mono">
                 (Learned Neural AI vs Deterministic Signature)
               </span>
             </h3>
-            <p className="text-xs text-cyber-beige-300">
+            <p className="text-xs text-[#544230]">
               When AI predictions and deterministic rules diverge, the disagreement becomes a primary security signal.
             </p>
           </div>
@@ -28,7 +28,7 @@ export default function ModelRuleComparisonCard({ disagreementData }) {
 
         <Link
           to="/disagreements"
-          className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1 transition-colors font-mono"
+          className="text-xs font-bold text-[#b45309] hover:text-[#92400e] flex items-center gap-1 transition-colors font-mono"
         >
           <span>All Disagreements</span>
           <ArrowRight className="w-3.5 h-3.5" />
@@ -38,44 +38,44 @@ export default function ModelRuleComparisonCard({ disagreementData }) {
       {/* Side-by-side comparison boxes */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* AI Model Output */}
-        <div className="p-4 rounded-xl bg-gradient-to-br from-cyber-brown-900/95 to-cyber-amber-950/80 border border-amber-600/40 space-y-2 shadow-md">
+        <div className="p-4 rounded-xl bg-[#fffbeb] border border-[#fde68a] space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-amber-300 uppercase tracking-wider flex items-center gap-1.5 font-mono">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <span className="text-[11px] font-bold text-[#b45309] uppercase tracking-wider flex items-center gap-1.5 font-mono">
+              <Sparkles className="w-3.5 h-3.5 text-[#d97706]" />
               Neural AI Model Prediction
             </span>
-            <span className="text-xs font-mono font-bold text-amber-200 bg-amber-950 px-2.5 py-0.5 rounded border border-amber-700">
+            <span className="text-xs font-mono font-bold text-[#78350f] bg-[#fef3c7] px-2.5 py-0.5 rounded border border-[#fde68a]">
               {formatConfidence(item?.model_confidence || 0.88)}
             </span>
           </div>
 
           <div>
-            <span className="text-sm font-bold text-white block">
+            <span className="text-sm font-bold text-[#221207] block">
               {item?.model_prediction || 'Multi-Stage Lateral Movement Campaign'}
             </span>
-            <span className="text-[11px] text-cyber-beige-300 font-mono block mt-0.5">
+            <span className="text-[11px] text-[#7a644c] font-mono block mt-0.5">
               Model: {item?.model_architecture || 'LSTM-B + Graph FastRP Features'}
             </span>
           </div>
         </div>
 
         {/* Rule Engine Output */}
-        <div className="p-4 rounded-xl bg-cyber-black/90 border border-cyber-brown-800 space-y-2">
+        <div className="p-4 rounded-xl bg-[#fcfaf7] border border-[#ebdcc7] space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-cyber-beige-300 uppercase tracking-wider flex items-center gap-1.5 font-mono">
-              <Shield className="w-3.5 h-3.5 text-cyber-beige-400" />
+            <span className="text-[11px] font-bold text-[#544230] uppercase tracking-wider flex items-center gap-1.5 font-mono">
+              <Shield className="w-3.5 h-3.5 text-[#7a644c]" />
               Deterministic Rule Engine
             </span>
-            <span className="text-xs font-mono font-bold text-amber-300 bg-amber-950/80 px-2.5 py-0.5 rounded border border-amber-700/60">
+            <span className="text-xs font-mono font-bold text-[#b45309] bg-[#fffbeb] px-2.5 py-0.5 rounded border border-[#fde68a]">
               Severity: {item?.rule_severity || 'Medium'}
             </span>
           </div>
 
           <div>
-            <span className="text-sm font-bold text-cyber-beige-200 block">
+            <span className="text-sm font-bold text-[#301a0a] block">
               {item?.rule_output || 'Port Scan Detected'}
             </span>
-            <span className="text-[11px] text-cyber-beige-400 font-mono block mt-0.5">
+            <span className="text-[11px] text-[#7a644c] font-mono block mt-0.5">
               Rule: {item?.rule_name || 'TCP SYN Port Sweep Detector'}
             </span>
           </div>
@@ -83,16 +83,16 @@ export default function ModelRuleComparisonCard({ disagreementData }) {
       </div>
 
       {/* Disagreement Callout Banner */}
-      <div className="p-4 rounded-xl bg-gradient-to-r from-amber-950/80 to-cyber-black border border-amber-700/60 flex items-start gap-3 shadow-md">
-        <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5 animate-pulse" />
+      <div className="p-4 rounded-xl bg-[#fffbeb] border border-[#fde68a] flex items-start gap-3">
+        <AlertTriangle className="w-4 h-4 text-[#d97706] shrink-0 mt-0.5" />
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-amber-300 font-mono">
+            <span className="text-xs font-bold text-[#92400e] font-mono">
               ⚠ MODEL–RULE DISAGREEMENT DETECTED
             </span>
-            <span className="text-[10px] font-mono text-amber-400/80">Target: {item?.target_node}</span>
+            <span className="text-[10px] font-mono text-[#b45309]">Target: {item?.target_node}</span>
           </div>
-          <p className="text-xs text-cyber-beige-200 leading-relaxed">
+          <p className="text-xs text-[#544230] leading-relaxed">
             {item?.why_it_matters ||
               'Learned AI temporal graph model and deterministic rule outputs differ. The static rule classified the activity as an isolated port sweep, whereas graph embeddings identified targeted lateral reconnaissance.'}
           </p>

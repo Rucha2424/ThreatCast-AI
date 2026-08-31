@@ -4,74 +4,48 @@
 
 @layer base {
   body {
-    background-color: #0c0704;
-    color: #ebdcc7;
+    background-color: #fbf8f4;
+    color: #382012;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     overflow-x: hidden;
   }
 
-  /* Custom Cyber Amber-Brown Scrollbars */
+  /* Custom Light Beige & Amber Scrollbars */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #140b06;
+    background: #f5efe6;
   }
   ::-webkit-scrollbar-thumb {
-    background: #482916;
+    background: #ded0bc;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #7c3f0e;
+    background: #cbab83;
   }
 }
 
 @layer utilities {
-  .glow-ai {
-    box-shadow: 0 0 30px -3px rgba(245, 158, 11, 0.4);
-  }
-  .glow-threat {
-    box-shadow: 0 0 30px -3px rgba(249, 115, 22, 0.5);
-  }
-  .glow-warning {
-    box-shadow: 0 0 30px -3px rgba(245, 158, 11, 0.4);
-  }
-  .glow-secure {
-    box-shadow: 0 0 30px -3px rgba(132, 204, 22, 0.4);
-  }
-  .glow-neural {
-    box-shadow: 0 0 35px -2px rgba(251, 191, 36, 0.35);
-  }
-
   .bg-cyber-glass {
-    background: linear-gradient(135deg, rgba(23, 14, 8, 0.88) 0%, rgba(12, 7, 4, 0.96) 100%);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(124, 63, 14, 0.35);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid #ebe1d3;
   }
 
   .bg-cyber-card {
-    background: linear-gradient(145deg, #1f120a 0%, #120a05 100%);
-    border: 1px solid rgba(72, 41, 22, 0.45);
+    background: #ffffff;
+    border: 1px solid #ebe1d3;
   }
 
   .bg-cyber-card-hover {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s ease-in-out;
   }
   .bg-cyber-card-hover:hover {
-    background: linear-gradient(145deg, #2d1b0f 0%, #1a0e07 100%);
-    border-color: rgba(245, 158, 11, 0.5);
-    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.8), 0 0 20px rgba(217, 119, 6, 0.25);
-  }
-
-  /* Neural Grid & Scanlines */
-  .cyber-grid-pattern {
-    background-image: 
-      radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.08) 0%, transparent 60%),
-      linear-gradient(to right, rgba(124, 63, 14, 0.14) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(124, 63, 14, 0.14) 1px, transparent 1px);
-    background-size: 100% 100%, 32px 32px, 32px 32px;
+    border-color: #d97706;
+    box-shadow: 0 8px 24px -4px rgba(84, 46, 20, 0.1);
   }
 }

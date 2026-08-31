@@ -25,7 +25,7 @@ const SCENARIO_COORDINATES = {
     'database-02': { x: 760, y: 270 },
     'gateway-01': { x: 620, y: 410 },
   },
-  // Lateral Movement Wave: Horizontal expanded battlefront
+  // Lateral Movement Wave
   lateral_movement_wave: {
     'user-014': { x: 110, y: 220 },
     'user-009': { x: 130, y: 390 },
@@ -35,7 +35,7 @@ const SCENARIO_COORDINATES = {
     'database-02': { x: 740, y: 160 },
     'gateway-01': { x: 740, y: 340 },
   },
-  // Exfiltration Crisis: Linear high-speed egress funnel
+  // Exfiltration Crisis
   exfiltration_crisis: {
     'user-014': { x: 110, y: 130 },
     'user-009': { x: 110, y: 370 },
@@ -45,7 +45,7 @@ const SCENARIO_COORDINATES = {
     'database-02': { x: 670, y: 230 },
     'gateway-01': { x: 810, y: 320 },
   },
-  // Ransomware Staging: Radial mesh cluster
+  // Ransomware Staging
   ransomware_staging: {
     'user-014': { x: 160, y: 140 },
     'user-009': { x: 160, y: 340 },
@@ -90,93 +90,77 @@ export default function InteractiveNetworkGraph({
   const viewBox = compact ? '0 0 920 500' : '0 0 920 520';
 
   return (
-    <div className="relative w-full bg-cyber-obsidian rounded-2xl overflow-hidden border border-cyber-brown-800 shadow-2xl select-none group">
-      {/* Ambient Warm Amber-Brown Glow Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cyber-brown-950/80 via-cyber-black/90 to-cyber-amber-950/40 pointer-events-none" />
+    <div className="relative w-full bg-[#fdfcf9] rounded-2xl overflow-hidden border border-[#ebdcc7] shadow-sm select-none group">
+      {/* Subtle Dot Grid Pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(#ded0bc_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
 
-      {/* Cyber Grid Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(#7c3f0e_1px,transparent_1px)] [background-size:28px_28px] opacity-25 pointer-events-none" />
-
-      {/* Top Cyber Legend Bar */}
-      <div className="absolute top-4 left-4 right-4 z-10 flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono text-cyber-beige-200 bg-cyber-brown-950/90 backdrop-blur-md px-4 py-2.5 rounded-xl border border-cyber-brown-700/60 shadow-lg">
+      {/* Top Legend Bar */}
+      <div className="absolute top-4 left-4 right-4 z-10 flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono text-[#544230] bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-xl border border-[#ebdcc7] shadow-xs">
         <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1.5 text-cyber-beige-100">
-            <span className="w-2.5 h-2.5 rounded-full bg-lime-400 shadow-[0_0_8px_#84cc16]" /> Normal
+          <span className="flex items-center gap-1.5 text-[#382819] font-medium">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#65a30d]" /> Normal
           </span>
-          <span className="flex items-center gap-1.5 text-cyber-beige-100">
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_#fbbf24]" /> Suspicious
+          <span className="flex items-center gap-1.5 text-[#382819] font-medium">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#d97706]" /> Suspicious
           </span>
-          <span className="flex items-center gap-1.5 text-orange-300 font-bold">
-            <span className="w-2.5 h-2.5 rounded-full bg-orange-500 animate-ping shadow-[0_0_12px_#f97316]" /> Compromised
+          <span className="flex items-center gap-1.5 text-[#c2410c] font-bold">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#ea580c]" /> Compromised
           </span>
-          <span className="flex items-center gap-1.5 text-amber-300 font-bold">
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_10px_#f59e0b]" /> Forecasted (T+1..3)
+          <span className="flex items-center gap-1.5 text-[#b45309] font-bold">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#f59e0b]" /> Forecasted (T+1..3)
           </span>
         </div>
 
         <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1.5 text-amber-400 font-semibold">
-            <span className="w-5 h-1 bg-gradient-to-r from-amber-600 to-amber-400 rounded-full shadow-[0_0_8px_#f59e0b]" />
+          <span className="flex items-center gap-1.5 text-[#b45309] font-semibold">
+            <span className="w-5 h-1 bg-[#d97706] rounded-full" />
             Active Vector
           </span>
-          <span className="flex items-center gap-1.5 text-cyber-beige-300 font-semibold">
-            <span className="w-5 h-0.5 border-t-2 border-dashed border-amber-300" />
+          <span className="flex items-center gap-1.5 text-[#7a644c] font-semibold">
+            <span className="w-5 h-0.5 border-t-2 border-dashed border-[#d97706]" />
             Predicted Synapse
           </span>
         </div>
       </div>
 
-      {/* SVG Neural Topology Canvas */}
+      {/* SVG Topology Canvas */}
       <svg
         viewBox={viewBox}
         className="w-full h-full relative z-0"
         style={{ minHeight: `${height}px` }}
       >
         <defs>
-          {/* Amber & Bronze Glow Filters */}
-          <filter id="cyber-glow-threat" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="8" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-
-          <filter id="cyber-glow-forecast" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="7" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-
-          {/* Gradients for Neural Axon Edges */}
-          <linearGradient id="grad-attack-axon" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#f97316" />
-            <stop offset="50%" stopColor="#f59e0b" />
+          {/* Gradients for Edges */}
+          <linearGradient id="grad-attack-light" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ea580c" />
             <stop offset="100%" stopColor="#d97706" />
           </linearGradient>
 
-          <linearGradient id="grad-forecast-axon" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#fbbf24" />
-            <stop offset="50%" stopColor="#d97706" />
-            <stop offset="100%" stopColor="#78350f" />
+          <linearGradient id="grad-forecast-light" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#d97706" />
+            <stop offset="100%" stopColor="#f59e0b" />
           </linearGradient>
 
-          <linearGradient id="grad-normal-axon" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#482916" />
-            <stop offset="100%" stopColor="#22140c" />
+          <linearGradient id="grad-normal-light" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ded0bc" />
+            <stop offset="100%" stopColor="#ccbaa2" />
           </linearGradient>
 
           {/* Marker Arrows */}
-          <marker id="marker-threat" markerWidth="10" markerHeight="10" refX="32" refY="5" orient="auto">
-            <path d="M 0 1 L 9 5 L 0 9 z" fill="#f59e0b" />
+          <marker id="marker-threat-light" markerWidth="9" markerHeight="9" refX="30" refY="4.5" orient="auto">
+            <path d="M 0 1 L 8 4.5 L 0 8 z" fill="#ea580c" />
           </marker>
 
-          <marker id="marker-forecast" markerWidth="10" markerHeight="10" refX="32" refY="5" orient="auto">
-            <path d="M 0 1 L 9 5 L 0 9 z" fill="#fbbf24" />
+          <marker id="marker-forecast-light" markerWidth="9" markerHeight="9" refX="30" refY="4.5" orient="auto">
+            <path d="M 0 1 L 8 4.5 L 0 8 z" fill="#d97706" />
           </marker>
 
-          <marker id="marker-normal" markerWidth="8" markerHeight="8" refX="28" refY="4" orient="auto">
-            <path d="M 0 1 L 7 4 L 0 7 z" fill="#482916" />
+          <marker id="marker-normal-light" markerWidth="7" markerHeight="7" refX="26" refY="3.5" orient="auto">
+            <path d="M 0 1 L 6 3.5 L 0 6 z" fill="#ccbaa2" />
           </marker>
         </defs>
 
-        {/* 1. Render Neural Interconnecting Edges (Curved Bezier Synaptic Axons) */}
+        {/* 1. Render Clean Connecting Edges */}
         {edges.map((edge) => {
           const sourceCoord = coordsMap[edge.source] || { x: 200, y: 200 };
           const targetCoord = coordsMap[edge.target] || { x: 450, y: 200 };
@@ -184,7 +168,6 @@ export default function InteractiveNetworkGraph({
           const isAttack = edge.is_attack_path;
           const isForecast = edge.is_forecasted_path;
 
-          // Compute gentle curved control point for organic neural look
           const dx = targetCoord.x - sourceCoord.x;
           const dy = targetCoord.y - sourceCoord.y;
           const cx = (sourceCoord.x + targetCoord.x) / 2 - dy * 0.12;
@@ -192,40 +175,29 @@ export default function InteractiveNetworkGraph({
 
           const pathD = `M ${sourceCoord.x} ${sourceCoord.y} Q ${cx} ${cy} ${targetCoord.x} ${targetCoord.y}`;
 
-          let stroke = 'url(#grad-normal-axon)';
+          let stroke = 'url(#grad-normal-light)';
           let strokeWidth = 2;
-          let markerEnd = 'url(#marker-normal)';
+          let markerEnd = 'url(#marker-normal-light)';
           let strokeDasharray = 'none';
 
           if (isAttack) {
-            stroke = 'url(#grad-attack-axon)';
-            strokeWidth = 4;
-            markerEnd = 'url(#marker-threat)';
-            strokeDasharray = '10 5';
+            stroke = 'url(#grad-attack-light)';
+            strokeWidth = 3.5;
+            markerEnd = 'url(#marker-threat-light)';
+            strokeDasharray = '8 4';
           } else if (isForecast) {
-            stroke = 'url(#grad-forecast-axon)';
-            strokeWidth = 3;
-            markerEnd = 'url(#marker-forecast)';
+            stroke = 'url(#grad-forecast-light)';
+            strokeWidth = 2.5;
+            markerEnd = 'url(#marker-forecast-light)';
             strokeDasharray = '6 4';
           }
 
-          // Midpoint for badge placement
           const midX = (sourceCoord.x + targetCoord.x) / 2 + (cx - (sourceCoord.x + targetCoord.x) / 2) * 0.5;
           const midY = (sourceCoord.y + targetCoord.y) / 2 + (cy - (sourceCoord.y + targetCoord.y) / 2) * 0.5;
 
           return (
-            <g key={edge.id} className="transition-all duration-700 ease-in-out">
-              {/* Outer Synaptic Glow Line */}
-              {(isAttack || isForecast) && (
-                <path
-                  d={pathD}
-                  fill="none"
-                  stroke={isAttack ? 'rgba(245, 158, 11, 0.35)' : 'rgba(251, 191, 36, 0.25)'}
-                  strokeWidth={strokeWidth + 6}
-                />
-              )}
-
-              {/* Main Connecting Path */}
+            <g key={edge.id} className="transition-all duration-500 ease-in-out">
+              {/* Path */}
               <path
                 d={pathD}
                 fill="none"
@@ -233,25 +205,24 @@ export default function InteractiveNetworkGraph({
                 strokeWidth={strokeWidth}
                 strokeDasharray={strokeDasharray}
                 markerEnd={markerEnd}
-                className={isAttack ? 'animate-flow-edge' : isForecast ? 'animate-pulse' : ''}
               />
 
               {/* Protocol Badge */}
               <rect
-                x={midX - 32}
-                y={midY - 11}
-                width="64"
+                x={midX - 30}
+                y={midY - 10}
+                width="60"
                 height="20"
                 rx="6"
-                fill="#170e08"
-                stroke={isAttack ? '#f59e0b' : isForecast ? '#d97706' : '#482916'}
+                fill="#ffffff"
+                stroke={isAttack ? '#ea580c' : isForecast ? '#d97706' : '#ded0bc'}
                 strokeWidth="1.2"
-                className="shadow-md"
+                className="shadow-xs"
               />
               <text
                 x={midX}
-                y={midY + 3}
-                fill={isAttack ? '#fde68a' : isForecast ? '#fef3c7' : '#ddc4a5'}
+                y={midY + 3.5}
+                fill={isAttack ? '#c2410c' : isForecast ? '#b45309' : '#7a644c'}
                 fontSize="9.5"
                 fontFamily="JetBrains Mono, monospace"
                 textAnchor="middle"
@@ -263,7 +234,7 @@ export default function InteractiveNetworkGraph({
           );
         })}
 
-        {/* 2. Render Neural Core Nodes */}
+        {/* 2. Render Topology Nodes */}
         {nodes.map((node) => {
           const coord = coordsMap[node.id] || { x: 450, y: 250 };
           const isSelected = selectedNodeId === node.id;
@@ -273,24 +244,26 @@ export default function InteractiveNetworkGraph({
 
           const Icon = ICON_MAP[node.type] || Server;
 
-          let ringColor = '#482916';
-          let bgColor = '#170e08';
-          let glowFilter = 'none';
+          let ringColor = '#ded0bc';
+          let bgColor = '#ffffff';
+          let iconColor = '#544230';
 
           if (node.state === 'compromised' || isInAttackPath) {
-            ringColor = '#f97316';
-            bgColor = '#3b1807';
-            glowFilter = 'url(#cyber-glow-threat)';
+            ringColor = '#ea580c';
+            bgColor = '#fff7ed';
+            iconColor = '#c2410c';
           } else if (node.state === 'suspicious') {
-            ringColor = '#f59e0b';
-            bgColor = '#2b1904';
+            ringColor = '#d97706';
+            bgColor = '#fffbeb';
+            iconColor = '#b45309';
           } else if (node.state === 'target' || isForecastTarget) {
-            ringColor = '#fbbf24';
-            bgColor = '#331e08';
-            glowFilter = 'url(#cyber-glow-forecast)';
+            ringColor = '#f59e0b';
+            bgColor = '#fefce8';
+            iconColor = '#92400e';
           } else {
             ringColor = '#84cc16';
-            bgColor = '#111905';
+            bgColor = '#f7fee7';
+            iconColor = '#4d7c0f';
           }
 
           return (
@@ -299,84 +272,58 @@ export default function InteractiveNetworkGraph({
               onClick={() => onSelectNode && onSelectNode(node)}
               onMouseEnter={() => setHoveredNodeId(node.id)}
               onMouseLeave={() => setHoveredNodeId(null)}
-              className="cursor-pointer transition-all duration-700 ease-in-out"
+              className="cursor-pointer transition-all duration-500 ease-in-out"
               transform={`translate(${coord.x}, ${coord.y})`}
             >
-              {/* Selected Spinning Target Ring */}
+              {/* Selected Ring */}
               {isSelected && (
                 <circle
-                  r="38"
+                  r="34"
                   fill="none"
-                  stroke="#fbbf24"
+                  stroke="#b45309"
                   strokeWidth="2.5"
-                  strokeDasharray="6 4"
-                  className="animate-spin"
-                  style={{ animationDuration: '6s' }}
+                  strokeDasharray="5 3"
                 />
               )}
 
-              {/* Pulsing Neural Concentric Rings for Compromised/Forecasted Nodes */}
-              {(node.state === 'compromised' || isInAttackPath) && (
-                <>
-                  <circle
-                    r="34"
-                    fill="none"
-                    stroke="#f97316"
-                    strokeWidth="1.5"
-                    opacity="0.6"
-                    className="animate-ping"
-                    style={{ animationDuration: '2.5s' }}
-                  />
-                  <circle
-                    r="42"
-                    fill="none"
-                    stroke="#d97706"
-                    strokeWidth="1"
-                    opacity="0.3"
-                    className="animate-pulse"
-                  />
-                </>
-              )}
-
-              {/* Outer Synaptic Node Base */}
+              {/* Node Base Circle */}
               <circle
-                r="26"
+                r="24"
                 fill={bgColor}
                 stroke={ringColor}
-                strokeWidth={isSelected ? 3.5 : 2.5}
-                filter={glowFilter}
-                className="transition-all duration-300"
+                strokeWidth={isSelected ? 3 : 2}
+                className="shadow-sm transition-all duration-200"
               />
 
               {/* Center Icon */}
-              <foreignObject x="-13" y="-13" width="26" height="26" className="pointer-events-none">
-                <div className="w-full h-full flex items-center justify-center text-cyber-beige-50">
-                  <Icon className="w-4 h-4 drop-shadow-[0_0_6px_rgba(251,191,36,0.7)]" />
+              <foreignObject x="-12" y="-12" width="24" height="24" className="pointer-events-none">
+                <div className="w-full h-full flex items-center justify-center" style={{ color: iconColor }}>
+                  <Icon className="w-4 h-4" />
                 </div>
               </foreignObject>
 
-              {/* Cyber Risk Score Pill */}
+              {/* Risk Score Pill */}
               <rect
-                x="14"
-                y="-28"
-                width="30"
-                height="16"
-                rx="5"
+                x="12"
+                y="-26"
+                width="28"
+                height="15"
+                rx="4"
                 fill={
                   node.risk_score > 75
-                    ? '#c2410c'
+                    ? '#ea580c'
                     : node.risk_score > 40
-                    ? '#b45309'
-                    : '#4d7c0f'
+                    ? '#d97706'
+                    : '#65a30d'
                 }
-                stroke="#0a0604"
+                stroke="#ffffff"
                 strokeWidth="1.5"
               />
               <text
-                x="29"
-                y="-16"
-                fill="#faf6f0"
-                fontSize="9"
+                x="26"
+                y="-15"
+                fill="#ffffff"
+                fontSize="8.5"
                 fontWeight="800"
                 fontFamily="JetBrains Mono, monospace"
                 textAnchor="middle"
@@ -384,25 +331,25 @@ export default function InteractiveNetworkGraph({
                 {node.risk_score}
               </text>
 
-              {/* Node Title (Warm Ivory / Beige) */}
+              {/* Node Title */}
               <text
                 x="0"
-                y="42"
-                fill="#faf6f0"
-                fontSize="11.5"
+                y="38"
+                fill="#301a0a"
+                fontSize="11"
                 fontWeight="800"
                 textAnchor="middle"
-                className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] tracking-wide font-mono"
+                className="font-mono tracking-wide"
               >
                 {node.id.toUpperCase()}
               </text>
 
-              {/* Node IP Subtitle (Warm Sand Beige) */}
+              {/* Node IP */}
               <text
                 x="0"
-                y="55"
-                fill="#ddc4a5"
-                fontSize="9.5"
+                y="50"
+                fill="#7a644c"
+                fontSize="9"
                 fontFamily="JetBrains Mono, monospace"
                 textAnchor="middle"
                 fontWeight="600"
@@ -414,13 +361,13 @@ export default function InteractiveNetworkGraph({
         })}
       </svg>
 
-      {/* Bottom Cyber Status Bar */}
-      <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between text-xs text-cyber-beige-300 bg-cyber-brown-950/90 backdrop-blur-md px-4 py-2.5 rounded-xl border border-cyber-brown-700/60 font-mono shadow-xl">
+      {/* Bottom Status Bar */}
+      <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between text-xs text-[#544230] bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-xl border border-[#ebdcc7] font-mono shadow-xs">
         <span className="flex items-center gap-2">
-          <Activity className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+          <Activity className="w-3.5 h-3.5 text-[#b45309]" />
           <span>Click any node to inspect telemetry, observed attacks & predicted next actions.</span>
         </span>
-        <span className="text-amber-400 font-bold tracking-wider">
+        <span className="text-[#b45309] font-bold tracking-wider">
           High-Risk Nodes: {graphData.high_risk_nodes_count || 0}
         </span>
       </div>

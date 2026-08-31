@@ -25,11 +25,11 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
     if (active && payload && payload.length) {
       const p = payload[0].payload;
       return (
-        <div className="p-3 bg-cyber-black text-white rounded-xl border border-cyber-brown-700 shadow-2xl text-xs font-mono">
-          <p className="font-bold text-amber-400">{p.horizon}: {p.stageName}</p>
-          <p className="text-cyber-beige-300 mt-1">Confidence: {p.confidencePct}%</p>
-          <p className="text-cyber-beige-400">Impact Window: {p.time}</p>
-          <p className="text-cyber-beige-400">Tactic: {p.tactic}</p>
+        <div className="p-3 bg-white text-[#221207] rounded-xl border border-[#ebdcc7] shadow-lg text-xs font-mono">
+          <p className="font-bold text-[#b45309]">{p.horizon}: {p.stageName}</p>
+          <p className="text-[#544230] mt-1">Confidence: {p.confidencePct}%</p>
+          <p className="text-[#7a644c]">Impact Window: {p.time}</p>
+          <p className="text-[#7a644c]">Tactic: {p.tactic}</p>
         </div>
       );
     }
@@ -37,17 +37,17 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
   };
 
   return (
-    <div className="p-6 md:p-7 rounded-2xl bg-gradient-to-br from-cyber-brown-950 via-cyber-black to-cyber-amber-950 border border-cyber-brown-800 shadow-2xl space-y-4 backdrop-blur-md">
+    <div className="p-6 md:p-7 rounded-2xl bg-white border border-[#ebdcc7] shadow-xs space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-bold text-white tracking-tight">
+          <h3 className="text-sm font-bold text-[#221207] tracking-tight">
             Forecast Confidence Decay Curve
           </h3>
-          <p className="text-xs text-cyber-beige-400">
+          <p className="text-xs text-[#7a644c]">
             Neural model certainty distribution across forecasted time horizons (T+1 to T+3).
           </p>
         </div>
-        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800 font-bold">
+        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] border border-[#fde68a] font-bold">
           Temporal Model
         </span>
       </div>
@@ -56,22 +56,22 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data} margin={{ top: 10, right: 20, left: -20, bottom: 0 }}>
             <defs>
-              <linearGradient id="confidenceGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.4} />
-                <stop offset="95%" stopColor="#f59e0b" stopOpacity={0.0} />
+              <linearGradient id="confidenceGradLight" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#d97706" stopOpacity={0.25} />
+                <stop offset="95%" stopColor="#d97706" stopOpacity={0.0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#22140c" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#f5efe6" vertical={false} />
             <XAxis
               dataKey="horizon"
-              tick={{ fontSize: 11, fill: '#cbab83', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#311c10' }}
+              tick={{ fontSize: 11, fill: '#7a644c', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#ded0bc' }}
               tickLine={false}
             />
             <YAxis
               domain={[0, 100]}
-              tick={{ fontSize: 11, fill: '#cbab83', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#311c10' }}
+              tick={{ fontSize: 11, fill: '#7a644c', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#ded0bc' }}
               tickLine={false}
               tickFormatter={(v) => `${v}%`}
             />
@@ -79,10 +79,10 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
             <Area
               type="monotone"
               dataKey="confidencePct"
-              stroke="#f59e0b"
-              strokeWidth={3}
+              stroke="#d97706"
+              strokeWidth={2.5}
               fillOpacity={1}
-              fill="url(#confidenceGrad)"
+              fill="url(#confidenceGradLight)"
             />
           </AreaChart>
         </ResponsiveContainer>

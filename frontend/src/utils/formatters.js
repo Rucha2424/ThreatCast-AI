@@ -14,40 +14,40 @@ export function getThreatLevelColor(level) {
   switch (level?.toUpperCase()) {
     case 'CRITICAL':
       return {
-        bg: 'bg-orange-950/80',
-        text: 'text-orange-300',
-        border: 'border-orange-700/60',
-        dot: 'bg-orange-500 shadow-[0_0_8px_#f97316]',
-        badge: 'bg-orange-950/90 text-orange-300 border-orange-600/60 shadow-[0_0_10px_rgba(249,115,22,0.3)]',
-        glow: 'shadow-[0_0_15px_rgba(249,115,22,0.4)]',
+        bg: 'bg-[#ffedd5]',
+        text: 'text-[#c2410c]',
+        border: 'border-[#fdba74]',
+        dot: 'bg-[#ea580c]',
+        badge: 'bg-[#ffedd5] text-[#c2410c] border-[#fdba74]',
+        glow: '',
       };
     case 'HIGH':
       return {
-        bg: 'bg-amber-950/80',
-        text: 'text-amber-300',
-        border: 'border-amber-700/60',
-        dot: 'bg-amber-500 shadow-[0_0_8px_#f59e0b]',
-        badge: 'bg-amber-950/90 text-amber-300 border-amber-600/60 shadow-[0_0_10px_rgba(245,158,11,0.3)]',
-        glow: 'shadow-[0_0_15px_rgba(245,158,11,0.4)]',
+        bg: 'bg-[#fef3c7]',
+        text: 'text-[#b45309]',
+        border: 'border-[#fde68a]',
+        dot: 'bg-[#d97706]',
+        badge: 'bg-[#fef3c7] text-[#b45309] border-[#fde68a]',
+        glow: '',
       };
     case 'MEDIUM':
       return {
-        bg: 'bg-cyber-brown-900/80',
-        text: 'text-cyber-beige-200',
-        border: 'border-cyber-brown-700/60',
-        dot: 'bg-amber-400 shadow-[0_0_8px_#fbbf24]',
-        badge: 'bg-cyber-brown-900/90 text-cyber-beige-200 border-cyber-brown-700/60',
+        bg: 'bg-[#f5efe6]',
+        text: 'text-[#544230]',
+        border: 'border-[#ded0bc]',
+        dot: 'bg-[#b45309]',
+        badge: 'bg-[#f5efe6] text-[#544230] border-[#ded0bc]',
         glow: '',
       };
     case 'LOW':
     default:
       return {
-        bg: 'bg-lime-950/80',
-        text: 'text-lime-300',
-        border: 'border-lime-700/60',
-        dot: 'bg-lime-400 shadow-[0_0_8px_#84cc16]',
-        badge: 'bg-lime-950/90 text-lime-300 border-lime-600/60 shadow-[0_0_10px_rgba(132,204,22,0.3)]',
-        glow: 'shadow-[0_0_15px_rgba(132,204,22,0.4)]',
+        bg: 'bg-[#f7fee7]',
+        text: 'text-[#4d7c0f]',
+        border: 'border-[#d9f99d]',
+        dot: 'bg-[#65a30d]',
+        badge: 'bg-[#f7fee7] text-[#4d7c0f] border-[#d9f99d]',
+        glow: '',
       };
   }
 }
@@ -60,14 +60,14 @@ export function getNodeTypeStyle(type) {
     case 'user':
       return { bg: '#d97706', label: 'User Entity' };
     case 'endpoint':
-      return { bg: '#cbab83', label: 'Workstation' };
+      return { bg: '#a37a58', label: 'Workstation' };
     case 'server':
-      return { bg: '#f59e0b', label: 'Domain Server' };
+      return { bg: '#b45309', label: 'Domain Server' };
     case 'database':
-      return { bg: '#b45309', label: 'Database Cluster' };
+      return { bg: '#78350f', label: 'Database Cluster' };
     case 'gateway':
-      return { bg: '#84cc16', label: 'Perimeter Gateway' };
+      return { bg: '#65a30d', label: 'Perimeter Gateway' };
     default:
-      return { bg: '#ddc4a5', label: 'Asset' };
+      return { bg: '#7a644c', label: 'Asset' };
   }
 }

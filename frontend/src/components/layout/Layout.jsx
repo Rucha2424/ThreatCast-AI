@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import SimModal from '../common/SimModal';
-import NeuralBackground from '../common/NeuralBackground';
 
 export default function Layout({ onScenarioChange, lastUpdated, activeScenario }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -21,10 +20,7 @@ export default function Layout({ onScenarioChange, lastUpdated, activeScenario }
   };
 
   return (
-    <div className="min-h-screen bg-cyber-black text-cyber-beige-100 flex relative selection:bg-amber-600 selection:text-white">
-      {/* Live Neural Axon Synapse Canvas Background */}
-      <NeuralBackground />
-
+    <div className="min-h-screen bg-[#fbf8f4] text-cyber-brown-900 flex relative selection:bg-amber-500 selection:text-white">
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
