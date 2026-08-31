@@ -51,7 +51,7 @@ export default function Login() {
         <div className="text-center mb-8 space-y-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-semibold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 mb-2">
             <Sparkles className="w-3.5 h-3.5" />
-            Smart India Hackathon 2026 Edition
+            Enterprise Threat Forecasting Edition
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-white">
             Predict the Attack. Stop It Before It Progresses.

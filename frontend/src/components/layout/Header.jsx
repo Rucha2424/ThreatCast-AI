@@ -55,8 +55,8 @@ export default function Header({
         </button>
 
         {/* Profile Avatar */}
-        <div className="w-8 h-8 rounded-full bg-soc-slate-100 border border-soc-slate-300 flex items-center justify-center text-xs font-bold text-soc-slate-700">
-          SIH
+        <div className="w-8 h-8 rounded-full bg-soc-navy-900 border border-soc-navy-700 flex items-center justify-center text-xs font-bold text-white">
+          TC
         </div>
       </div>
     </header>
