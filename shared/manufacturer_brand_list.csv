@@ -1,0 +1,90 @@
+# Schema: raw_string,parenthetical_code,canonical_name,looks_like_distributor,inferred_brands,notes
+# Source: Derived from all 76 distinct Part_Manuf values in /data/sample_input.csv
+# Rule: Entries with looks_like_distributor=true require Part_Desc fallback for brand extraction per AGENTS.md
+raw_string,parenthetical_code,canonical_name,looks_like_distributor,inferred_brands,notes
+Phillips Lighting (5831),5831,Signify (Philips Lighting),false,"Philips, Signify",OEM lighting manufacturer
+Milwaukee Accessory (4031),4031,Milwaukee Electric Tool Corp.,false,"Milwaukee, Milw",OEM power tool accessories and abrasives
+Boise Cascade Building Materials (BOICA),BOICA,Boise Cascade,true,"Boise Cascade, LP SmartSide, Trex, Simpson Strong-Tie, LP, Simpson",Distributor / Wholesaler of building products
+Appliance Dealers Cooperative (APPDE),APPDE,Appliance Dealers Cooperative,true,"Frigidaire, FRIGIDAIRE®, Whirlpool, Electrolux, GE Appliances, GE, Rheem, Café, Cafe, KitchenAid, LG, Bosch, Speed Queen, Maytag",Distributor / Buying cooperative for major appliances
+Kichler Lighting (KICLI),KICLI,Kichler Lighting LLC,false,Kichler,OEM decorative and architectural lighting
+Parksite (6151),6151,Parksite,true,"Azek, TimberTech, DuPont Tyvek, DuPont, Tyvek",Building materials distributor
+Black & Decker/dewlt (2585),2585,Stanley Black & Decker,false,"DEWALT, Dewlt, Black & Decker",OEM power tools and accessories
+Freud Inc (2435),2435,"Freud America, Inc.",false,"Diablo, Freud",OEM cutting tools and abrasives
+U S Lumber (3073),3073,U.S. LUMBER Group,true,"Trex, Fiberon, TimberTech",Two-step wholesale building materials distributor
+-,,Unspecified / Missing,false,,Null/placeholder value in raw distributor data
+Satco Prod Inc (5573),5573,"Satco Products, Inc.",false,"Satco, Nuvo",OEM lighting and electrical manufacturer
+Makita Usa Inc (5142),5142,"Makita U.S.A., Inc.",false,Makita,OEM industrial power tools and outdoor power equipment
+Southwire/g Turner (6603),6603,Southwire Company,false,"Southwire, Garvin","OEM electrical wire, cable, and boxes"
+Leviton Mfg Co (4927),4927,"Leviton Manufacturing Co., Inc.",false,Leviton,OEM electrical wiring devices and network solutions
+Festool USA (FESTO),FESTO,Festool USA,false,Festool,OEM precision woodworking power tools
+Tech Gear 5.7 Inc (TECGE),TECGE,Tech Gear 5.7 Inc.,false,"Mobile Warming, Fieldsheer, UTW Pro, Tech Gear",OEM heated apparel and work gear
+Kreg Tool Company (KRETO),KRETO,Kreg Tool Company,false,Kreg,OEM woodworking joinery and cutting solutions
+Edge Eyewear Inc (EDGSA),EDGSA,Wolf Peak International (Edge Eyewear),false,"Edge Eyewear",OEM safety eyewear
+U S Tape Company (6694),6694,U.S. Tape Company,false,"U.S. Tape, DuraWheel, Stringliner, US Tape",OEM measuring and layout tools
+Mirka Abrasives Inc (MIRUS),MIRUS,Mirka USA Inc.,false,"Mirka, Abranet, Hiolit",OEM surface finishing and abrasives
+Palmer Donavin Mfg Company (PALDO),PALDO,Palmer-Donavin,true,"Owens Corning, Protecto Wrap, CertainTeed, OC",Wholesale building materials distributor
+Hunter Fan Co (4381),4381,Hunter Fan Company,false,"Hunter, Casablanca",OEM ceiling fans and air purification
+Premier Metals (PREME),PREME,Premier Metals,false,Premier Metals,OEM metal roofing and siding manufacturer
+Jam Industrial Supply LLC (JAMIN),JAMIN,"Jam Industrial Supply, LLC",true,"3M, Scotch-Brite, Cubitron II, Cubitron, Stikit, Scotch, Milwaukee, Milw, Festool, Tyvek, Abranet, Paslode",Industrial distributor specializing in 3M tapes and abrasives
+Vessel Tools USA Inc (VESTO),VESTO,Vessel Tools USA Inc.,false,Vessel,OEM fastening tools and bits
+Oliver Machinery Company (OLIMA),OLIMA,Oliver Machinery,false,Oliver,OEM woodworking machinery
+Prime Wire & Cable (3562),3562,"Prime Wire & Cable, Inc.",false,"Prime Wire & Cable, Prime Wire",OEM power cords and timers
+Bow Products (BOWPR),BOWPR,Bow Products LLC,false,"Bow Products, GuidePRO, FeatherPRO, XTENDER, Bow",OEM woodworking safety and guidance tools
+Saw Stop LLC (SAWST),SAWST,SawStop LLC,false,"SawStop, Saw Stop",OEM table saws with flesh-sensing safety technology
+Rees Cast Stone Company (REECA),REECA,Rees Cast Stone Co.,false,"Rees, Spec Mix","OEM masonry, mortar, and architectural precast products"
+United Window & Door Manufacturing (UNIWI),UNIWI,United Window & Door,false,"United Window & Door, United",OEM vinyl windows and patio doors
+Westwood Lumber Sales (WESLU),WESLU,Westwood Lumber Sales,true,"Westwood, Doug Fir",Wholesale distributor of softwood lumber
+Woodpeckers Inc (WOODP),WOODP,Woodpeckers LLC,false,"Woodpeckers, AutoScale, BigCal, Align-A-Saw",OEM precision woodworking layout and routing tools
+Robt Bosch Tool Corp (6564),6564,Robert Bosch Tool Corporation,false,"Bosch, Dremel, RotoZip","OEM power tools, measuring lasers, and rotary accessories"
+Velux America Inc (VELAM),VELAM,VELUX America LLC,false,"VELUX, Velux",OEM roof windows and skylights
+Fenton Bros Electric Inc (FENBR),FENBR,Fenton Bros Electric,true,"Lutron, Leviton, Square D",Wholesale electrical distributor
+Square D Con Prod Dv (6825),6825,Schneider Electric (Square D),false,"Square D, Homeline, QO, Schneider Electric",OEM circuit breakers and load centers
+Whiteside Machine & Repair Co (WHIMA),WHIMA,Whiteside Machine Company,false,Whiteside,OEM router bits and CNC tooling
+CMT USA Inc (CMTUS),CMTUS,"CMT USA, Inc. (CMT Orange Tools)",false,"CMT, CMT Orange Tools","OEM saw blades, router bits, and cutter heads"
+JPW Industries (JPWIN),JPWIN,JPW Industries,false,"JET, Powermatic, Wilton, Baileigh, Jet",OEM industrial machinery and metal/woodworking tools
+Wera Tools NA Inc (WERTO),WERTO,Wera Tools Inc.,false,"Wera, Kraftform, Zyklop, Hex-Plus","OEM screwdrivers, ratchets, and hex keys"
+ProVia (PRODO),PRODO,ProVia LLC,false,"ProVia, ecoLitePlus","OEM exterior doors, windows, and vinyl siding"
+Certainteed Gypsum (2765),2765,CertainTeed LLC (Saint-Gobain),false,"CertainTeed, Easi-Lite, Firelite","OEM gypsum board, insulation, and roofing"
+Hager Hinge Co (4189),4189,Hager Companies,false,Hager,"OEM architectural door hardware, hinges, and thresholds"
+Cooper Lighting (7638),7638,Cooper Lighting Solutions,false,"Halo, Metalux, Lumark, Cooper Lighting",OEM residential and commercial lighting
+Feit Electric (3468),3468,Feit Electric Company,false,"Feit Electric, Feit","OEM LED bulbs, fixtures, and shop lights"
+ACG Brands (1154),1154,Alliance Consumer Group (ACG Brands),false,"NEBO, TRUE, Skeeter Hawk, iPROTEC, ACG Brands",OEM portable lighting and consumer tools
+Senco Products Inc (4650),4650,"Kyocera Senco Industrial Tools, Inc.",false,"SENCO, Senco",OEM pneumatic/cordless fastening tools and collated fasteners
+National Nail Corp (7439),7439,National Nail Corp.,true,"Paslode, CAMO, Pro-Fit",Distributor and manufacturer of building fasteners and tools
+Prebena (PREBE),PREBE,PREBENA Fastening Systems,false,Prebena,"OEM pneumatic fasteners, staplers, and nailers"
+Marshalltown Trowel (5155),5155,Marshalltown Company,false,"Marshalltown, Wal-Board Tools, Wal-Board","OEM drywall, masonry, and concrete tools"
+Ohio Firewatch Protection Inc (HOLFS),HOLFS,Ohio Firewatch Protection Inc.,true,"Amerex, Buckeye, Lith Fire Extinguishers, Lith",Fire protection service provider and distributor
+First Alert - B R K Brands (2754),2754,Resideo Technologies (First Alert / BRK),false,"First Alert, BRK","OEM smoke, CO, and fire safety devices"
+Malco Prod (2370),2370,"Malco Products, SBC",false,Malco,OEM specialized sheet metal hand tools and snips
+King Canada Inc (KINCA),KINCA,King Canada Inc.,false,"King Canada, King Industrial",OEM woodworking and metalworking machinery
+Woodstock Intl (3658),3658,"Woodstock International, Inc.",false,"Grizzly Industrial, Grizzly, Shop Fox, Woodstock",OEM woodworking machinery and accessories
+3 M Co (5293),5293,3M Company,false,"3M, Scotch, Tartan, Cubitron, Cubitron II, Stikit, Scotch-Brite","OEM abrasives, adhesives, and electrical tapes"
+Emseal Joint Systems Ltd (EMSJO),EMSJO,Sika Emseal (Emseal Joint Systems),false,"Emseal, Sika",OEM architectural expansion joints and sealants
+V & V Appliance Parts Inc (VVAPP),VVAPP,V&V Appliance Parts Inc.,true,"Alliance Laundry, Speed Queen, Whirlpool Parts, Speed Queen",Appliance parts wholesale distributor
+A J Manufacturing Inc (AJMAN),AJMAN,"A.J. Manufacturing, Inc.",false,"A.J. Manufacturing, AJ Manufacturing",OEM commercial and residential doors/access panels
+Huber Eng Wood LLC (3158),3158,Huber Engineered Woods LLC,false,"ZIP System, AdvanTech, Huber",OEM engineered wood panels and moisture barriers
+MillerTech Energy Solutions (MILTE),MILTE,MillerTech Energy Solutions LLC,false,MillerTech,OEM lithium batteries and solar energy equipment
+Metalmark Industrial Inc (METIN),METIN,Metalmark Industrial Inc.,true,"Dewalt, StealthMounts",Distributor and specialty accessory maker
+Thomas & Betts (7405),7405,ABB Installation Products Inc. (Thomas & Betts),false,"Thomas & Betts, Carlon, Steel City","OEM electrical fittings, boxes, and connectors"
+Cooper Wiring Devices (3560),3560,Eaton (Cooper Wiring Devices),false,"Arrow Hart, Eaton, Cooper Wiring","OEM switches, receptacles, and wall plates"
+Lithonia Lighting (2776),2776,Acuity Brands Lighting (Lithonia),false,"Lithonia Lighting, Acuity Brands, Lithonia",OEM commercial and residential luminaires
+Keystone (5702),5702,Keystone Technologies,false,"Keystone, SmartDrive","OEM LED lamps, drivers, and fixtures"
+Maxsa Innovations (MAXIN),MAXIN,MAXSA Innovations,false,"MAXSA Innovations, MAXSA",OEM solar security lights and automotive accessories
+Streamlight (7277),7277,"Streamlight, Inc.",false,Streamlight,"OEM professional tactical, weapon, and work lights"
+Police Security (9470),9470,Police Security Flashlights,false,Police Security,"OEM flashlights, headlamps, and batteries"
+Woods Wire Southwire (7579),7579,Southwire (Woods),false,"Woods, Southwire","OEM extension cords, power strips, and wire"
+Sabre (9195),9195,Security Equipment Corp. (SABRE),false,"SABRE, Sabre","OEM personal safety alarms, pepper sprays, and driveway alerts"
+Radians (7363),7363,"Radians, Inc.",false,"Radians, DEWALT Safety",OEM personal protective equipment (PPE)
+Amana Tool Corp (AMATO),AMATO,Amana Tool Corporation,false,"Amana Tool, Amana","OEM industrial cutting tools, CNC router bits, and saw blades"
+Irwin Industrial Tools (5863),5863,Stanley Black & Decker (IRWIN),false,"IRWIN, Vise-Grip, Marathon, Quick-Grip, Irwin","OEM hand tools, marking tools, and power tool accessories"
+J&G Machinery (JGMAC),JGMAC,J&G Machinery Inc.,true,"Maggi Technology, Steff, Cantek, Maggi",Distributor / Dealer of woodworking machinery and feeders
+Rheem Manufacturing (FRIG),,Rheem Manufacturing,false,"FRIGIDAIRE®, Frigidaire, Rheem","OEM HVAC, water heating, and appliance manufacturer"
+Whirlpool Corporation (WHIRL),,Whirlpool Corporation,false,"Whirlpool®, Whirlpool, KitchenAid, Maytag, Amana Appliance",OEM major home appliances
+GE Appliances (GEAPP),,GE Appliances (Haier),false,"GE Appliances, GE, Café, Cafe, Monogram, Haier, Hotpoint",OEM major appliances and kitchen equipment
+Lutron Electronics (LUTRO),,"Lutron Electronics Co., Inc.",false,"Lutron, Maestro, Diva, Caseta",OEM lighting control and shading systems
+The AZEK Company (AZEK),,The AZEK Company Inc.,false,"Azek, TimberTech",OEM premium building materials and decking
+Trex Company (TREX),,"Trex Company, Inc.",false,"Trex, Transcend, Enhance, Select",OEM composite decking and railing
+Owens Corning (OWCOR),,Owens Corning,false,"Owens Corning, OC, Duration","OEM insulation, roofing, and fiberglass composites"
+Illinois Tool Works (PASLO),,Illinois Tool Works Inc. (Paslode),false,"Paslode, ITW",OEM industrial fastening systems
+LG Electronics (LGELE),,LG Electronics USA,false,"LG, LG Signature, ThinQ",OEM consumer electronics and home appliances
+Protecto Wrap (PROWR),,Protecto Wrap Company,false,"Protecto Wrap, Protecto",OEM waterproofing membranes and flashing tapes

@@ -1,0 +1,12 @@
+# Schema: attribute_slot,attribute_label,standard_uom,allowed_values_or_pattern,is_required,provenance_rule,notes
+# Status: [CONTROLLED SCHEMA] - Collated Construction Fasteners & Hardware
+# Category: Building Materials>Fasteners & Hardware>Nails & Staples
+attribute_slot,attribute_label,standard_uom,allowed_values_or_pattern,is_required,provenance_rule,notes
+1,Fastener Type,,"Framing Nail, Finish Nail, Brad Nail, Roofing Nail, Coil Nail, Deck Screw, Timber Screw, Heavy Duty Staple",true,Manufacturer packaging / catalog,Fastener category and structural purpose
+2,Length,in,"1-1/4 in, 1-1/2 in, 1-3/4 in, 2 in, 2-3/8 in, 2-1/2 in, 3 in, 3-1/4 in, 3-1/2 in, 1/2 in, 3/8 in",true,Manufacturer packaging / dimensional spec,Fastener point-to-head length
+3,Diameter / Gauge,,".113 in, .120 in, .131 in, .148 in, .099 in, 15 Ga, 16 Ga, 18 Ga, 23 Ga, #8, #10",true,Manufacturer packaging / technical spec,Wire shank diameter or gauge rating
+4,Collation Angle,deg,"15 Deg, 20 Deg, 21 Deg, 28 Deg, 30 Deg, 33 Deg, 34 Deg, 0 Deg",true,Tool compatibility spec,Collation strip angle for pneumatic nailers
+5,Collation Type,,"Paper Tape, Plastic Strip, Wire Coil, Glue Collated",false,Manufacturer packaging,Collation carrier material
+6,Shank Type,,"Smooth, Ring, Screw Shank, Spiral",false,Manufacturer packaging / spec,Shank withdrawal resistance profile
+7,Finish / Coating,,"Hot Dip Galvanized (HDG), Bright Basic, Stainless Steel 304, Stainless Steel 316, Electro-Galvanized, Polymer Coated",false,Corrosion resistance spec,Surface protective finish
+8,Head Type,,"Full Round Head, Clipped Head, Offset Round Head, Flat Head, Trim Head, Countersunk",false,Manufacturer catalog,Fastener head geometry

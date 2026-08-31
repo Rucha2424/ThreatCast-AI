@@ -1,0 +1,14 @@
+# Schema: attribute_slot,attribute_label,standard_uom,allowed_values_or_pattern,is_required,provenance_rule,notes
+# Status: [CONTROLLED SCHEMA] - Composite Decking & Railing Systems
+# Category: Building Materials>Lumber & Composites>Decking & Railing
+attribute_slot,attribute_label,standard_uom,allowed_values_or_pattern,is_required,provenance_rule,notes
+1,Material,,"Composite, Capped Composite, PVC, Capped Polymer, Aluminum, Pressure Treated Wood",true,Manufacturer catalog / spec sheet,Core substrate material formulation
+2,Series / Collection,,"Transcend, Lineage, Enhance, Select, Prime+, Terrain, Vintage, Landmark, Signature",true,Manufacturer marketing catalog,Product line collection
+3,Color / Finish,,"Jasper, Island Mist, Spiced Rum, Havana Gold, Tiki Torch, Gravel Path, Winchester Grey, Saddle, Brown, White, Black",true,Manufacturer catalog / color swatch,Exterior color finish
+4,Actual Length,ft,"8 ft, 12 ft, 16 ft, 20 ft, 6 ft, 8, 12, 16, 20",true,Manufacturer dimensional spec,Plank or rail length in feet
+5,Actual Width,in,"5-1/2 in, 7-1/4 in, 11-1/4 in, 1x12, 1x8, 2x4, 2x6",true,Manufacturer dimensional spec,Board or rail cross-section width
+6,Profile / Edge,,"Grooved, Square Edge, Fascia, Riser, T-Rail, Universal",true,Manufacturer catalog / spec,Board edge configuration for hidden fasteners
+7,Component Type,,"Decking Board, Railing Kit, Baluster, Post Cap, Stair Tread, Joist Tape, Post Sleeve",false,Distributor catalog / manufacturer SKU,System component classification
+8,Baluster Style,,"Square Composite, Round Aluminum, Glass Panel, Mesh Panel, Square Balusters",false,Manufacturer railing catalog,Infill baluster geometry
+9,Railing Height,in,"36 in, 42 in, 36, 42",false,Building code spec / manufacturer catalog,Installed guardrail assembly height
+10,Warranty,yr,"25 Year Limited, 30 Year Fade & Stain, 50 Year Fade & Stain, Lifetime Limited, 25, 50",false,Manufacturer warranty documentation,Manufacturer warranty duration

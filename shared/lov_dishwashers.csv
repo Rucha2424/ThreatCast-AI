@@ -1,0 +1,19 @@
+# Schema: attribute_slot,attribute_label,standard_uom,allowed_values_or_pattern,is_required,provenance_rule,notes
+# Source: Ground truth derived directly from expected_output_delivery_format.csv (Slots 1-15)
+# Flagship Category: Appliances & Consumer Electronics>Kitchen Appliances>Built-In Dishwashers
+attribute_slot,attribute_label,standard_uom,allowed_values_or_pattern,is_required,provenance_rule,notes
+1,Series,,"Professional Series, Eco Series, Gallery Series, 100 Series, 300 Series, 500 Series, 800 Series, Profile Series, Cafe Series",false,Manufacturer spec sheet / product page,Marketing model series
+2,Model,,[A-Z0-9-]+,false,Manufacturer spec sheet / product page,Manufacturer model identifier code
+3,Number of Wash Cycles,,"1, 2, 3, 4, 5, 6, 7, 8, 9, 10",false,Manufacturer spec sheet / product page,Total discrete wash cycles available
+4,Voltage Rating,V,"120, 208, 240",true,Manufacturer spec sheet / electrical data,Operational electrical voltage
+5,Amperage Rating,A,"10, 12, 15, 20",true,Manufacturer spec sheet / electrical data,Circuit amperage requirement
+6,Mounting Type,,"Built-in, Leg, Under-Counter, Freestanding, Panel Ready",true,Manufacturer spec sheet / installation guide,Physical installation and mounting method
+7,Plug Type,,"Hardwired, 3-Prong NEMA 5-15P, 4-Prong",false,Manufacturer installation manual,Power cord plug standard or hardwired
+8,Size,,"24 in, 18 in, 24 in W x 24-1/4 in D, 33-7/16 in H x 23-7/8 in W x 22-5/8 in D",true,Manufacturer spec sheet / dimensional drawing,Nominal width or composite dimensional footprint
+9,Depth With Door Open,in,"50-1/4, 50-3/16, 49-1/2, 51-1/8",true,Manufacturer dimensional drawing / spec sheet,Total clearance depth required with door open at 90 degrees
+10,Minimum Height,in,"33-7/8, 33-7/16, 34, 8-1/2 in Upper Rack, 11-1/4 in Lower Rack",true,Manufacturer spec sheet,Minimum cut-out/unit height or minimum rack clearances
+11,Maximum Height,in,"35, 35-1/4, 34-1/2, 10-3/8 in Upper Rack, 13-1/4 in Lower Rack",false,Manufacturer spec sheet,Maximum adjustable height or maximum rack clearance
+12,Sound Level,dBA,"39, 41, 42, 44, 47, 48, 50, 52",true,Manufacturer spec sheet,Operational acoustic rating in A-weighted decibels
+13,Material,,"Stainless Steel, Plastic, Stainless Steel / Plastic, Heavy-Duty Polymer",true,Manufacturer spec sheet,Tub and exterior construction material
+14,Color,,"Stainless Steel, Black Stainless Steel, White, Black, Custom Panel Ready, Smudge-Proof Stainless Steel",true,Manufacturer spec sheet,Exterior finish color
+15,Additional Information,,"Comma-delimited features/options list (e.g. 240 kW-hr Annual Energy, Leak Detection System, Sani Rinse Option, Sani-Clean)",false,Manufacturer spec sheet / feature list,Concatenated secondary specs and Energy Star metrics
