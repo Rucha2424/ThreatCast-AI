@@ -1,0 +1,20 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# JavaScript dependencies and build output
+node_modules/
+dist/
+.next/
+
+# Python generated files and environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Tooling and operating-system files
+.pytest_cache/
+.DS_Store
+Thumbs.db
