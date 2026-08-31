@@ -25,11 +25,11 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
     if (active && payload && payload.length) {
       const p = payload[0].payload;
       return (
-        <div className="p-3 bg-cyber-black text-white rounded-xl border border-cyber-maroon-700 shadow-2xl text-xs font-mono">
-          <p className="font-bold text-rose-400">{p.horizon}: {p.stageName}</p>
-          <p className="text-cyber-grey-300 mt-1">Confidence: {p.confidencePct}%</p>
-          <p className="text-cyber-grey-400">Impact Window: {p.time}</p>
-          <p className="text-cyber-grey-400">Tactic: {p.tactic}</p>
+        <div className="p-3 bg-cyber-black text-white rounded-xl border border-cyber-brown-700 shadow-2xl text-xs font-mono">
+          <p className="font-bold text-amber-400">{p.horizon}: {p.stageName}</p>
+          <p className="text-cyber-beige-300 mt-1">Confidence: {p.confidencePct}%</p>
+          <p className="text-cyber-beige-400">Impact Window: {p.time}</p>
+          <p className="text-cyber-beige-400">Tactic: {p.tactic}</p>
         </div>
       );
     }
@@ -37,17 +37,17 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
   };
 
   return (
-    <div className="p-6 md:p-7 rounded-2xl bg-gradient-to-br from-cyber-maroon-950 via-cyber-black to-cyber-burgundy-950 border border-cyber-maroon-800 shadow-2xl space-y-4 backdrop-blur-md">
+    <div className="p-6 md:p-7 rounded-2xl bg-gradient-to-br from-cyber-brown-950 via-cyber-black to-cyber-amber-950 border border-cyber-brown-800 shadow-2xl space-y-4 backdrop-blur-md">
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-sm font-bold text-white tracking-tight">
             Forecast Confidence Decay Curve
           </h3>
-          <p className="text-xs text-cyber-grey-400">
+          <p className="text-xs text-cyber-beige-400">
             Neural model certainty distribution across forecasted time horizons (T+1 to T+3).
           </p>
         </div>
-        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800 font-bold">
+        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800 font-bold">
           Temporal Model
         </span>
       </div>
@@ -57,21 +57,21 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
           <AreaChart data={data} margin={{ top: 10, right: 20, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="confidenceGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#f43f5e" stopOpacity={0.4} />
-                <stop offset="95%" stopColor="#f43f5e" stopOpacity={0.0} />
+                <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.4} />
+                <stop offset="95%" stopColor="#f59e0b" stopOpacity={0.0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#260817" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#22140c" vertical={false} />
             <XAxis
               dataKey="horizon"
-              tick={{ fontSize: 11, fill: '#94A3B8', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#340b20' }}
+              tick={{ fontSize: 11, fill: '#cbab83', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#311c10' }}
               tickLine={false}
             />
             <YAxis
               domain={[0, 100]}
-              tick={{ fontSize: 11, fill: '#94A3B8', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#340b20' }}
+              tick={{ fontSize: 11, fill: '#cbab83', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#311c10' }}
               tickLine={false}
               tickFormatter={(v) => `${v}%`}
             />
@@ -79,7 +79,7 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
             <Area
               type="monotone"
               dataKey="confidencePct"
-              stroke="#f43f5e"
+              stroke="#f59e0b"
               strokeWidth={3}
               fillOpacity={1}
               fill="url(#confidenceGrad)"

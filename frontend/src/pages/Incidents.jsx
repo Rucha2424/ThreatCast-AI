@@ -68,15 +68,15 @@ export default function Incidents() {
       />
 
       {/* Filter Row */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 bg-gradient-to-r from-cyber-maroon-950 via-cyber-black to-cyber-burgundy-950 rounded-2xl border border-cyber-maroon-800 shadow-xl backdrop-blur-md">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 bg-gradient-to-r from-cyber-brown-950 via-cyber-black to-cyber-amber-950 rounded-2xl border border-cyber-brown-800 shadow-xl backdrop-blur-md">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-cyber-grey-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-cyber-beige-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search Incident ID, title, or asset..."
-            className="w-full pl-10 pr-3.5 py-2 text-xs rounded-xl border border-cyber-maroon-800 bg-cyber-black text-white placeholder:text-cyber-grey-500 focus:outline-none focus:ring-2 focus:ring-rose-500/40 font-mono"
+            className="w-full pl-10 pr-3.5 py-2 text-xs rounded-xl border border-cyber-brown-800 bg-cyber-black text-white placeholder:text-cyber-beige-500 focus:outline-none focus:ring-2 focus:ring-amber-500/40 font-mono"
           />
         </div>
 
@@ -84,7 +84,7 @@ export default function Incidents() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="text-xs px-3.5 py-2 rounded-xl border border-cyber-maroon-800 bg-cyber-black text-white focus:outline-none font-mono cursor-pointer"
+            className="text-xs px-3.5 py-2 rounded-xl border border-cyber-brown-800 bg-cyber-black text-cyber-beige-200 focus:outline-none font-mono cursor-pointer"
           >
             <option value="all">All Incident Statuses</option>
             <option value="Forecasted">Forecasted (Pre-emptive)</option>

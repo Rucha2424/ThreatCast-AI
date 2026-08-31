@@ -21,7 +21,7 @@ export default function Layout({ onScenarioChange, lastUpdated, activeScenario }
   };
 
   return (
-    <div className="min-h-screen bg-cyber-black text-cyber-grey-100 flex relative selection:bg-rose-600 selection:text-white">
+    <div className="min-h-screen bg-cyber-black text-cyber-beige-100 flex relative selection:bg-amber-600 selection:text-white">
       {/* Live Neural Axon Synapse Canvas Background */}
       <NeuralBackground />
 

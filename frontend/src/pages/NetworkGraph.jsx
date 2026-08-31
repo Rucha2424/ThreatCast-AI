@@ -106,7 +106,7 @@ export default function NetworkGraph() {
               onClose={() => setSelectedNode(null)}
             />
           ) : (
-            <div className="p-12 text-center bg-cyber-maroon-950/80 rounded-2xl border border-cyber-maroon-800 text-cyber-grey-400 text-xs">
+            <div className="p-12 text-center bg-cyber-brown-950/80 rounded-2xl border border-cyber-brown-800 text-cyber-beige-400 text-xs font-mono">
               Select any node on the graph canvas to inspect granular telemetry.
             </div>
           )}

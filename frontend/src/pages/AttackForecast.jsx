@@ -46,8 +46,8 @@ export default function AttackForecast() {
       {/* Current Observed State Hero Card */}
       {current && (
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase text-cyber-grey-400">
-            <span className="w-2 h-2 rounded-full bg-rose-500 shadow-[0_0_8px_#f43f5e]" />
+          <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase text-cyber-beige-400">
+            <span className="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_#f97316]" />
             <span>State Baseline (T_0)</span>
           </div>
           <ForecastStageCard stage={current} isCurrent={true} />
@@ -57,11 +57,11 @@ export default function AttackForecast() {
       {/* K=3 Future States Section */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase text-rose-400">
-            <Sparkles className="w-3.5 h-3.5 text-rose-400" />
+          <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase text-amber-400">
+            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
             <span>K=3 Forecast Projections (T+1, T+2, T+3)</span>
           </div>
-          <span className="text-xs font-mono text-cyber-grey-400">
+          <span className="text-xs font-mono text-cyber-beige-400">
             Engine: {forecast?.model_used}
           </span>
         </div>

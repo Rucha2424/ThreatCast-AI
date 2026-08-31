@@ -17,28 +17,28 @@ export default function AttackProgressionTimeline({ forecastData, onSelectStage 
   };
 
   return (
-    <div className="p-6 md:p-7 rounded-2xl bg-gradient-to-br from-cyber-maroon-950 via-cyber-black to-cyber-burgundy-950 border border-cyber-maroon-800 shadow-2xl space-y-6 backdrop-blur-md">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-cyber-maroon-800/80 pb-4">
+    <div className="p-6 md:p-7 rounded-2xl bg-gradient-to-br from-cyber-brown-950 via-cyber-black to-cyber-amber-950 border border-cyber-brown-800 shadow-2xl space-y-6 backdrop-blur-md">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-cyber-brown-800 pb-4">
         <div>
           <div className="flex items-center gap-2.5">
             <h3 className="text-base font-bold text-white tracking-tight">
               Attack Progression Forecast Timeline
             </h3>
-            <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-950 text-rose-300 border border-rose-700/60 shadow-[0_0_10px_rgba(244,63,94,0.2)]">
+            <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-950 text-amber-300 border border-amber-700/60 shadow-[0_0_10px_rgba(245,158,11,0.2)]">
               K=3 Horizon
             </span>
           </div>
-          <p className="text-xs text-cyber-grey-300 mt-0.5">
+          <p className="text-xs text-cyber-beige-300 mt-0.5">
             Step from current observed state into forecasted multi-step attack futures.
           </p>
         </div>
 
-        <div className="flex items-center gap-3 text-xs text-cyber-grey-400 font-mono">
-          <span className="flex items-center gap-1.5 text-cyber-grey-200">
-            <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_8px_#f43f5e]" /> Observed (T_0)
+        <div className="flex items-center gap-3 text-xs text-cyber-beige-400 font-mono">
+          <span className="flex items-center gap-1.5 text-orange-300">
+            <span className="w-2.5 h-2.5 rounded-full bg-orange-500 shadow-[0_0_8px_#f97316]" /> Observed (T_0)
           </span>
-          <span className="flex items-center gap-1.5 pl-2 text-fuchsia-300">
-            <span className="w-2.5 h-2.5 rounded-full bg-fuchsia-500 shadow-[0_0_8px_#d946ef]" /> Forecasted (T+1..3)
+          <span className="flex items-center gap-1.5 pl-2 text-amber-300">
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_8px_#f59e0b]" /> Forecasted (T+1..3)
           </span>
         </div>
       </div>
@@ -55,10 +55,10 @@ export default function AttackProgressionTimeline({ forecastData, onSelectStage 
               onClick={() => handleStageClick(stage)}
               className={`cursor-pointer rounded-xl p-4 transition-all duration-300 border flex flex-col justify-between relative group ${
                 isSelected
-                  ? 'ring-2 ring-rose-500 border-rose-400 bg-rose-950/60 shadow-xl shadow-rose-950/80'
+                  ? 'ring-2 ring-amber-500 border-amber-400 bg-amber-950/70 shadow-xl shadow-amber-950/80'
                   : isObserved
-                  ? 'bg-gradient-to-b from-cyber-maroon-900 via-cyber-black to-cyber-burgundy-950 text-white border-rose-600/50 shadow-md'
-                  : 'bg-cyber-maroon-950/60 hover:bg-cyber-maroon-900/60 border-cyber-maroon-800 hover:border-rose-500/60 shadow-md'
+                  ? 'bg-gradient-to-b from-cyber-brown-900 via-cyber-black to-cyber-amber-950 text-white border-amber-600/50 shadow-md'
+                  : 'bg-cyber-brown-950/70 hover:bg-cyber-brown-900/70 border-cyber-brown-800 hover:border-amber-500/60 shadow-md'
               }`}
             >
               {/* Top Horizon Badge */}
@@ -66,8 +66,8 @@ export default function AttackProgressionTimeline({ forecastData, onSelectStage 
                 <span
                   className={`text-[11px] font-mono font-bold px-2.5 py-0.5 rounded ${
                     isObserved
-                      ? 'bg-rose-950 text-rose-300 border border-rose-600/60 shadow-[0_0_8px_rgba(244,63,94,0.3)]'
-                      : 'bg-cyber-black text-fuchsia-300 border border-fuchsia-600/40'
+                      ? 'bg-amber-950 text-amber-300 border border-amber-600/60 shadow-[0_0_8px_rgba(245,158,11,0.3)]'
+                      : 'bg-cyber-black text-amber-300 border border-amber-600/40'
                   }`}
                 >
                   {stage.horizon}
@@ -75,7 +75,7 @@ export default function AttackProgressionTimeline({ forecastData, onSelectStage 
 
                 <span
                   className={`text-[10px] font-mono font-bold ${
-                    isObserved ? 'text-rose-400 animate-pulse' : 'text-fuchsia-400'
+                    isObserved ? 'text-orange-400 animate-pulse' : 'text-amber-400'
                   }`}
                 >
                   {isObserved ? 'OBSERVED' : `${formatConfidence(stage.confidence)} Conf`}
@@ -86,20 +86,20 @@ export default function AttackProgressionTimeline({ forecastData, onSelectStage 
               <div className="space-y-1.5 flex-1">
                 <h4
                   className={`text-sm font-bold leading-snug transition-colors ${
-                    isObserved ? 'text-white' : 'text-white group-hover:text-rose-300'
+                    isObserved ? 'text-white' : 'text-white group-hover:text-amber-300'
                   }`}
                 >
                   {stage.stage_name}
                 </h4>
-                <p className="text-[11px] font-mono truncate text-cyber-grey-300">
+                <p className="text-[11px] font-mono truncate text-cyber-beige-300">
                   {stage.tactic}
                 </p>
               </div>
 
               {/* Estimated Time & Node Count */}
-              <div className="mt-4 pt-3 border-t border-cyber-maroon-800/80 text-[10px] font-mono flex items-center justify-between text-cyber-grey-400">
-                <span className="text-cyber-grey-300 font-semibold">{stage.estimated_time_to_impact}</span>
-                <span className="text-rose-300">{stage.affected_nodes?.length || 0} Assets</span>
+              <div className="mt-4 pt-3 border-t border-cyber-brown-800 text-[10px] font-mono flex items-center justify-between text-cyber-beige-400">
+                <span className="text-cyber-beige-200 font-semibold">{stage.estimated_time_to_impact}</span>
+                <span className="text-amber-300">{stage.affected_nodes?.length || 0} Assets</span>
               </div>
             </div>
           );
@@ -108,8 +108,8 @@ export default function AttackProgressionTimeline({ forecastData, onSelectStage 
 
       {/* Narrative Context */}
       {forecastData.summary_narrative && (
-        <div className="p-4 rounded-xl bg-cyber-black/90 border border-cyber-maroon-800 text-xs text-cyber-grey-200 leading-relaxed flex items-start gap-3 shadow-inner">
-          <Zap className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
+        <div className="p-4 rounded-xl bg-cyber-black/90 border border-cyber-brown-800 text-xs text-cyber-beige-200 leading-relaxed flex items-start gap-3 shadow-inner">
+          <Zap className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
           <div>
             <strong className="text-white font-mono">Forecasting Engine Analysis: </strong>
             {forecastData.summary_narrative}

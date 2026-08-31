@@ -82,17 +82,17 @@ export default function Overview() {
       {/* Section 4 & 5: Model vs Rule Comparison & Mini Network Risk Graph */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <ModelRuleComparisonCard disagreementData={disagreementsData} />
-        <div className="p-6 md:p-7 rounded-2xl bg-gradient-to-br from-cyber-maroon-950 via-cyber-black to-cyber-burgundy-950 border border-cyber-maroon-800 shadow-2xl flex flex-col justify-between space-y-4 backdrop-blur-md">
+        <div className="p-6 md:p-7 rounded-2xl bg-gradient-to-br from-cyber-brown-950 via-cyber-black to-cyber-amber-950 border border-cyber-brown-800 shadow-2xl flex flex-col justify-between space-y-4 backdrop-blur-md">
           <div className="flex items-center justify-between">
             <div>
               <h3 className="text-sm font-bold text-white tracking-tight">
                 Network Entity Risk Topology
               </h3>
-              <p className="text-xs text-cyber-grey-400">
+              <p className="text-xs text-cyber-beige-400">
                 Compromise vectors & predicted neural traversal trajectory.
               </p>
             </div>
-            <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-cyber-maroon-900 text-rose-300 border border-cyber-maroon-700 font-bold">
+            <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-cyber-brown-900 text-amber-300 border border-cyber-brown-700 font-bold">
               Live Topology
             </span>
           </div>

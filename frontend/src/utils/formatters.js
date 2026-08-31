@@ -14,12 +14,12 @@ export function getThreatLevelColor(level) {
   switch (level?.toUpperCase()) {
     case 'CRITICAL':
       return {
-        bg: 'bg-rose-950/80',
-        text: 'text-rose-300',
-        border: 'border-rose-700/60',
-        dot: 'bg-rose-500 shadow-[0_0_8px_#f43f5e]',
-        badge: 'bg-rose-950/90 text-rose-300 border-rose-600/60 shadow-[0_0_10px_rgba(244,63,94,0.3)]',
-        glow: 'shadow-[0_0_15px_rgba(244,63,94,0.4)]',
+        bg: 'bg-orange-950/80',
+        text: 'text-orange-300',
+        border: 'border-orange-700/60',
+        dot: 'bg-orange-500 shadow-[0_0_8px_#f97316]',
+        badge: 'bg-orange-950/90 text-orange-300 border-orange-600/60 shadow-[0_0_10px_rgba(249,115,22,0.3)]',
+        glow: 'shadow-[0_0_15px_rgba(249,115,22,0.4)]',
       };
     case 'HIGH':
       return {
@@ -32,22 +32,22 @@ export function getThreatLevelColor(level) {
       };
     case 'MEDIUM':
       return {
-        bg: 'bg-blue-950/80',
-        text: 'text-blue-300',
-        border: 'border-blue-700/60',
-        dot: 'bg-blue-400 shadow-[0_0_8px_#60a5fa]',
-        badge: 'bg-blue-950/90 text-blue-300 border-blue-600/60',
+        bg: 'bg-cyber-brown-900/80',
+        text: 'text-cyber-beige-200',
+        border: 'border-cyber-brown-700/60',
+        dot: 'bg-amber-400 shadow-[0_0_8px_#fbbf24]',
+        badge: 'bg-cyber-brown-900/90 text-cyber-beige-200 border-cyber-brown-700/60',
         glow: '',
       };
     case 'LOW':
     default:
       return {
-        bg: 'bg-emerald-950/80',
-        text: 'text-emerald-300',
-        border: 'border-emerald-700/60',
-        dot: 'bg-emerald-400 shadow-[0_0_8px_#34d399]',
-        badge: 'bg-emerald-950/90 text-emerald-300 border-emerald-600/60 shadow-[0_0_10px_rgba(16,185,129,0.3)]',
-        glow: 'shadow-[0_0_15px_rgba(16,185,129,0.4)]',
+        bg: 'bg-lime-950/80',
+        text: 'text-lime-300',
+        border: 'border-lime-700/60',
+        dot: 'bg-lime-400 shadow-[0_0_8px_#84cc16]',
+        badge: 'bg-lime-950/90 text-lime-300 border-lime-600/60 shadow-[0_0_10px_rgba(132,204,22,0.3)]',
+        glow: 'shadow-[0_0_15px_rgba(132,204,22,0.4)]',
       };
   }
 }
@@ -58,16 +58,16 @@ export function getThreatLevelColor(level) {
 export function getNodeTypeStyle(type) {
   switch (type?.toLowerCase()) {
     case 'user':
-      return { bg: '#c026d3', label: 'User Entity' };
+      return { bg: '#d97706', label: 'User Entity' };
     case 'endpoint':
-      return { bg: '#38bdf8', label: 'Workstation' };
+      return { bg: '#cbab83', label: 'Workstation' };
     case 'server':
-      return { bg: '#f43f5e', label: 'Domain Server' };
+      return { bg: '#f59e0b', label: 'Domain Server' };
     case 'database':
-      return { bg: '#f59e0b', label: 'Database Cluster' };
+      return { bg: '#b45309', label: 'Database Cluster' };
     case 'gateway':
-      return { bg: '#10b981', label: 'Perimeter Gateway' };
+      return { bg: '#84cc16', label: 'Perimeter Gateway' };
     default:
-      return { bg: '#94a3b8', label: 'Asset' };
+      return { bg: '#ddc4a5', label: 'Asset' };
   }
 }
