@@ -14,17 +14,17 @@ export default function RiskTrendChart({ riskTrend = [] }) {
   if (!riskTrend || riskTrend.length === 0) return null;
 
   return (
-    <div className="p-6 rounded-2xl bg-white border border-soc-slate-200 shadow-soc-card space-y-4">
+    <div className="p-6 md:p-7 rounded-2xl bg-gradient-to-br from-cyber-maroon-950 via-cyber-black to-cyber-burgundy-950 border border-cyber-maroon-800 shadow-2xl space-y-4 backdrop-blur-md">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-bold text-soc-slate-900">
+          <h3 className="text-sm font-bold text-white tracking-tight">
             Temporal Network Risk Score & Threat Count
           </h3>
-          <p className="text-xs text-soc-slate-500">
-            Aggregated threat score evolution over observation windows.
+          <p className="text-xs text-cyber-grey-400">
+            Aggregated threat score evolution over neural observation windows.
           </p>
         </div>
-        <span className="text-xs font-mono px-2 py-0.5 rounded bg-red-50 text-red-700 border border-red-200">
+        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800 font-bold">
           Risk Dynamics
         </span>
       </div>
@@ -32,18 +32,18 @@ export default function RiskTrendChart({ riskTrend = [] }) {
       <div className="h-60 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={riskTrend} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#260817" vertical={false} />
             <XAxis
               dataKey="time"
-              tick={{ fontSize: 11, fill: '#64748B', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#E2E8F0' }}
+              tick={{ fontSize: 11, fill: '#94A3B8', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#340b20' }}
               tickLine={false}
             />
             <YAxis
               yAxisId="left"
               domain={[0, 100]}
-              tick={{ fontSize: 11, fill: '#64748B', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#E2E8F0' }}
+              tick={{ fontSize: 11, fill: '#94A3B8', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#340b20' }}
               tickLine={false}
               tickFormatter={(v) => `${v}`}
             />
@@ -51,18 +51,19 @@ export default function RiskTrendChart({ riskTrend = [] }) {
               yAxisId="right"
               orientation="right"
               domain={[0, 40]}
-              tick={{ fontSize: 11, fill: '#64748B', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#E2E8F0' }}
+              tick={{ fontSize: 11, fill: '#94A3B8', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#340b20' }}
               tickLine={false}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#0B132B',
-                border: '1px solid #1C2541',
+                backgroundColor: '#12030a',
+                border: '1px solid #6e1644',
                 borderRadius: '0.75rem',
                 fontSize: '11px',
                 color: '#fff',
                 fontFamily: 'monospace',
+                boxShadow: '0 0 20px rgba(0,0,0,0.8)',
               }}
             />
             <Legend
@@ -73,9 +74,9 @@ export default function RiskTrendChart({ riskTrend = [] }) {
               type="monotone"
               dataKey="risk_score"
               name="Composite Risk Score"
-              stroke="#EF4444"
+              stroke="#F43F5E"
               strokeWidth={3}
-              dot={{ r: 4, fill: '#EF4444' }}
+              dot={{ r: 4, fill: '#F43F5E' }}
             />
             <Line
               yAxisId="right"

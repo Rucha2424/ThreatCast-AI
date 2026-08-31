@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock, ShieldAlert, Sparkles, AlertOctagon, CheckCircle2, Server } from 'lucide-react';
+import { Clock, ShieldAlert, Sparkles, AlertOctagon, CheckCircle2, Server, Zap } from 'lucide-react';
 import { formatConfidence } from '../../utils/formatters';
 
 export default function ForecastStageCard({ stage, isCurrent = false }) {
@@ -7,10 +7,10 @@ export default function ForecastStageCard({ stage, isCurrent = false }) {
 
   return (
     <div
-      className={`rounded-2xl p-6 border transition-all shadow-sm ${
+      className={`rounded-2xl p-6 border transition-all duration-300 shadow-xl backdrop-blur-md ${
         isCurrent
-          ? 'bg-soc-navy-950 text-white border-soc-navy-800'
-          : 'bg-white text-soc-slate-900 border-soc-slate-200 hover:border-indigo-300'
+          ? 'bg-gradient-to-br from-cyber-maroon-900 via-cyber-black to-cyber-burgundy-950 text-white border-rose-600/50 shadow-rose-950/60'
+          : 'bg-cyber-maroon-950/80 text-cyber-grey-100 border-cyber-maroon-800 hover:border-rose-500/60'
       }`}
     >
       {/* Top Header */}
@@ -19,15 +19,15 @@ export default function ForecastStageCard({ stage, isCurrent = false }) {
           <span
             className={`text-xs font-mono font-bold px-2.5 py-1 rounded ${
               isCurrent
-                ? 'bg-white/10 text-white border border-white/20'
-                : 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+                ? 'bg-rose-950 text-rose-300 border border-rose-600/60 shadow-[0_0_8px_rgba(244,63,94,0.3)]'
+                : 'bg-cyber-black text-fuchsia-300 border border-fuchsia-600/40'
             }`}
           >
             {stage.horizon}
           </span>
           <span
-            className={`text-xs font-semibold ${
-              isCurrent ? 'text-emerald-400' : 'text-indigo-600'
+            className={`text-xs font-bold font-mono ${
+              isCurrent ? 'text-rose-400 animate-pulse' : 'text-fuchsia-400'
             }`}
           >
             {isCurrent ? 'CURRENT OBSERVED' : 'FORECASTED STATE'}
@@ -35,10 +35,10 @@ export default function ForecastStageCard({ stage, isCurrent = false }) {
         </div>
 
         <span
-          className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-full ${
+          className={`text-xs font-mono font-bold px-3 py-1 rounded-full ${
             isCurrent
-              ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
-              : 'bg-indigo-50 text-indigo-700 border border-indigo-200'
+              ? 'bg-rose-950 text-rose-300 border border-rose-600/50'
+              : 'bg-fuchsia-950/80 text-fuchsia-300 border border-fuchsia-600/40'
           }`}
         >
           {formatConfidence(stage.confidence)} Confidence
@@ -47,40 +47,32 @@ export default function ForecastStageCard({ stage, isCurrent = false }) {
 
       {/* Title & Description */}
       <div className="space-y-1 mb-4">
-        <h3 className="text-lg font-bold tracking-tight">{stage.stage_name}</h3>
-        <p className={`text-xs font-mono ${isCurrent ? 'text-soc-slate-400' : 'text-soc-slate-500'}`}>
+        <h3 className="text-lg font-bold tracking-tight text-white">{stage.stage_name}</h3>
+        <p className="text-xs font-mono text-cyber-grey-400">
           MITRE ATT&CK: {stage.tactic} ({stage.technique_id})
         </p>
-        <p className={`text-xs leading-relaxed mt-2 ${isCurrent ? 'text-soc-slate-300' : 'text-soc-slate-600'}`}>
+        <p className="text-xs leading-relaxed mt-2 text-cyber-grey-200">
           {stage.description}
         </p>
       </div>
 
       {/* Affected Nodes & Est. Time */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4 text-xs font-mono">
-        <div
-          className={`p-3 rounded-xl border ${
-            isCurrent ? 'bg-soc-navy-900 border-soc-navy-800' : 'bg-soc-slate-50 border-soc-slate-200'
-          }`}
-        >
-          <span className={`block text-[10px] uppercase font-bold mb-1 ${isCurrent ? 'text-soc-slate-400' : 'text-soc-slate-500'}`}>
+        <div className="p-3 rounded-xl border bg-cyber-black/90 border-cyber-maroon-800">
+          <span className="block text-[10px] uppercase font-bold mb-1 text-cyber-grey-400">
             Estimated Window
           </span>
-          <span className="font-semibold flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5 text-indigo-400" />
+          <span className="font-bold text-white flex items-center gap-1.5">
+            <Clock className="w-3.5 h-3.5 text-rose-400" />
             {stage.estimated_time_to_impact}
           </span>
         </div>
 
-        <div
-          className={`p-3 rounded-xl border ${
-            isCurrent ? 'bg-soc-navy-900 border-soc-navy-800' : 'bg-soc-slate-50 border-soc-slate-200'
-          }`}
-        >
-          <span className={`block text-[10px] uppercase font-bold mb-1 ${isCurrent ? 'text-soc-slate-400' : 'text-soc-slate-500'}`}>
+        <div className="p-3 rounded-xl border bg-cyber-black/90 border-cyber-maroon-800">
+          <span className="block text-[10px] uppercase font-bold mb-1 text-cyber-grey-400">
             Affected Infrastructure
           </span>
-          <span className="font-semibold truncate block" title={stage.affected_nodes?.join(', ')}>
+          <span className="font-bold text-white truncate block" title={stage.affected_nodes?.join(', ')}>
             {stage.affected_nodes?.join(', ') || 'None'}
           </span>
         </div>
@@ -89,19 +81,19 @@ export default function ForecastStageCard({ stage, isCurrent = false }) {
       {/* Probability Distribution if present */}
       {stage.probability_distribution && Object.keys(stage.probability_distribution).length > 0 && (
         <div className="mb-4 space-y-1.5">
-          <span className={`text-[10px] uppercase font-mono font-bold block ${isCurrent ? 'text-soc-slate-400' : 'text-soc-slate-500'}`}>
+          <span className="text-[10px] uppercase font-mono font-bold block text-cyber-grey-400">
             Tactical Probability Distribution:
           </span>
           <div className="space-y-1">
             {Object.entries(stage.probability_distribution).map(([tactic, prob]) => (
               <div key={tactic} className="space-y-0.5 text-[11px]">
                 <div className="flex justify-between font-mono">
-                  <span className={isCurrent ? 'text-soc-slate-300' : 'text-soc-slate-700'}>{tactic}</span>
-                  <span className="font-bold">{formatConfidence(prob)}</span>
+                  <span className="text-cyber-grey-300">{tactic}</span>
+                  <span className="font-bold text-rose-300">{formatConfidence(prob)}</span>
                 </div>
-                <div className={`w-full h-1.5 rounded-full overflow-hidden ${isCurrent ? 'bg-soc-navy-800' : 'bg-soc-slate-200'}`}>
+                <div className="w-full h-1.5 rounded-full overflow-hidden bg-cyber-black border border-cyber-maroon-900">
                   <div
-                    className="h-full bg-gradient-to-r from-indigo-500 to-soc-ai"
+                    className="h-full bg-gradient-to-r from-rose-500 to-fuchsia-500 shadow-[0_0_8px_#f43f5e]"
                     style={{ width: `${prob * 100}%` }}
                   />
                 </div>
@@ -112,19 +104,13 @@ export default function ForecastStageCard({ stage, isCurrent = false }) {
       )}
 
       {/* Recommended Proactive Mitigation */}
-      <div
-        className={`p-3 rounded-xl border flex items-start gap-2.5 text-xs ${
-          isCurrent
-            ? 'bg-amber-500/10 border-amber-500/30 text-amber-200'
-            : 'bg-amber-50 border-amber-200 text-amber-900'
-        }`}
-      >
-        <AlertOctagon className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+      <div className="p-3.5 rounded-xl border flex items-start gap-2.5 text-xs bg-amber-950/60 border-amber-700/60 text-amber-200 shadow-inner">
+        <AlertOctagon className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
         <div>
-          <strong className="block text-[11px] uppercase tracking-wider font-bold">
+          <strong className="block text-[11px] uppercase tracking-wider font-bold text-amber-300 font-mono">
             Proactive Mitigation:
           </strong>
-          <span className="leading-relaxed">{stage.recommended_mitigation}</span>
+          <span className="leading-relaxed text-cyber-grey-200">{stage.recommended_mitigation}</span>
         </div>
       </div>
     </div>

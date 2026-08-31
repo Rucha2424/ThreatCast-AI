@@ -15,7 +15,7 @@ import { useNetworkGraph } from '../hooks/useNetworkGraph';
 import { useDisagreements } from '../hooks/useDisagreements';
 
 export default function Overview() {
-  const { refreshTrigger, onRefresh } = useOutletContext() || {};
+  const { refreshTrigger, activeScenario } = useOutletContext() || {};
 
   const { summary, kpis, loading: dashLoading, error: dashError, refetch: refetchDash } = useDashboard();
   const { forecast, loading: fcastLoading, error: fcastError, refetch: refetchFcast } = useForecast();
@@ -35,7 +35,7 @@ export default function Overview() {
   const error = dashError || fcastError || graphError || disError;
 
   if (loading && !summary) {
-    return <LoadingState message="Connecting to ThreatCast AI forecasting engine..." />;
+    return <LoadingState message="Connecting to ThreatCast AI neural forecasting engine..." />;
   }
 
   if (error && !summary) {
@@ -53,12 +53,14 @@ export default function Overview() {
     );
   }
 
+  const currentScenario = activeScenario || summary?.active_scenario || 'default';
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative z-10">
       {/* Top Header */}
       <PageHeader
         title="Executive Security Overview"
-        subtitle="Real-time network state intelligence, K=3 attack progression forecasting, and model-rule verification."
+        subtitle="Real-time network state intelligence, K=3 attack progression forecasting, and neural model-rule verification."
         badge="Predictive SOC Mode"
       />
 
@@ -80,21 +82,25 @@ export default function Overview() {
       {/* Section 4 & 5: Model vs Rule Comparison & Mini Network Risk Graph */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <ModelRuleComparisonCard disagreementData={disagreementsData} />
-        <div className="p-6 rounded-2xl bg-white border border-soc-slate-200 shadow-soc-card flex flex-col justify-between space-y-4">
+        <div className="p-6 md:p-7 rounded-2xl bg-gradient-to-br from-cyber-maroon-950 via-cyber-black to-cyber-burgundy-950 border border-cyber-maroon-800 shadow-2xl flex flex-col justify-between space-y-4 backdrop-blur-md">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-sm font-bold text-soc-slate-900">
+              <h3 className="text-sm font-bold text-white tracking-tight">
                 Network Entity Risk Topology
               </h3>
-              <p className="text-xs text-soc-slate-500">
-                Identified compromise vector & predicted traversal trajectory.
+              <p className="text-xs text-cyber-grey-400">
+                Compromise vectors & predicted neural traversal trajectory.
               </p>
             </div>
-            <span className="text-xs font-mono px-2 py-0.5 rounded bg-soc-slate-100 text-soc-slate-700 border border-soc-slate-200">
+            <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-cyber-maroon-900 text-rose-300 border border-cyber-maroon-700 font-bold">
               Live Topology
             </span>
           </div>
-          <InteractiveNetworkGraph graphData={graph} compact={true} />
+          <InteractiveNetworkGraph
+            graphData={graph}
+            compact={true}
+            activeScenario={currentScenario}
+          />
         </div>
       </div>
 

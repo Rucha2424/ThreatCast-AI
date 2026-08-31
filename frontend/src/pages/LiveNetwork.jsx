@@ -35,7 +35,7 @@ export default function LiveNetwork() {
   const error = actError || evtError;
 
   if (loading && !activity && !eventsData) {
-    return <LoadingState message="Streaming live network telemetry & flow records..." />;
+    return <LoadingState message="Streaming live neural network telemetry & flow records..." />;
   }
 
   if (error && !activity && !eventsData) {
@@ -64,7 +64,7 @@ export default function LiveNetwork() {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative z-10">
       {/* Header */}
       <PageHeader
         title="Live Network Observability & Telemetry"
@@ -81,35 +81,35 @@ export default function LiveNetwork() {
       <RiskTrendChart riskTrend={activity?.risk_trend} />
 
       {/* Security Event Telemetry Log */}
-      <div className="p-6 rounded-2xl bg-white border border-soc-slate-200 shadow-soc-card space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-soc-slate-100 pb-4">
+      <div className="p-6 md:p-7 rounded-2xl bg-gradient-to-br from-cyber-maroon-950 via-cyber-black to-cyber-burgundy-950 border border-cyber-maroon-800 shadow-2xl space-y-4 backdrop-blur-md">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-cyber-maroon-800/80 pb-4">
           <div>
-            <h3 className="text-base font-bold text-soc-slate-900 flex items-center gap-2">
-              <Radio className="w-4 h-4 text-soc-ai" />
+            <h3 className="text-base font-bold text-white flex items-center gap-2">
+              <Radio className="w-4 h-4 text-rose-400 animate-pulse" />
               Live Security Telemetry Log
             </h3>
-            <p className="text-xs text-soc-slate-500">
-              Raw network events annotated with MITRE ATT&CK taxonomy & forecast trigger flags.
+            <p className="text-xs text-cyber-grey-400">
+              Raw network events annotated with MITRE ATT&CK taxonomy & neural forecast trigger flags.
             </p>
           </div>
 
           {/* Filters */}
           <div className="flex flex-wrap items-center gap-2.5">
             <div className="relative">
-              <Search className="w-3.5 h-3.5 text-soc-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-3.5 h-3.5 text-cyber-grey-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Filter events..."
-                className="pl-8 pr-2.5 py-1.5 text-xs rounded-lg border border-soc-slate-200 bg-soc-slate-50/50 focus:outline-none focus:ring-2 focus:ring-soc-ai/20"
+                className="pl-8 pr-3 py-1.5 text-xs rounded-xl border border-cyber-maroon-800 bg-cyber-black text-white placeholder:text-cyber-grey-500 focus:outline-none focus:ring-2 focus:ring-rose-500/40 font-mono"
               />
             </div>
 
             <select
               value={riskFilter}
               onChange={(e) => setRiskFilter(e.target.value)}
-              className="text-xs px-2.5 py-1.5 rounded-lg border border-soc-slate-200 bg-soc-slate-50/50 focus:outline-none"
+              className="text-xs px-3 py-1.5 rounded-xl border border-cyber-maroon-800 bg-cyber-black text-white focus:outline-none font-mono cursor-pointer"
             >
               <option value="">All Risk Tiers</option>
               <option value="CRITICAL">Critical</option>
@@ -124,40 +124,40 @@ export default function LiveNetwork() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="bg-soc-slate-50 border-b border-soc-slate-200 text-soc-slate-500 font-mono uppercase text-[10px] tracking-wider">
-                <th className="py-3 px-3.5 font-semibold">Timestamp</th>
-                <th className="py-3 px-3.5 font-semibold">Source Entity</th>
-                <th className="py-3 px-3.5 font-semibold">Destination Entity</th>
-                <th className="py-3 px-3.5 font-semibold">Event Description</th>
-                <th className="py-3 px-3.5 font-semibold">ATT&CK Tactic</th>
-                <th className="py-3 px-3.5 font-semibold">Risk Level</th>
-                <th className="py-3 px-3.5 font-semibold">Status</th>
+              <tr className="bg-cyber-black border-b border-cyber-maroon-800/80 text-cyber-grey-400 font-mono uppercase text-[10px] tracking-wider">
+                <th className="py-3 px-3.5 font-bold">Timestamp</th>
+                <th className="py-3 px-3.5 font-bold">Source Entity</th>
+                <th className="py-3 px-3.5 font-bold">Destination Entity</th>
+                <th className="py-3 px-3.5 font-bold">Event Description</th>
+                <th className="py-3 px-3.5 font-bold">ATT&CK Tactic</th>
+                <th className="py-3 px-3.5 font-bold">Risk Level</th>
+                <th className="py-3 px-3.5 font-bold">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-soc-slate-100 font-mono">
+            <tbody className="divide-y divide-cyber-maroon-900/60 font-mono">
               {filteredEvents.map((evt) => (
-                <tr key={evt.id} className="hover:bg-soc-slate-50/80 transition-colors">
-                  <td className="py-3 px-3.5 text-soc-slate-500">{evt.timestamp}</td>
-                  <td className="py-3 px-3.5 font-semibold text-soc-slate-900">
-                    {evt.source_entity} ({evt.source_ip})
+                <tr key={evt.id} className="hover:bg-cyber-maroon-950/60 transition-colors">
+                  <td className="py-3 px-3.5 text-cyber-grey-400">{evt.timestamp}</td>
+                  <td className="py-3 px-3.5 font-bold text-white">
+                    {evt.source_entity} <span className="text-cyber-grey-400 font-normal">({evt.source_ip})</span>
                   </td>
-                  <td className="py-3 px-3.5 text-soc-slate-700">
-                    {evt.destination_entity} ({evt.destination_ip})
+                  <td className="py-3 px-3.5 text-cyber-grey-300">
+                    {evt.destination_entity} <span className="text-cyber-grey-500">({evt.destination_ip})</span>
                   </td>
-                  <td className="py-3 px-3.5 font-sans font-medium text-soc-slate-800 max-w-xs">
+                  <td className="py-3 px-3.5 font-sans font-medium text-cyber-grey-200 max-w-xs">
                     {evt.event_type}
                     {evt.is_forecast_trigger && (
-                      <span className="ml-2 inline-flex text-[9px] font-mono font-bold px-1.5 py-0.2 rounded bg-indigo-50 text-soc-ai border border-indigo-200">
+                      <span className="ml-2 inline-flex text-[9px] font-mono font-bold px-1.5 py-0.2 rounded bg-rose-950 text-rose-300 border border-rose-600/50">
                         AI Trigger
                       </span>
                     )}
                   </td>
-                  <td className="py-3 px-3.5 text-indigo-900 font-semibold">{evt.tactic}</td>
+                  <td className="py-3 px-3.5 text-rose-300 font-bold">{evt.tactic}</td>
                   <td className="py-3 px-3.5">
                     <StatusBadge status={evt.risk_level} />
                   </td>
                   <td className="py-3 px-3.5">
-                    <span className="text-[11px] font-medium text-soc-slate-600">
+                    <span className="text-[11px] font-medium text-cyber-grey-300">
                       {evt.status}
                     </span>
                   </td>

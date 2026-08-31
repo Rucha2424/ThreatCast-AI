@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import SimModal from '../common/SimModal';
+import NeuralBackground from '../common/NeuralBackground';
 
 export default function Layout({ onScenarioChange, lastUpdated, activeScenario }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -20,12 +21,15 @@ export default function Layout({ onScenarioChange, lastUpdated, activeScenario }
   };
 
   return (
-    <div className="min-h-screen bg-soc-slate-50 flex">
+    <div className="min-h-screen bg-cyber-black text-cyber-grey-100 flex relative selection:bg-rose-600 selection:text-white">
+      {/* Live Neural Axon Synapse Canvas Background */}
+      <NeuralBackground />
+
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0 lg:pl-64">
+      <div className="flex-1 flex flex-col min-w-0 lg:pl-64 relative z-10">
         <Header
           onToggleSidebar={() => setSidebarOpen((prev) => !prev)}
           onOpenSimModal={() => setSimModalOpen(true)}

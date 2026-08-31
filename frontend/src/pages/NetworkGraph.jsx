@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { Network, Shield, Filter, Search } from 'lucide-react';
 import PageHeader from '../components/common/PageHeader';
 import LoadingState from '../components/common/LoadingState';
 import ErrorState from '../components/common/ErrorState';
@@ -10,7 +9,7 @@ import NetworkFilters from '../components/network/NetworkFilters';
 import { useNetworkGraph } from '../hooks/useNetworkGraph';
 
 export default function NetworkGraph() {
-  const { refreshTrigger } = useOutletContext() || {};
+  const { refreshTrigger, activeScenario } = useOutletContext() || {};
 
   const [selectedNode, setSelectedNode] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -32,7 +31,7 @@ export default function NetworkGraph() {
   }, [graph, selectedNode]);
 
   if (loading && !graph) {
-    return <LoadingState message="Rendering network topology & Neo4j FastRP vector distances..." />;
+    return <LoadingState message="Rendering neural network topology & Neo4j FastRP vector distances..." />;
   }
 
   if (error && !graph) {
@@ -70,7 +69,7 @@ export default function NetworkGraph() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative z-10">
       {/* Header */}
       <PageHeader
         title="Network State & Topological Graph"
@@ -96,6 +95,7 @@ export default function NetworkGraph() {
             selectedNodeId={selectedNode?.id}
             onSelectNode={setSelectedNode}
             compact={false}
+            activeScenario={activeScenario || 'default'}
           />
         </div>
 
@@ -106,7 +106,7 @@ export default function NetworkGraph() {
               onClose={() => setSelectedNode(null)}
             />
           ) : (
-            <div className="p-12 text-center bg-white rounded-2xl border border-soc-slate-200 text-soc-slate-400 text-xs">
+            <div className="p-12 text-center bg-cyber-maroon-950/80 rounded-2xl border border-cyber-maroon-800 text-cyber-grey-400 text-xs">
               Select any node on the graph canvas to inspect granular telemetry.
             </div>
           )}

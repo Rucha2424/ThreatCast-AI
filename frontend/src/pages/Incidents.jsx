@@ -59,7 +59,7 @@ export default function Incidents() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative z-10">
       {/* Header */}
       <PageHeader
         title="Security Incident Management & Playbooks"
@@ -68,15 +68,15 @@ export default function Incidents() {
       />
 
       {/* Filter Row */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 bg-white rounded-xl border border-soc-slate-200 shadow-sm">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 bg-gradient-to-r from-cyber-maroon-950 via-cyber-black to-cyber-burgundy-950 rounded-2xl border border-cyber-maroon-800 shadow-xl backdrop-blur-md">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-soc-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-cyber-grey-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search Incident ID, title, or asset..."
-            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-soc-slate-200 bg-soc-slate-50/50 focus:outline-none focus:ring-2 focus:ring-soc-ai/20"
+            className="w-full pl-10 pr-3.5 py-2 text-xs rounded-xl border border-cyber-maroon-800 bg-cyber-black text-white placeholder:text-cyber-grey-500 focus:outline-none focus:ring-2 focus:ring-rose-500/40 font-mono"
           />
         </div>
 
@@ -84,7 +84,7 @@ export default function Incidents() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="text-xs px-3 py-1.5 rounded-lg border border-soc-slate-200 bg-soc-slate-50/50 text-soc-slate-700 focus:outline-none"
+            className="text-xs px-3.5 py-2 rounded-xl border border-cyber-maroon-800 bg-cyber-black text-white focus:outline-none font-mono cursor-pointer"
           >
             <option value="all">All Incident Statuses</option>
             <option value="Forecasted">Forecasted (Pre-emptive)</option>

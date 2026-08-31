@@ -32,7 +32,7 @@ export default function Explainability() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative z-10">
       {/* Header */}
       <PageHeader
         title="AI Forecast Explainability & Feature Attribution"
