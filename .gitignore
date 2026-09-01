@@ -1,30 +1,8 @@
-<<<<<<< HEAD
-# Environment and secrets
-.env
-.env.*
-!.env.example
-
-# JavaScript dependencies and build output
-node_modules/
-dist/
-.next/
-
-# Python generated files and environments
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-
-# Tooling and operating-system files
-.pytest_cache/
-.DS_Store
-Thumbs.db
-=======
 # Environment variables & secrets
 .env
 .env.local
-.env.*.local
-*.env
+.env.*
+!.env.example
 
 # Python
 __pycache__/
@@ -51,6 +29,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+.pytest_cache/
 
 # Node / Frontend
 frontend/node_modules/
@@ -60,9 +39,11 @@ frontend/out/
 node_modules/
 dist/
 
+# External / Unrelated
+digital-wardrobe/
+
 # OS / IDE
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
->>>>>>> 4c60841 (feat: complete ThreatCast AI predictive SOC platform (FastAPI backend + Vite React frontend + deployment config))
