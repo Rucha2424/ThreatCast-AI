@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+﻿import React, { useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Sparkles, Brain, Info, Network, Layers } from 'lucide-react';
 import PageHeader from '../components/common/PageHeader';
@@ -32,7 +32,7 @@ export default function Explainability() {
   }
 
   return (
-    <div className="space-y-6 relative z-10">
+    <div className="space-y-6 relative z-10 text-slate-100">
       {/* Header */}
       <PageHeader
         title="AI Forecast Explainability & Feature Attribution"

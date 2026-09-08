@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useState, lazy, Suspense } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import SimModal from '../common/SimModal';
 import SimulationResultModal from '../common/SimulationResultModal';
+import ThreeCanvasWrapper from '../3d/ThreeCanvasWrapper';
+
+const DashboardBackground3D = lazy(() => import('../3d/DashboardBackground3D'));
 
 export default function Layout({ onScenarioChange, lastUpdated, activeScenario }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [simModalOpen, setSimModalOpen] = useState(false);
   const [resultModalScenario, setResultModalScenario] = useState(null);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
+  const location = useLocation();
 
   const handleRefresh = async () => {
     setRefreshTrigger((prev) => prev + 1);
@@ -22,11 +27,16 @@ export default function Layout({ onScenarioChange, lastUpdated, activeScenario }
   };
 
   return (
-    <div className="min-h-screen bg-[#fbf8f4] text-cyber-brown-900 flex relative selection:bg-amber-500 selection:text-white">
-      {/* Sidebar */}
+    <div className="min-h-screen bg-[#070a10] text-slate-100 flex relative selection:bg-sky-500 selection:text-white overflow-x-hidden">
+      {/* 3D Ambient Perspective & Particle Field in Background */}
+      <ThreeCanvasWrapper className="fixed inset-0 pointer-events-none z-0">
+        <DashboardBackground3D />
+      </ThreeCanvasWrapper>
+
+      {/* Sidebar Navigation */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      {/* Main Content Area */}
+      {/* Main Content Shell */}
       <div className="flex-1 flex flex-col min-w-0 lg:pl-64 relative z-10">
         <Header
           onToggleSidebar={() => setSidebarOpen((prev) => !prev)}
@@ -36,17 +46,27 @@ export default function Layout({ onScenarioChange, lastUpdated, activeScenario }
           activeScenario={activeScenario}
         />
 
-        <main className="flex-1 p-4 md:p-8 max-w-7xl w-full mx-auto space-y-6">
-          <Outlet
-            key={`${activeScenario}-${refreshTrigger}`}
-            context={{
-              refreshTrigger,
-              onRefresh: handleRefresh,
-              activeScenario,
-              openSimModal: () => setSimModalOpen(true),
-              showResultModal: (sc) => setResultModalScenario(sc),
-            }}
-          />
+        <main className="flex-1 p-4 sm:p-6 md:p-8 max-w-7xl w-full mx-auto space-y-6">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.28, ease: 'easeOut' }}
+            >
+              <Outlet
+                key={`${activeScenario || 'none'}-${location.pathname}`}
+                context={{
+                  refreshTrigger,
+                  onRefresh: handleRefresh,
+                  activeScenario,
+                  openSimModal: () => setSimModalOpen(true),
+                  showResultModal: (sc) => setResultModalScenario(sc),
+                }}
+              />
+            </motion.div>
+          </AnimatePresence>
         </main>
       </div>
 

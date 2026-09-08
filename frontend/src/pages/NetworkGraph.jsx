@@ -74,7 +74,7 @@ export default function NetworkGraph() {
   const compromisedCount = rawNodes.filter((n) => n.state === 'compromised').length;
 
   return (
-    <div className="space-y-6 relative z-10">
+    <div className="space-y-6 relative z-10 text-slate-100">
       {/* Header */}
       <PageHeader
         title="Network State & Topological Graph"
@@ -127,12 +127,12 @@ export default function NetworkGraph() {
               onClose={() => setSelectedNode(null)}
             />
           ) : (
-            <div className="p-8 text-center bg-white rounded-2xl border border-[#ebdcc7] shadow-xs space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-[#fef3c7] text-[#b45309] border border-[#fde68a] flex items-center justify-center mx-auto">
+            <div className="p-8 text-center bg-cyber-surface rounded-2xl border border-slate-800 shadow-soc-card space-y-3">
+              <div className="w-10 h-10 rounded-xl bg-sky-500/15 text-sky-400 border border-sky-500/30 flex items-center justify-center mx-auto">
                 <MousePointerClick className="w-5 h-5" />
               </div>
-              <h4 className="text-sm font-bold text-[#221207]">Select a Node on the Map</h4>
-              <p className="text-xs text-[#7a644c] leading-relaxed">
+              <h4 className="text-sm sm:text-base font-bold text-white">Select a Node on the Map</h4>
+              <p className="text-xs text-slate-400 leading-relaxed">
                 Click any user, workstation, or server on the topology map to view human-readable threat analysis, observed telemetry, and proactive quarantine controls.
               </p>
             </div>

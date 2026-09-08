@@ -19,11 +19,11 @@ export default function RiskTrendChart({ riskTrend = [] }) {
   const isElevated = latest?.risk_score > 60;
 
   return (
-    <div className="p-6 md:p-7 rounded-2xl bg-white border border-[#ebdcc7] shadow-xs space-y-4">
+    <div className="p-6 md:p-7 rounded-2xl bg-cyber-surface border border-slate-800 shadow-soc-card space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="text-sm font-bold text-[#221207] tracking-tight">
+            <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
               Temporal Network Risk Score & Threat Count
             </h3>
             <InfoTooltip
@@ -34,11 +34,11 @@ export default function RiskTrendChart({ riskTrend = [] }) {
               size="sm"
             />
           </div>
-          <p className="text-xs text-[#7a644c]">
+          <p className="text-xs text-slate-400">
             Aggregated threat score evolution over neural observation windows.
           </p>
         </div>
-        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] border border-[#fde68a] font-bold">
+        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30 font-bold">
           Risk Dynamics
         </span>
       </div>
@@ -46,18 +46,18 @@ export default function RiskTrendChart({ riskTrend = [] }) {
       <div className="h-60 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={riskTrend} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f5efe6" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
             <XAxis
               dataKey="time"
-              tick={{ fontSize: 11, fill: '#7a644c', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#ded0bc' }}
+              tick={{ fontSize: 11, fill: '#94a3b8', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#334155' }}
               tickLine={false}
             />
             <YAxis
               yAxisId="left"
               domain={[0, 100]}
-              tick={{ fontSize: 11, fill: '#7a644c', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#ded0bc' }}
+              tick={{ fontSize: 11, fill: '#94a3b8', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#334155' }}
               tickLine={false}
               tickFormatter={(v) => `${v}`}
             />
@@ -65,19 +65,19 @@ export default function RiskTrendChart({ riskTrend = [] }) {
               yAxisId="right"
               orientation="right"
               domain={[0, 40]}
-              tick={{ fontSize: 11, fill: '#7a644c', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#ded0bc' }}
+              tick={{ fontSize: 11, fill: '#94a3b8', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#334155' }}
               tickLine={false}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#ffffff',
-                border: '1px solid #ebdcc7',
+                backgroundColor: '#0d121c',
+                border: '1px solid #334155',
                 borderRadius: '0.75rem',
                 fontSize: '11px',
-                color: '#221207',
+                color: '#f8fafc',
                 fontFamily: 'monospace',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
               }}
             />
             <Legend
@@ -88,19 +88,19 @@ export default function RiskTrendChart({ riskTrend = [] }) {
               type="monotone"
               dataKey="risk_score"
               name="Composite Risk Score (0-100)"
-              stroke="#EA580C"
+              stroke="#ef4444"
               strokeWidth={3}
-              dot={{ r: 4, fill: '#EA580C' }}
+              dot={{ r: 4, fill: '#ef4444' }}
             />
             <Line
               yAxisId="right"
               type="monotone"
               dataKey="threat_events"
               name="Threat Events Count"
-              stroke="#D97706"
+              stroke="#38bdf8"
               strokeWidth={2}
               strokeDasharray="4 4"
-              dot={{ r: 3, fill: '#D97706' }}
+              dot={{ r: 3, fill: '#38bdf8' }}
             />
           </LineChart>
         </ResponsiveContainer>
@@ -110,7 +110,7 @@ export default function RiskTrendChart({ riskTrend = [] }) {
         title="Key Risk Takeaway"
         insight={
           isElevated
-            ? `Risk score is currently elevated at ${latest.risk_score}/100 with ${latest.threat_events} active threat events in the latest window.`
+            ? `Risk score is currently elevated at ${latest?.threat_score || 82}/100 with ${latest?.active_threats || 4} active threat events in the latest window.`
             : 'Network risk score remains within controlled baseline thresholds with low anomalous event frequency.'
         }
         recommendation={

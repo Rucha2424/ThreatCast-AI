@@ -18,11 +18,11 @@ export default function AuthActivityChart({ authSeries = [] }) {
   const totalEscalations = authSeries.reduce((acc, curr) => acc + (curr.privilege_escalations || 0), 0);
 
   return (
-    <div className="p-6 md:p-7 rounded-2xl bg-white border border-[#ebdcc7] shadow-xs space-y-4">
+    <div className="p-6 md:p-7 rounded-2xl bg-cyber-surface border border-slate-800 shadow-soc-card space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="text-sm font-bold text-[#221207] tracking-tight">
+            <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
               Authentication Activity & Privilege Escalation Events
             </h3>
             <InfoTooltip
@@ -33,11 +33,11 @@ export default function AuthActivityChart({ authSeries = [] }) {
               size="sm"
             />
           </div>
-          <p className="text-xs text-[#7a644c]">
+          <p className="text-xs text-slate-400">
             Kerberos/NTLM logins, failed authentication attempts, and elevated token spawns.
           </p>
         </div>
-        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] border border-[#fde68a] font-bold">
+        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30 font-bold">
           IAM Telemetry
         </span>
       </div>
@@ -45,27 +45,27 @@ export default function AuthActivityChart({ authSeries = [] }) {
       <div className="h-60 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={authSeries} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f5efe6" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
             <XAxis
               dataKey="time"
-              tick={{ fontSize: 11, fill: '#7a644c', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#ded0bc' }}
+              tick={{ fontSize: 11, fill: '#94a3b8', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#334155' }}
               tickLine={false}
             />
             <YAxis
-              tick={{ fontSize: 11, fill: '#7a644c', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#ded0bc' }}
+              tick={{ fontSize: 11, fill: '#94a3b8', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#334155' }}
               tickLine={false}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#ffffff',
-                border: '1px solid #ebdcc7',
+                backgroundColor: '#0d121c',
+                border: '1px solid #334155',
                 borderRadius: '0.75rem',
                 fontSize: '11px',
-                color: '#221207',
+                color: '#f8fafc',
                 fontFamily: 'monospace',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
               }}
             />
             <Legend
@@ -74,21 +74,21 @@ export default function AuthActivityChart({ authSeries = [] }) {
             <Bar
               dataKey="successful_logins"
               name="Successful Auth"
-              fill="#65A30D"
+              fill="#10b981"
               radius={[4, 4, 0, 0]}
               stackId="a"
             />
             <Bar
               dataKey="failed_logins"
               name="Failed Attempts"
-              fill="#D97706"
+              fill="#f59e0b"
               radius={[4, 4, 0, 0]}
               stackId="a"
             />
             <Bar
               dataKey="privilege_escalations"
               name="Privilege Escalations"
-              fill="#EA580C"
+              fill="#ef4444"
               radius={[4, 4, 0, 0]}
             />
           </BarChart>

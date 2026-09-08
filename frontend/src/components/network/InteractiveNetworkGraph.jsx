@@ -16,9 +16,7 @@ import {
 } from 'lucide-react';
 import InfoTooltip from '../common/InfoTooltip';
 
-// Scenario-specific dynamic topological coordinates
 const SCENARIO_COORDINATES = {
-  // Default Constellation
   default: {
     'user-014': { x: 130, y: 140 },
     'user-009': { x: 130, y: 350 },
@@ -28,7 +26,6 @@ const SCENARIO_COORDINATES = {
     'database-02': { x: 760, y: 270 },
     'gateway-01': { x: 620, y: 410 },
   },
-  // Lateral Movement Wave
   lateral_movement_wave: {
     'user-014': { x: 110, y: 220 },
     'user-009': { x: 130, y: 390 },
@@ -38,7 +35,6 @@ const SCENARIO_COORDINATES = {
     'database-02': { x: 740, y: 160 },
     'gateway-01': { x: 740, y: 340 },
   },
-  // Exfiltration Crisis
   exfiltration_crisis: {
     'user-014': { x: 110, y: 130 },
     'user-009': { x: 110, y: 370 },
@@ -48,7 +44,6 @@ const SCENARIO_COORDINATES = {
     'database-02': { x: 670, y: 230 },
     'gateway-01': { x: 810, y: 320 },
   },
-  // Ransomware Staging
   ransomware_staging: {
     'user-014': { x: 160, y: 140 },
     'user-009': { x: 160, y: 340 },
@@ -89,44 +84,43 @@ export default function InteractiveNetworkGraph({
   const coordsMap =
     SCENARIO_COORDINATES[activeScenario] || SCENARIO_COORDINATES.default;
 
-  const height = compact ? 380 : 560;
   const viewBox = compact ? '0 0 920 500' : '0 0 920 520';
 
   return (
-    <div className="relative w-full bg-[#fdfcf9] rounded-2xl overflow-hidden border border-[#ebdcc7] shadow-sm select-none group space-y-2">
+    <div className="relative w-full bg-cyber-black rounded-2xl overflow-hidden border border-slate-800 shadow-soc-card select-none group space-y-2">
       {/* Subtle Dot Grid Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(#ded0bc_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
       {/* Top Explanation & Legend Bar */}
-      <div className="p-3.5 bg-white/95 backdrop-blur-md border-b border-[#ebdcc7] flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+      <div className="p-3.5 bg-cyber-surface/95 backdrop-blur-md border-b border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-2">
-          <span className="w-6 h-6 rounded-md bg-[#fef3c7] text-[#b45309] flex items-center justify-center shrink-0">
+          <span className="w-6 h-6 rounded-md bg-sky-500/15 text-sky-400 flex items-center justify-center shrink-0">
             <Info className="w-3.5 h-3.5" />
           </span>
           <div>
-            <span className="text-[#221207] font-bold text-xs">What This Map Shows: </span>
-            <span className="text-[#544230] text-[11px]">
+            <span className="text-white font-bold text-xs">What This Map Shows: </span>
+            <span className="text-slate-400 text-[11px]">
               Active compromised systems and the future trajectory predicted by ThreatCast AI.
             </span>
           </div>
         </div>
 
         {/* Legend */}
-        <div className="flex flex-wrap items-center gap-3 text-[11px] font-mono text-[#544230]">
+        <div className="flex flex-wrap items-center gap-3 text-[11px] font-mono text-slate-400">
           <span className="flex items-center gap-1.5 font-medium">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#65a30d]" /> Normal
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" /> Normal
           </span>
           <span className="flex items-center gap-1.5 font-medium">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#d97706]" /> Suspicious
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-400" /> Suspicious
           </span>
           <span className="flex items-center gap-1.5 font-medium">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#ea580c] ring-2 ring-[#ea580c]/30" /> Compromised
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-500 ring-2 ring-rose-500/30" /> Compromised
           </span>
           <span className="flex items-center gap-1.5 font-medium">
-            <span className="w-4 h-0.5 bg-[#ea580c]" /> Active Vector
+            <span className="w-4 h-0.5 bg-rose-500" /> Active Vector
           </span>
           <span className="flex items-center gap-1.5 font-medium">
-            <span className="w-4 h-0.5 border-b-2 border-dashed border-[#b45309]" /> Predicted Path
+            <span className="w-4 h-0.5 border-b-2 border-dashed border-sky-400" /> Predicted Path
           </span>
         </div>
       </div>
@@ -140,13 +134,13 @@ export default function InteractiveNetworkGraph({
         <defs>
           {/* Active Gradient & Marker */}
           <linearGradient id="activeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#ea580c" />
-            <stop offset="100%" stopColor="#d97706" />
+            <stop offset="0%" stopColor="#ef4444" />
+            <stop offset="100%" stopColor="#f97316" />
           </linearGradient>
 
           <linearGradient id="forecastGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#d97706" />
-            <stop offset="100%" stopColor="#b45309" />
+            <stop offset="0%" stopColor="#38bdf8" />
+            <stop offset="100%" stopColor="#0284c7" />
           </linearGradient>
 
           <marker
@@ -158,7 +152,7 @@ export default function InteractiveNetworkGraph({
             markerHeight="6"
             orient="auto-start-reverse"
           >
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#ea580c" />
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#ef4444" />
           </marker>
 
           <marker
@@ -170,10 +164,9 @@ export default function InteractiveNetworkGraph({
             markerHeight="6"
             orient="auto-start-reverse"
           >
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#b45309" />
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8" />
           </marker>
 
-          {/* Glow filters for active path */}
           <filter id="glowActive" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="3" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
@@ -192,16 +185,16 @@ export default function InteractiveNetworkGraph({
           if (isAttackEdge || isForecastEdge) return null;
 
           return (
-            <g key={edge.id || idx}>
+            <g key={edge.id || `${edge.source}-${edge.target}-${idx}`}>
               <line
                 x1={src.x}
                 y1={src.y}
                 x2={tgt.x}
                 y2={tgt.y}
-                stroke="#ded0bc"
+                stroke="#1e293b"
                 strokeWidth="1.5"
                 strokeDasharray="4 3"
-                opacity="0.7"
+                opacity="0.8"
               />
             </g>
           );
@@ -217,7 +210,7 @@ export default function InteractiveNetworkGraph({
           if (!isForecastEdge) return null;
 
           return (
-            <g key={edge.id || `f-${idx}`}>
+            <g key={edge.id || `forecast-${edge.source}-${edge.target}-${idx}`}>
               <line
                 x1={src.x}
                 y1={src.y}
@@ -228,18 +221,17 @@ export default function InteractiveNetworkGraph({
                 strokeDasharray="6 4"
                 markerEnd="url(#arrowForecast)"
                 className="animate-pulse"
-                opacity="0.9"
+                opacity="0.95"
               />
               {/* Midpoint Label */}
               <text
                 x={(src.x + tgt.x) / 2}
                 y={(src.y + tgt.y) / 2 - 8}
-                fill="#b45309"
+                fill="#38bdf8"
                 fontSize="10"
                 fontFamily="monospace"
                 fontWeight="bold"
                 textAnchor="middle"
-                className="bg-white"
               >
                 Predicted Next Hop
               </text>
@@ -257,7 +249,7 @@ export default function InteractiveNetworkGraph({
           if (!isAttackEdge) return null;
 
           return (
-            <g key={edge.id || `a-${idx}`}>
+            <g key={edge.id || `active-${edge.source}-${edge.target}-${idx}`}>
               <line
                 x1={src.x}
                 y1={src.y}
@@ -269,7 +261,7 @@ export default function InteractiveNetworkGraph({
                 filter="url(#glowActive)"
               />
               {/* Active Traversing Pulse */}
-              <circle r="4" fill="#ea580c">
+              <circle r="4" fill="#ef4444">
                 <animateMotion
                   path={`M ${src.x} ${src.y} L ${tgt.x} ${tgt.y}`}
                   dur="2s"
@@ -293,21 +285,21 @@ export default function InteractiveNetworkGraph({
           const isCompromised = node.state === 'compromised';
           const isSuspicious = node.state === 'suspicious';
 
-          let nodeFill = '#ffffff';
-          let nodeStroke = '#ded0bc';
+          let nodeFill = '#0d121c';
+          let nodeStroke = '#334155';
           let ringColor = 'transparent';
 
           if (isCompromised) {
-            nodeFill = '#fff7ed';
-            nodeStroke = '#ea580c';
-            ringColor = 'rgba(234, 88, 12, 0.25)';
+            nodeFill = '#1c0d0d';
+            nodeStroke = '#ef4444';
+            ringColor = 'rgba(239, 68, 68, 0.35)';
           } else if (isSuspicious || isInForecastPath) {
-            nodeFill = '#fffbeb';
-            nodeStroke = '#d97706';
-            ringColor = 'rgba(217, 119, 6, 0.2)';
+            nodeFill = '#1c160d';
+            nodeStroke = '#f59e0b';
+            ringColor = 'rgba(245, 158, 11, 0.25)';
           } else {
-            nodeFill = '#ffffff';
-            nodeStroke = '#a3e635';
+            nodeFill = '#0d121c';
+            nodeStroke = '#10b981';
           }
 
           const IconComponent = ICON_MAP[node.type] || Laptop;
@@ -337,9 +329,9 @@ export default function InteractiveNetworkGraph({
                 cy={coords.y}
                 r={isSelected ? '24' : isHovered ? '22' : '20'}
                 fill={nodeFill}
-                stroke={isSelected ? '#b45309' : nodeStroke}
+                stroke={isSelected ? '#38bdf8' : nodeStroke}
                 strokeWidth={isSelected ? '3.5' : '2.5'}
-                className="transition-all duration-200 shadow-md"
+                className="transition-all duration-200"
               />
 
               {/* Node Center Icon */}
@@ -351,13 +343,7 @@ export default function InteractiveNetworkGraph({
                 className="pointer-events-none"
               >
                 <div
-                  className={`w-full h-full flex items-center justify-center ${
-                    isCompromised
-                      ? 'text-[#ea580c]'
-                      : isSuspicious || isInForecastPath
-                      ? 'text-[#d97706]'
-                      : 'text-[#65a30d]'
-                  }`}
+                  className="w-full h-full flex items-center justify-center text-slate-200"
                 >
                   <IconComponent className="w-4 h-4" />
                 </div>
@@ -369,7 +355,7 @@ export default function InteractiveNetworkGraph({
                   width="22"
                   height="14"
                   rx="4"
-                  fill={isCompromised ? '#ea580c' : isSuspicious ? '#d97706' : '#65a30d'}
+                  fill={isCompromised ? '#ef4444' : isSuspicious ? '#f59e0b' : '#10b981'}
                 />
                 <text
                   x="11"
@@ -388,7 +374,7 @@ export default function InteractiveNetworkGraph({
               <text
                 x={coords.x}
                 y={coords.y + 34}
-                fill="#221207"
+                fill="#f1f5f9"
                 fontSize="11"
                 fontFamily="sans-serif"
                 fontWeight="bold"
@@ -401,7 +387,7 @@ export default function InteractiveNetworkGraph({
               <text
                 x={coords.x}
                 y={coords.y + 46}
-                fill="#7a644c"
+                fill="#94a3b8"
                 fontSize="9"
                 fontFamily="monospace"
                 textAnchor="middle"

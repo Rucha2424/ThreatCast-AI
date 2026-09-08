@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { Activity, Radio, Filter, Search } from 'lucide-react';
+import { motion } from 'framer-motion';
 import PageHeader from '../components/common/PageHeader';
 import LoadingState from '../components/common/LoadingState';
 import ErrorState from '../components/common/ErrorState';
@@ -64,7 +65,7 @@ export default function LiveNetwork() {
   });
 
   return (
-    <div className="space-y-6 relative z-10">
+    <div className="space-y-6 relative z-10 text-slate-100">
       {/* Header */}
       <PageHeader
         title="Live Network Observability & Telemetry"
@@ -81,14 +82,14 @@ export default function LiveNetwork() {
       <RiskTrendChart riskTrend={activity?.risk_trend} />
 
       {/* Security Event Telemetry Log */}
-      <div className="p-6 md:p-7 rounded-2xl bg-white border border-[#ebdcc7] shadow-xs space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#ebdcc7] pb-4">
+      <div className="p-6 md:p-7 rounded-2xl bg-cyber-surface border border-slate-800 shadow-soc-card space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
           <div>
-            <h3 className="text-base font-bold text-[#221207] flex items-center gap-2">
-              <Radio className="w-4 h-4 text-[#b45309]" />
+            <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+              <Radio className="w-4 h-4 text-sky-400" />
               Live Security Telemetry Log
             </h3>
-            <p className="text-xs text-[#7a644c]">
+            <p className="text-xs text-slate-400">
               Raw network events annotated with MITRE ATT&CK taxonomy & neural forecast trigger flags.
             </p>
           </div>
@@ -96,20 +97,20 @@ export default function LiveNetwork() {
           {/* Filters */}
           <div className="flex flex-wrap items-center gap-2.5">
             <div className="relative">
-              <Search className="w-3.5 h-3.5 text-[#7a644c] absolute left-2.5 top-1/2 -translate-y-1/2" />
+              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Filter events..."
-                className="pl-8 pr-3 py-1.5 text-xs rounded-xl border border-[#ebdcc7] bg-[#fcfaf7] text-[#221207] placeholder:text-[#998165] focus:outline-none focus:ring-2 focus:ring-[#b45309]/30 font-mono"
+                className="pl-8 pr-3 py-1.5 text-xs rounded-xl border border-slate-700 bg-cyber-card text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-400/40 font-mono"
               />
             </div>
 
             <select
               value={riskFilter}
               onChange={(e) => setRiskFilter(e.target.value)}
-              className="text-xs px-3 py-1.5 rounded-xl border border-[#ebdcc7] bg-[#fcfaf7] text-[#544230] focus:outline-none font-mono cursor-pointer"
+              className="text-xs px-3 py-1.5 rounded-xl border border-slate-700 bg-cyber-card text-slate-300 focus:outline-none font-mono cursor-pointer"
             >
               <option value="">All Risk Tiers</option>
               <option value="CRITICAL">Critical</option>
@@ -124,7 +125,7 @@ export default function LiveNetwork() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="bg-[#fcfaf7] border-b border-[#ebdcc7] text-[#7a644c] font-mono uppercase text-[10px] tracking-wider">
+              <tr className="bg-cyber-card border-b border-slate-800 text-slate-400 font-mono uppercase text-[10px] tracking-wider">
                 <th className="py-3 px-3.5 font-bold">Timestamp</th>
                 <th className="py-3 px-3.5 font-bold">Source Entity</th>
                 <th className="py-3 px-3.5 font-bold">Destination Entity</th>
@@ -134,30 +135,30 @@ export default function LiveNetwork() {
                 <th className="py-3 px-3.5 font-bold">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#f5efe6] font-mono">
+            <tbody className="divide-y divide-slate-800/80 font-mono">
               {filteredEvents.map((evt) => (
-                <tr key={evt.id} className="hover:bg-[#fcfaf7] transition-colors">
-                  <td className="py-3 px-3.5 text-[#7a644c]">{evt.timestamp}</td>
-                  <td className="py-3 px-3.5 font-bold text-[#221207]">
-                    {evt.source_entity} <span className="text-[#7a644c] font-normal">({evt.source_ip})</span>
+                <tr key={evt.id} className="hover:bg-slate-800/40 transition-colors">
+                  <td className="py-3 px-3.5 text-slate-400">{evt.timestamp}</td>
+                  <td className="py-3 px-3.5 font-bold text-white">
+                    {evt.source_entity} <span className="text-slate-500 font-normal">({evt.source_ip})</span>
                   </td>
-                  <td className="py-3 px-3.5 text-[#544230]">
-                    {evt.destination_entity} <span className="text-[#998165]">({evt.destination_ip})</span>
+                  <td className="py-3 px-3.5 text-slate-300">
+                    {evt.destination_entity} <span className="text-slate-500">({evt.destination_ip})</span>
                   </td>
-                  <td className="py-3 px-3.5 font-sans font-medium text-[#301a0a] max-w-xs">
+                  <td className="py-3 px-3.5 font-sans font-medium text-slate-200 max-w-xs">
                     {evt.event_type}
                     {evt.is_forecast_trigger && (
-                      <span className="ml-2 inline-flex text-[9px] font-mono font-bold px-1.5 py-0.2 rounded bg-[#fef3c7] text-[#b45309] border border-[#fde68a]">
+                      <span className="ml-2 inline-flex text-[9px] font-mono font-bold px-1.5 py-0.2 rounded bg-sky-500/20 text-sky-300 border border-sky-500/30">
                         AI Trigger
                       </span>
                     )}
                   </td>
-                  <td className="py-3 px-3.5 text-[#b45309] font-bold">{evt.tactic}</td>
+                  <td className="py-3 px-3.5 text-sky-400 font-bold">{evt.tactic}</td>
                   <td className="py-3 px-3.5">
                     <StatusBadge status={evt.risk_level} />
                   </td>
                   <td className="py-3 px-3.5">
-                    <span className="text-[11px] font-medium text-[#544230]">
+                    <span className="text-[11px] font-medium text-slate-400">
                       {evt.status}
                     </span>
                   </td>

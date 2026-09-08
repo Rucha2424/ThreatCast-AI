@@ -1,51 +1,79 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    color-scheme: dark;
+  }
+
   body {
-    background-color: #fbf8f4;
-    color: #382012;
+    background-color: #070a10;
+    color: #f1f5f9;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     overflow-x: hidden;
+    font-size: clamp(0.95rem, 0.9rem + 0.35vw, 1.125rem);
+    line-height: 1.6;
   }
 
-  /* Custom Light Beige & Amber Scrollbars */
+  /* Dark Charcoal Cyber Scrollbars */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #f5efe6;
+    background: #0d121c;
   }
   ::-webkit-scrollbar-thumb {
-    background: #ded0bc;
+    background: #1e293b;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #cbab83;
+    background: #0284c7;
   }
 }
 
 @layer utilities {
   .bg-cyber-glass {
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid #ebe1d3;
+    background: rgba(13, 18, 28, 0.78);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(30, 41, 59, 0.7);
   }
 
   .bg-cyber-card {
-    background: #ffffff;
-    border: 1px solid #ebe1d3;
+    background: #0d121c;
+    border: 1px solid #1e293b;
   }
 
   .bg-cyber-card-hover {
     transition: all 0.25s ease-in-out;
   }
   .bg-cyber-card-hover:hover {
-    border-color: #d97706;
-    box-shadow: 0 8px 24px -4px rgba(84, 46, 20, 0.1);
+    border-color: #38bdf8;
+    box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.8), 0 0 20px -2px rgba(56, 189, 248, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 25px -4px rgba(56, 189, 248, 0.35);
+  }
+
+  .glow-threat {
+    box-shadow: 0 0 25px -4px rgba(239, 68, 68, 0.4);
+  }
+
+  .glow-emerald {
+    box-shadow: 0 0 25px -4px rgba(16, 185, 129, 0.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

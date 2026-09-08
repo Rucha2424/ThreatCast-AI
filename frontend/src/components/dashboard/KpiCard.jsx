@@ -9,6 +9,7 @@ import {
   ArrowDownRight,
   Minus,
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import InfoTooltip from '../common/InfoTooltip';
 
 const ICON_LOOKUP = {
@@ -72,27 +73,27 @@ export default function KpiCard({ item }) {
     switch (item.status) {
       case 'danger':
         return {
-          border: 'border-[#fdba74]',
-          iconBg: 'bg-[#ffedd5] text-[#ea580c]',
-          badge: 'text-[#ea580c]',
+          border: 'border-rose-500/30',
+          iconBg: 'bg-rose-500/15 text-rose-400',
+          badge: 'text-rose-400',
         };
       case 'warning':
         return {
-          border: 'border-[#fde68a]',
-          iconBg: 'bg-[#fef3c7] text-[#d97706]',
-          badge: 'text-[#d97706]',
+          border: 'border-amber-500/30',
+          iconBg: 'bg-amber-500/15 text-amber-400',
+          badge: 'text-amber-400',
         };
       case 'safe':
         return {
-          border: 'border-[#d9f99d]',
-          iconBg: 'bg-[#f7fee7] text-[#65a30d]',
-          badge: 'text-[#65a30d]',
+          border: 'border-emerald-500/30',
+          iconBg: 'bg-emerald-500/15 text-emerald-400',
+          badge: 'text-emerald-400',
         };
       default:
         return {
-          border: 'border-[#ebdcc7]',
-          iconBg: 'bg-[#fef3c7] text-[#b45309]',
-          badge: 'text-[#b45309]',
+          border: 'border-sky-500/30',
+          iconBg: 'bg-sky-500/15 text-sky-400',
+          badge: 'text-sky-400',
         };
     }
   };
@@ -100,22 +101,24 @@ export default function KpiCard({ item }) {
   const statusStyle = getStatusClasses();
 
   return (
-    <div
-      className={`p-5 rounded-2xl bg-white border ${statusStyle.border} shadow-xs hover:shadow-md transition-all duration-200 flex flex-col justify-between group relative`}
+    <motion.div
+      whileHover={{ scale: 1.02, y: -2 }}
+      transition={{ duration: 0.2 }}
+      className={`p-5 rounded-2xl bg-cyber-surface border ${statusStyle.border} shadow-soc-card flex flex-col justify-between group relative`}
     >
       <div className="flex items-center justify-between mb-3">
         <div
-          className={`w-10 h-10 rounded-xl ${statusStyle.iconBg} flex items-center justify-center transition-transform group-hover:scale-105 shadow-2xs`}
+          className={`w-10 h-10 rounded-xl ${statusStyle.iconBg} flex items-center justify-center transition-transform group-hover:scale-110 shadow-sm`}
         >
           <Icon className="w-5 h-5" />
         </div>
 
         <div className="flex items-center gap-1.5">
           {item.trend && (
-            <div className="flex items-center gap-1 text-[11px] font-medium text-[#7a644c] font-mono">
-              {item.trend.direction === 'up' && <ArrowUpRight className="w-3.5 h-3.5 text-[#ea580c]" />}
-              {item.trend.direction === 'down' && <ArrowDownRight className="w-3.5 h-3.5 text-[#65a30d]" />}
-              {item.trend.direction === 'neutral' && <Minus className="w-3.5 h-3.5 text-[#998165]" />}
+            <div className="flex items-center gap-1 text-2xs sm:text-xs font-medium text-slate-400 font-mono">
+              {item.trend.direction === 'up' && <ArrowUpRight className="w-3.5 h-3.5 text-rose-400" />}
+              {item.trend.direction === 'down' && <ArrowDownRight className="w-3.5 h-3.5 text-emerald-400" />}
+              {item.trend.direction === 'neutral' && <Minus className="w-3.5 h-3.5 text-slate-400" />}
               <span>{item.trend.value}</span>
             </div>
           )}
@@ -132,16 +135,16 @@ export default function KpiCard({ item }) {
       </div>
 
       <div>
-        <span className="text-xs font-bold text-[#7a644c] uppercase tracking-wider block font-mono">
+        <span className="text-2xs sm:text-xs font-bold text-slate-400 uppercase tracking-wider block font-mono">
           {item.label}
         </span>
-        <div className="text-2xl font-black tracking-tight text-[#221207] mt-1">
+        <div className="text-2xl sm:text-3xl font-black tracking-tight text-white mt-1">
           {item.value}
         </div>
-        <p className="text-xs text-[#544230] mt-1 truncate" title={item.context}>
+        <p className="text-xs text-slate-400 mt-1 truncate" title={item.context}>
           {item.context}
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 }

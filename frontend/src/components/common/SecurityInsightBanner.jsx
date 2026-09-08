@@ -1,9 +1,6 @@
 import React from 'react';
 import { Sparkles, AlertTriangle, CheckCircle, Info } from 'lucide-react';
 
-/**
- * SecurityInsightBanner — Grounded plain-English takeaways for charts, tables, and topology maps.
- */
 export default function SecurityInsightBanner({
   title = 'Key Security Insight',
   insight,
@@ -15,35 +12,35 @@ export default function SecurityInsightBanner({
 
   const styles = {
     info: {
-      bg: 'bg-[#fffbeb]',
-      border: 'border-[#fde68a]',
-      iconBg: 'bg-[#fef3c7] text-[#b45309]',
-      titleColor: 'text-[#92400e]',
-      textColor: 'text-[#544230]',
+      bg: 'bg-sky-500/10',
+      border: 'border-sky-500/30',
+      iconBg: 'bg-sky-500/15 text-sky-400',
+      titleColor: 'text-sky-400',
+      textColor: 'text-slate-300',
       icon: Sparkles,
     },
     warning: {
-      bg: 'bg-[#fff7ed]',
-      border: 'border-[#fdba74]',
-      iconBg: 'bg-[#ffedd5] text-[#c2410c]',
-      titleColor: 'text-[#9a3412]',
-      textColor: 'text-[#544230]',
+      bg: 'bg-amber-500/10',
+      border: 'border-amber-500/30',
+      iconBg: 'bg-amber-500/15 text-amber-400',
+      titleColor: 'text-amber-400',
+      textColor: 'text-slate-300',
       icon: AlertTriangle,
     },
     critical: {
-      bg: 'bg-[#fef2f2]',
-      border: 'border-[#fca5a5]',
-      iconBg: 'bg-[#fee2e2] text-[#dc2626]',
-      titleColor: 'text-[#991b1b]',
-      textColor: 'text-[#544230]',
+      bg: 'bg-rose-500/10',
+      border: 'border-rose-500/30',
+      iconBg: 'bg-rose-500/15 text-rose-400',
+      titleColor: 'text-rose-400',
+      textColor: 'text-slate-300',
       icon: AlertTriangle,
     },
     success: {
-      bg: 'bg-[#f7fee7]',
-      border: 'border-[#d9f99d]',
-      iconBg: 'bg-[#ecfccb] text-[#65a30d]',
-      titleColor: 'text-[#3f6212]',
-      textColor: 'text-[#544230]',
+      bg: 'bg-emerald-500/10',
+      border: 'border-emerald-500/30',
+      iconBg: 'bg-emerald-500/15 text-emerald-400',
+      titleColor: 'text-emerald-400',
+      textColor: 'text-slate-300',
       icon: CheckCircle,
     },
   };
@@ -52,8 +49,8 @@ export default function SecurityInsightBanner({
   const Icon = currentStyle.icon;
 
   return (
-    <div className={`p-4 rounded-xl border ${currentStyle.bg} ${currentStyle.border} ${className} flex items-start gap-3 shadow-2xs`}>
-      <div className={`w-7 h-7 rounded-lg ${currentStyle.iconBg} flex items-center justify-center shrink-0 mt-0.5 shadow-2xs`}>
+    <div className={`p-4 rounded-xl border ${currentStyle.border} ${currentStyle.bg} flex items-start gap-3 shadow-sm ${className}`}>
+      <div className={`w-7 h-7 rounded-lg ${currentStyle.iconBg} flex items-center justify-center shrink-0 mt-0.5 shadow-sm`}>
         <Icon className="w-4 h-4" />
       </div>
       <div className="space-y-1 text-xs leading-relaxed">
@@ -62,8 +59,8 @@ export default function SecurityInsightBanner({
         </span>
         <p className={`${currentStyle.textColor} font-medium`}>{insight}</p>
         {recommendation && (
-          <p className="text-[11px] text-[#221207] pt-1 font-semibold border-t border-[#ebdcc7]/50 mt-1">
-            <span className="text-[#b45309]">Recommended: </span>
+          <p className="text-[11px] text-slate-200 pt-1 font-semibold border-t border-slate-800/80 mt-1">
+            <span className="text-sky-400">Recommended: </span>
             {recommendation}
           </p>
         )}

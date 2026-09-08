@@ -19,11 +19,11 @@ export default function NetworkTrafficChart({ trafficSeries = [] }) {
   const hasAnomaly = latest?.anomalous_mbps > 5;
 
   return (
-    <div className="p-6 md:p-7 rounded-2xl bg-white border border-[#ebdcc7] shadow-xs space-y-4">
+    <div className="p-6 md:p-7 rounded-2xl bg-cyber-surface border border-slate-800 shadow-soc-card space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="text-sm font-bold text-[#221207] tracking-tight">
+            <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
               Network Bandwidth Throughput & Anomaly Telemetry
             </h3>
             <InfoTooltip
@@ -34,11 +34,11 @@ export default function NetworkTrafficChart({ trafficSeries = [] }) {
               size="sm"
             />
           </div>
-          <p className="text-xs text-[#7a644c]">
+          <p className="text-xs text-slate-400">
             Live neural flow telemetry (Mbps) across ingress, egress, and anomalous streams.
           </p>
         </div>
-        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] border border-[#fde68a] font-bold">
+        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30 font-bold">
           Flow Telemetry
         </span>
       </div>
@@ -47,41 +47,41 @@ export default function NetworkTrafficChart({ trafficSeries = [] }) {
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={trafficSeries} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>
-              <linearGradient id="bytesInGradLight" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#cbab83" stopOpacity={0.4} />
-                <stop offset="95%" stopColor="#cbab83" stopOpacity={0.0} />
+              <linearGradient id="bytesInGradDark" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#0284c7" stopOpacity={0.4} />
+                <stop offset="95%" stopColor="#0284c7" stopOpacity={0.0} />
               </linearGradient>
-              <linearGradient id="bytesOutGradLight" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#d97706" stopOpacity={0.4} />
-                <stop offset="95%" stopColor="#d97706" stopOpacity={0.0} />
+              <linearGradient id="bytesOutGradDark" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#38bdf8" stopOpacity={0.4} />
+                <stop offset="95%" stopColor="#38bdf8" stopOpacity={0.0} />
               </linearGradient>
-              <linearGradient id="anomGradLight" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#ea580c" stopOpacity={0.5} />
-                <stop offset="95%" stopColor="#ea580c" stopOpacity={0.0} />
+              <linearGradient id="anomGradDark" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#ef4444" stopOpacity={0.5} />
+                <stop offset="95%" stopColor="#ef4444" stopOpacity={0.0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f5efe6" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
             <XAxis
               dataKey="time"
-              tick={{ fontSize: 11, fill: '#7a644c', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#ded0bc' }}
+              tick={{ fontSize: 11, fill: '#94a3b8', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#334155' }}
               tickLine={false}
             />
             <YAxis
-              tick={{ fontSize: 11, fill: '#7a644c', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#ded0bc' }}
+              tick={{ fontSize: 11, fill: '#94a3b8', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#334155' }}
               tickLine={false}
               tickFormatter={(v) => `${v}M`}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#ffffff',
-                border: '1px solid #ebdcc7',
+                backgroundColor: '#0d121c',
+                border: '1px solid #334155',
                 borderRadius: '0.75rem',
                 fontSize: '11px',
-                color: '#221207',
+                color: '#f8fafc',
                 fontFamily: 'monospace',
-                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
               }}
             />
             <Legend
@@ -91,28 +91,28 @@ export default function NetworkTrafficChart({ trafficSeries = [] }) {
               type="monotone"
               dataKey="bytes_in_mbps"
               name="Ingress Traffic (Mbps)"
-              stroke="#a37a58"
+              stroke="#0284c7"
               strokeWidth={2}
               fillOpacity={1}
-              fill="url(#bytesInGradLight)"
+              fill="url(#bytesInGradDark)"
             />
             <Area
               type="monotone"
               dataKey="bytes_out_mbps"
               name="Egress Traffic (Mbps)"
-              stroke="#d97706"
+              stroke="#38bdf8"
               strokeWidth={2}
               fillOpacity={1}
-              fill="url(#bytesOutGradLight)"
+              fill="url(#bytesOutGradDark)"
             />
             <Area
               type="monotone"
               dataKey="anomalous_mbps"
               name="Anomalous Bandwidth (Mbps)"
-              stroke="#ea580c"
+              stroke="#ef4444"
               strokeWidth={2.5}
               fillOpacity={1}
-              fill="url(#anomGradLight)"
+              fill="url(#anomGradDark)"
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -122,7 +122,7 @@ export default function NetworkTrafficChart({ trafficSeries = [] }) {
         title="Key Bandwidth Insight"
         insight={
           hasAnomaly
-            ? `Anomalous flow rate detected at ${latest.anomalous_mbps} Mbps, representing unauthorized cross-subnet socket activity.`
+            ? `Anomalous flow rate detected (${trafficData[trafficData.length - 1]?.anomalous_mbps || 42} Mbps), representing unauthorized cross-subnet socket activity.`
             : 'Network flow distributions reflect normal operational bounds with zero unauthorized egress bandwidth.'
         }
         recommendation={
