@@ -1,6 +1,5 @@
-﻿import React from 'react';
-import { Menu, Zap, Clock, Compass, Activity } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React from 'react';
+import { Menu, Zap, Clock, Compass, HelpCircle } from 'lucide-react';
 import RefreshButton from '../common/RefreshButton';
 import { startOnboardingTour } from '../common/OnboardingTour';
 
@@ -13,24 +12,24 @@ export default function Header({
   activeScenario,
 }) {
   return (
-    <header className="sticky top-0 z-30 flex items-center justify-between h-16 sm:h-18 px-4 sm:px-6 md:px-8 bg-cyber-surface/90 backdrop-blur-xl border-b border-slate-800/80 shadow-md">
+    <header className="sticky top-0 z-30 flex items-center justify-between h-16 px-4 md:px-8 bg-white/90 backdrop-blur-md border-b border-[#ebdcc7] shadow-sm">
       <div className="flex items-center gap-3">
         <button
           onClick={onToggleSidebar}
-          className="p-2 rounded-xl text-slate-400 hover:bg-slate-800/60 lg:hidden transition-colors"
+          className="p-2 rounded-lg text-[#7a644c] hover:bg-[#f5efe6] lg:hidden transition-colors"
         >
           <Menu className="w-5 h-5" />
         </button>
 
         <div className="hidden sm:flex items-center gap-2.5 text-xs font-medium">
-          <span className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-mono text-xs">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f7fee7] text-[#4d7c0f] border border-[#d9f99d] font-mono text-[11px]">
+            <span className="w-2 h-2 rounded-full bg-[#65a30d]" />
             Neural AI Engine Online
           </span>
 
           {activeScenario && activeScenario !== 'default' && (
-            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-mono text-xs">
-              <Zap className="w-3.5 h-3.5 text-amber-400" />
+            <span className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fffbeb] text-[#b45309] border border-[#fde68a] font-mono text-[11px]">
+              <Zap className="w-3.5 h-3.5 text-[#d97706]" />
               <span>Simulation: {activeScenario}</span>
             </span>
           )}
@@ -39,21 +38,19 @@ export default function Header({
 
       <div className="flex items-center gap-3">
         {/* Guided Tour Trigger */}
-        <motion.button
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.96 }}
+        <button
           onClick={startOnboardingTour}
-          className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border border-slate-700 bg-cyber-card hover:bg-slate-800 text-slate-300 hover:text-white text-xs font-mono font-medium transition-colors"
+          className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#ebdcc7] bg-white hover:bg-[#f5efe6] text-[#7a644c] hover:text-[#221207] text-xs font-mono font-medium transition-colors"
           title="Take Guided Product Tour"
         >
-          <Compass className="w-3.5 h-3.5 text-sky-400" />
+          <Compass className="w-3.5 h-3.5 text-[#b45309]" />
           <span>Tour</span>
-        </motion.button>
+        </button>
 
         {/* Backend Timestamp */}
         {lastUpdated && (
-          <div className="hidden lg:flex items-center gap-1.5 text-xs text-slate-400 font-mono">
-            <Clock className="w-3.5 h-3.5 text-sky-400" />
+          <div className="hidden lg:flex items-center gap-1.5 text-xs text-[#7a644c] font-mono">
+            <Clock className="w-3.5 h-3.5 text-[#b45309]" />
             <span>Updated: {new Date(lastUpdated).toLocaleTimeString()}</span>
           </div>
         )}
@@ -61,19 +58,17 @@ export default function Header({
         <RefreshButton onRefresh={onRefresh} loading={refreshing} />
 
         {/* Attack Simulation Modal Trigger */}
-        <motion.button
+        <button
           id="tour-sim-trigger"
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
           onClick={onOpenSimModal}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white text-xs sm:text-sm font-bold shadow-lg shadow-sky-500/25 transition-all group font-mono"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#b45309] hover:bg-[#92400e] text-white text-xs font-bold shadow-sm transition-all active:scale-95 group font-mono"
         >
-          <Zap className="w-4 h-4 text-sky-200 group-hover:scale-110 transition-transform" />
+          <Zap className="w-3.5 h-3.5 text-amber-200 group-hover:scale-110 transition-transform" />
           <span>Simulate Attack</span>
-        </motion.button>
+        </button>
 
         {/* Profile Avatar */}
-        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold text-sky-400 shadow-sm font-mono">
+        <div className="w-8 h-8 rounded-xl bg-[#f5efe6] border border-[#ded0bc] flex items-center justify-center text-xs font-bold text-[#542e14] shadow-sm font-mono">
           TC
         </div>
       </div>

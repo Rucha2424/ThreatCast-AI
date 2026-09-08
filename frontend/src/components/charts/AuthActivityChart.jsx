@@ -14,11 +14,11 @@ import SecurityInsightBanner from '../common/SecurityInsightBanner';
 
 const DEFAULT_AUTH = [
   { time: '15:10', successful_logins: 45, failed_logins: 4, privilege_escalations: 0 },
-  { time: '15:15', successful_logins: 52, failed_logins: 6, privilege_escalations: 0 },
-  { time: '15:20', successful_logins: 68, failed_logins: 14, privilege_escalations: 1 },
-  { time: '15:25', successful_logins: 88, failed_logins: 28, privilege_escalations: 3 },
-  { time: '15:30', successful_logins: 115, failed_logins: 45, privilege_escalations: 6 },
-  { time: '15:35', successful_logins: 130, failed_logins: 58, privilege_escalations: 9 },
+  { time: '15:15', successful_logins: 52, failed_logins: 12, privilege_escalations: 1 },
+  { time: '15:20', successful_logins: 68, failed_logins: 28, privilege_escalations: 2 },
+  { time: '15:25', successful_logins: 84, failed_logins: 45, privilege_escalations: 4 },
+  { time: '15:30', successful_logins: 110, failed_logins: 68, privilege_escalations: 8 },
+  { time: '15:35', successful_logins: 125, failed_logins: 82, privilege_escalations: 12 },
 ];
 
 export default function AuthActivityChart({ authSeries }) {
@@ -26,11 +26,11 @@ export default function AuthActivityChart({ authSeries }) {
   const totalEscalations = data.reduce((acc, curr) => acc + (curr.privilege_escalations || 0), 0);
 
   return (
-    <div className="p-6 md:p-7 rounded-2xl bg-cyber-surface border border-slate-800 shadow-soc-card space-y-4">
+    <div className="p-6 md:p-7 rounded-2xl bg-white border border-[#ebdcc7] shadow-xs space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
+            <h3 className="text-sm font-bold text-[#221207] tracking-tight">
               Authentication Activity & Privilege Escalation Events
             </h3>
             <InfoTooltip
@@ -41,60 +41,62 @@ export default function AuthActivityChart({ authSeries }) {
               size="sm"
             />
           </div>
-          <p className="text-xs sm:text-sm text-slate-400">
+          <p className="text-xs text-[#7a644c]">
             Kerberos/NTLM logins, failed authentication attempts, and elevated token spawns.
           </p>
         </div>
-        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30 font-bold">
+        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] border border-[#fde68a] font-bold">
           IAM Telemetry
         </span>
       </div>
 
-      <div className="h-64 w-full">
+      <div className="h-60 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#f5efe6" vertical={false} />
             <XAxis
               dataKey="time"
-              tick={{ fontSize: 12, fill: '#94a3b8', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#334155' }}
+              tick={{ fontSize: 11, fill: '#7a644c', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#ded0bc' }}
               tickLine={false}
             />
             <YAxis
-              tick={{ fontSize: 12, fill: '#94a3b8', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#334155' }}
+              tick={{ fontSize: 11, fill: '#7a644c', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#ded0bc' }}
               tickLine={false}
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#0d121c',
-                border: '1px solid #334155',
+                backgroundColor: '#ffffff',
+                border: '1px solid #ebdcc7',
                 borderRadius: '0.75rem',
-                fontSize: '12px',
-                color: '#f8fafc',
+                fontSize: '11px',
+                color: '#221207',
                 fontFamily: 'monospace',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.5)',
+                boxShadow: '0 4px 16px rgba(0,0,0,0.06)',
               }}
             />
-            <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '8px' }} />
+            <Legend
+              wrapperStyle={{ fontSize: '11px', paddingTop: '8px', fontFamily: 'monospace' }}
+            />
             <Bar
               dataKey="successful_logins"
-              name="Successful Logins"
-              fill="#0ea5e9"
+              name="Successful Auth"
+              fill="#65A30D"
               radius={[4, 4, 0, 0]}
               stackId="a"
             />
             <Bar
               dataKey="failed_logins"
-              name="Failed Login Attempts"
-              fill="#f59e0b"
+              name="Failed Attempts"
+              fill="#D97706"
               radius={[4, 4, 0, 0]}
               stackId="a"
             />
             <Bar
               dataKey="privilege_escalations"
               name="Privilege Escalations"
-              fill="#ef4444"
+              fill="#EA580C"
               radius={[4, 4, 0, 0]}
             />
           </BarChart>

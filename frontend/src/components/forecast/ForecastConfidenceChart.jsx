@@ -29,11 +29,11 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
     if (active && payload && payload.length) {
       const p = payload[0].payload;
       return (
-        <div className="p-3 bg-cyber-surface text-slate-100 rounded-xl border border-slate-700 shadow-xl text-xs font-mono">
-          <p className="font-bold text-sky-400">{p.horizon}: {p.stageName}</p>
-          <p className="text-slate-300 mt-1">Confidence: {p.confidencePct}%</p>
-          <p className="text-slate-400">Impact Window: {p.time}</p>
-          <p className="text-slate-400">Tactic: {p.tactic}</p>
+        <div className="p-3 bg-white text-[#221207] rounded-xl border border-[#ebdcc7] shadow-lg text-xs font-mono">
+          <p className="font-bold text-[#b45309]">{p.horizon}: {p.stageName}</p>
+          <p className="text-[#544230] mt-1">Confidence: {p.confidencePct}%</p>
+          <p className="text-[#7a644c]">Impact Window: {p.time}</p>
+          <p className="text-[#7a644c]">Tactic: {p.tactic}</p>
         </div>
       );
     }
@@ -41,11 +41,11 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
   };
 
   return (
-    <div className="p-6 md:p-7 rounded-2xl bg-cyber-surface border border-slate-800 shadow-soc-card space-y-4">
+    <div className="p-6 md:p-7 rounded-2xl bg-white border border-[#ebdcc7] shadow-xs space-y-4">
       <div className="flex items-center justify-between">
         <div>
           <div className="flex items-center gap-2">
-            <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
+            <h3 className="text-sm font-bold text-[#221207] tracking-tight">
               Forecast Confidence Decay Curve
             </h3>
             <InfoTooltip
@@ -56,11 +56,11 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
               size="sm"
             />
           </div>
-          <p className="text-xs text-slate-400">
+          <p className="text-xs text-[#7a644c]">
             Neural model certainty distribution across forecasted time horizons (T+1 to T+3).
           </p>
         </div>
-        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-sky-500/15 text-sky-300 border border-sky-500/30 font-bold">
+        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-[#fef3c7] text-[#b45309] border border-[#fde68a] font-bold">
           Temporal Model
         </span>
       </div>
@@ -69,22 +69,22 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data} margin={{ top: 10, right: 20, left: -20, bottom: 0 }}>
             <defs>
-              <linearGradient id="confidenceGradDark" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#38bdf8" stopOpacity={0.4} />
-                <stop offset="95%" stopColor="#38bdf8" stopOpacity={0.0} />
+              <linearGradient id="confidenceGradLight" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#d97706" stopOpacity={0.25} />
+                <stop offset="95%" stopColor="#d97706" stopOpacity={0.0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#f5efe6" vertical={false} />
             <XAxis
               dataKey="horizon"
-              tick={{ fontSize: 11, fill: '#94a3b8', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#334155' }}
+              tick={{ fontSize: 11, fill: '#7a644c', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#ded0bc' }}
               tickLine={false}
             />
             <YAxis
               domain={[0, 100]}
-              tick={{ fontSize: 11, fill: '#94a3b8', fontFamily: 'monospace' }}
-              axisLine={{ stroke: '#334155' }}
+              tick={{ fontSize: 11, fill: '#7a644c', fontFamily: 'monospace' }}
+              axisLine={{ stroke: '#ded0bc' }}
               tickLine={false}
               tickFormatter={(v) => `${v}%`}
             />
@@ -92,10 +92,10 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
             <Area
               type="monotone"
               dataKey="confidencePct"
-              stroke="#38bdf8"
+              stroke="#d97706"
               strokeWidth={2.5}
               fillOpacity={1}
-              fill="url(#confidenceGradDark)"
+              fill="url(#confidenceGradLight)"
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -104,7 +104,7 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
       {nearestStage && (
         <SecurityInsightBanner
           title="Key Forecast Insight"
-          insight={`ThreatCast AI exhibits highest certainty at T+1 (${Math.round((nearestStage.confidence || 0.94) * 100)}% for ${nearestStage.stage_name || 'Lateral Pivoting'}) within an estimated ${nearestStage.estimated_time_to_impact || '<3 mins'}.`}
+          insight={`ThreatCast AI exhibits highest certainty at T+1 (${nearestStage.confidencePct}% for ${nearestStage.stageName}) within an estimated ${nearestStage.time}.`}
           recommendation="Intervening at T+1 collapses the remaining forecasted attack steps (T+2 and T+3) before target assets can be breached."
           type="info"
         />

@@ -22,10 +22,10 @@ export default function ForecastStageCard({ stage, isCurrent = false }) {
 
   return (
     <div
-      className={`rounded-2xl p-6 border transition-all duration-200 shadow-soc-card space-y-4 ${
+      className={`rounded-2xl p-6 border transition-all duration-200 shadow-xs space-y-4 ${
         isCurrent
-          ? 'bg-rose-500/5 border-rose-500/30'
-          : 'bg-cyber-surface border-slate-800'
+          ? 'bg-[#fcfaf7] text-[#221207] border-[#ded0bc]'
+          : 'bg-white text-[#301a0a] border-[#ebdcc7] hover:border-[#b45309]'
       }`}
     >
       {/* Top Header */}
@@ -34,74 +34,80 @@ export default function ForecastStageCard({ stage, isCurrent = false }) {
           <span
             className={`text-xs font-mono font-bold px-2.5 py-1 rounded ${
               isCurrent
-                ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
-                : 'bg-sky-500/20 text-sky-300 border border-sky-500/30'
+                ? 'bg-[#ffedd5] text-[#c2410c] border border-[#fdba74]'
+                : 'bg-[#fef3c7] text-[#b45309] border border-[#fde68a]'
             }`}
           >
             {stage.horizon}
           </span>
           <span
             className={`text-xs font-bold font-mono ${
-              isCurrent ? 'text-rose-400' : 'text-sky-400'
+              isCurrent ? 'text-[#ea580c]' : 'text-[#b45309]'
             }`}
           >
             {isCurrent ? 'CURRENT OBSERVED' : 'FORECASTED STATE'}
           </span>
         </div>
 
-        <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-sky-500/10 text-sky-300 border border-sky-500/30">
+        <span
+          className={`text-xs font-mono font-bold px-3 py-1 rounded-full ${
+            isCurrent
+              ? 'bg-[#fef3c7] text-[#b45309] border border-[#fde68a]'
+              : 'bg-[#fffbeb] text-[#b45309] border border-[#fde68a]'
+          }`}
+        >
           {formatConfidence(stage.confidence)} Confidence
         </span>
       </div>
 
       {/* Title & Human Meaning */}
       <div className="space-y-1.5">
-        <h3 className="text-lg sm:text-xl font-bold tracking-tight text-white">{stage.stage_name}</h3>
-        <p className="text-xs sm:text-sm leading-relaxed text-slate-300 font-medium">
+        <h3 className="text-lg font-bold tracking-tight text-[#221207]">{stage.stage_name}</h3>
+        <p className="text-xs leading-relaxed text-[#544230] font-medium">
           {stage.description}
         </p>
       </div>
 
       {/* Why It Matters */}
-      <div className="p-3.5 rounded-xl bg-cyber-card border border-slate-800/80 space-y-1">
-        <span className="text-[10px] font-mono uppercase font-bold text-sky-400 block">
+      <div className="p-3 rounded-xl bg-[#fffdfa] border border-[#ebdcc7] space-y-1">
+        <span className="text-[10px] font-mono uppercase font-bold text-[#b45309] block">
           Why This Matters:
         </span>
-        <p className="text-xs text-slate-300 leading-relaxed">
+        <p className="text-xs text-[#544230] leading-relaxed">
           {getWhyItMatters()}
         </p>
       </div>
 
       {/* Affected Nodes & Estimated Time Window */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs font-mono">
-        <div className="p-3 rounded-xl border bg-cyber-card border-slate-800/80">
-          <span className="block text-[10px] uppercase font-bold mb-1 text-slate-400">
+        <div className="p-3 rounded-xl border bg-[#fcfaf7] border-[#ebdcc7]">
+          <span className="block text-[10px] uppercase font-bold mb-1 text-[#7a644c]">
             Estimated Time Window
           </span>
-          <span className="font-bold text-white flex items-center gap-1.5 text-sm">
-            <Clock className="w-3.5 h-3.5 text-sky-400" />
+          <span className="font-bold text-[#221207] flex items-center gap-1.5">
+            <Clock className="w-3.5 h-3.5 text-[#b45309]" />
             {stage.estimated_time_to_impact}
           </span>
         </div>
 
-        <div className="p-3 rounded-xl border bg-cyber-card border-slate-800/80">
-          <span className="block text-[10px] uppercase font-bold mb-1 text-slate-400">
+        <div className="p-3 rounded-xl border bg-[#fcfaf7] border-[#ebdcc7]">
+          <span className="block text-[10px] uppercase font-bold mb-1 text-[#7a644c]">
             Affected Infrastructure
           </span>
-          <span className="font-bold text-sky-300 truncate block text-sm" title={stage.affected_nodes?.join(', ')}>
+          <span className="font-bold text-[#221207] truncate block" title={stage.affected_nodes?.join(', ')}>
             {stage.affected_nodes?.join(', ') || 'None'}
           </span>
         </div>
       </div>
 
       {/* Recommended Proactive Mitigation */}
-      <div className="p-3.5 rounded-xl border flex items-start gap-2.5 text-xs bg-sky-500/10 border-sky-500/30 text-sky-200">
-        <AlertOctagon className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
+      <div className="p-3.5 rounded-xl border flex items-start gap-2.5 text-xs bg-[#fffbeb] border-[#fde68a] text-[#78350f]">
+        <AlertOctagon className="w-4 h-4 text-[#d97706] shrink-0 mt-0.5" />
         <div>
-          <strong className="block text-[11px] uppercase tracking-wider font-bold text-sky-300 font-mono">
+          <strong className="block text-[11px] uppercase tracking-wider font-bold text-[#b45309] font-mono">
             Recommended Action (What to do):
           </strong>
-          <span className="leading-relaxed text-slate-300 font-medium">{stage.recommended_mitigation}</span>
+          <span className="leading-relaxed text-[#544230] font-medium">{stage.recommended_mitigation}</span>
         </div>
       </div>
 
@@ -111,32 +117,32 @@ export default function ForecastStageCard({ stage, isCurrent = false }) {
         badge="Evidence"
         defaultOpen={false}
       >
-        <div className="space-y-2 font-mono text-[11px] text-slate-300">
-          <div className="flex justify-between border-b border-slate-800 pb-1">
-            <span className="text-slate-500">MITRE Tactic:</span>
-            <span className="font-bold text-white">{stage.tactic}</span>
+        <div className="space-y-2 font-mono text-[11px] text-[#544230]">
+          <div className="flex justify-between border-b border-[#f5efe6] pb-1">
+            <span className="text-[#7a644c]">MITRE Tactic:</span>
+            <span className="font-bold text-[#221207]">{stage.tactic}</span>
           </div>
-          <div className="flex justify-between border-b border-slate-800 pb-1">
-            <span className="text-slate-500">MITRE Technique ID:</span>
-            <span className="font-bold text-white">{stage.technique_id}</span>
+          <div className="flex justify-between border-b border-[#f5efe6] pb-1">
+            <span className="text-[#7a644c]">MITRE Technique ID:</span>
+            <span className="font-bold text-[#221207]">{stage.technique_id}</span>
           </div>
 
           {/* Probability Distribution */}
           {stage.probability_distribution && Object.keys(stage.probability_distribution).length > 0 && (
             <div className="pt-2 space-y-1.5">
-              <span className="text-[10px] uppercase font-mono font-bold block text-slate-400">
+              <span className="text-[10px] uppercase font-mono font-bold block text-[#7a644c]">
                 Tactical Probability Distribution:
               </span>
               <div className="space-y-1">
                 {Object.entries(stage.probability_distribution).map(([tactic, prob]) => (
                   <div key={tactic} className="space-y-0.5 text-[11px]">
                     <div className="flex justify-between font-mono">
-                      <span className="text-slate-300">{tactic}</span>
-                      <span className="font-bold text-sky-400">{formatConfidence(prob)}</span>
+                      <span className="text-[#544230]">{tactic}</span>
+                      <span className="font-bold text-[#b45309]">{formatConfidence(prob)}</span>
                     </div>
-                    <div className="w-full h-1.5 rounded-full overflow-hidden bg-slate-800 border border-slate-700">
+                    <div className="w-full h-1.5 rounded-full overflow-hidden bg-[#f5efe6] border border-[#ded0bc]">
                       <div
-                        className="h-full bg-sky-400 rounded-full"
+                        className="h-full bg-[#d97706] rounded-full"
                         style={{ width: `${prob * 100}%` }}
                       />
                     </div>

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 import { ShieldAlert, Filter, Search, Plus } from 'lucide-react';
 import PageHeader from '../components/common/PageHeader';
@@ -59,7 +59,7 @@ export default function Incidents() {
   };
 
   return (
-    <div className="space-y-6 relative z-10 text-slate-100">
+    <div className="space-y-6 relative z-10">
       {/* Header */}
       <PageHeader
         title="Security Incident Management & Playbooks"
@@ -68,15 +68,15 @@ export default function Incidents() {
       />
 
       {/* Filter Row */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 bg-cyber-surface rounded-2xl border border-slate-800 shadow-soc-card">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 bg-white rounded-2xl border border-[#ebdcc7] shadow-xs">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#7a644c] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search Incident ID, title, or asset..."
-            className="w-full pl-10 pr-3.5 py-2 text-xs rounded-xl border border-slate-700 bg-cyber-card text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-400/30 font-mono"
+            className="w-full pl-10 pr-3.5 py-2 text-xs rounded-xl border border-[#ebdcc7] bg-[#fcfaf7] text-[#221207] placeholder:text-[#998165] focus:outline-none focus:ring-2 focus:ring-[#b45309]/30 font-mono"
           />
         </div>
 
@@ -84,7 +84,7 @@ export default function Incidents() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="text-xs px-3.5 py-2 rounded-xl border border-slate-700 bg-cyber-card text-slate-300 focus:outline-none font-mono cursor-pointer"
+            className="text-xs px-3.5 py-2 rounded-xl border border-[#ebdcc7] bg-[#fcfaf7] text-[#544230] focus:outline-none font-mono cursor-pointer"
           >
             <option value="all">All Incident Statuses</option>
             <option value="Forecasted">Forecasted (Pre-emptive)</option>
