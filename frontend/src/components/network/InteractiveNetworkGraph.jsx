@@ -63,6 +63,26 @@ const ICON_MAP = {
   gateway: Shield,
 };
 
+const DEFAULT_GRAPH_DATA = {
+  nodes: [
+    { id: 'user-014', label: 'User-014 (SecOps Analyst)', type: 'user', ip: '10.0.1.14', risk_score: 82, state: 'compromised', department: 'Security Operations', os: 'Windows 11', observed_activity: 'Privilege escalation via token impersonation', predicted_action: 'Lateral scan across internal subnet', active_connections: 3, is_in_attack_path: true },
+    { id: 'user-009', label: 'User-009 (DevOps)', type: 'user', ip: '10.0.1.9', risk_score: 15, state: 'normal', department: 'Engineering', os: 'macOS', observed_activity: 'GitLab auth', predicted_action: 'Normal', active_connections: 2, is_in_attack_path: false },
+    { id: 'endpoint-07', label: 'Endpoint-07 (Workstation)', type: 'endpoint', ip: '10.0.2.7', risk_score: 86, state: 'compromised', department: 'SecOps Floor', os: 'Windows 10', observed_activity: 'Seeding SMB SYN packets and RPC probes', predicted_action: 'Lateral Movement to Server-03 in T+1', active_connections: 5, is_in_attack_path: true },
+    { id: 'endpoint-12', label: 'Endpoint-12 (Build Node)', type: 'endpoint', ip: '10.0.2.12', risk_score: 12, state: 'normal', department: 'Engineering', os: 'Ubuntu', observed_activity: 'Routine compile', predicted_action: 'Normal', active_connections: 3, is_in_attack_path: false },
+    { id: 'server-03', label: 'Server-03 (Domain Controller)', type: 'server', ip: '10.0.3.3', risk_score: 68, state: 'suspicious', department: 'Core Infra', os: 'Win Server 2022', observed_activity: 'Listening on RPC/SMB; unauthenticated probes', predicted_action: 'Target of T+1 Lateral Movement', active_connections: 9, is_in_attack_path: false },
+    { id: 'database-02', label: 'Database-02 (Customer DB)', type: 'database', ip: '10.0.4.2', risk_score: 45, state: 'target', department: 'DB Subnet', os: 'PostgreSQL 16', observed_activity: 'Normal query throughput', predicted_action: 'Target of T+2 Credential Extraction', active_connections: 6, is_in_attack_path: false },
+    { id: 'gateway-01', label: 'Gateway-01 (Firewall)', type: 'gateway', ip: '10.0.0.1', risk_score: 35, state: 'normal', department: 'Perimeter', os: 'PAN-OS 11', observed_activity: 'Normal routing', predicted_action: 'Target of T+3 Exfiltration', active_connections: 38, is_in_attack_path: false },
+  ],
+  edges: [
+    { id: 'e1', source: 'user-014', target: 'endpoint-07', protocol: 'RDP/TLS', port: 3389, traffic_volume: '11.8 MB', is_attack_path: true, is_forecasted_path: false, status: 'active' },
+    { id: 'e2', source: 'endpoint-07', target: 'server-03', protocol: 'SMB/RPC', port: 445, traffic_volume: '42.3 MB', is_attack_path: false, is_forecasted_path: true, status: 'forecasted' },
+    { id: 'e3', source: 'server-03', target: 'database-02', protocol: 'TCP/SQL', port: 5432, traffic_volume: '18.9 MB', is_attack_path: false, is_forecasted_path: true, status: 'forecasted' },
+    { id: 'e4', source: 'database-02', target: 'gateway-01', protocol: 'HTTPS/DNS', port: 443, traffic_volume: '0.8 MB', is_attack_path: false, is_forecasted_path: true, status: 'forecasted' },
+  ],
+  attack_path_node_ids: ['user-014', 'endpoint-07'],
+  forecasted_path_node_ids: ['endpoint-07', 'server-03', 'database-02', 'gateway-01'],
+};
+
 export default function InteractiveNetworkGraph({
   graphData,
   selectedNodeId,
@@ -72,14 +92,14 @@ export default function InteractiveNetworkGraph({
 }) {
   const [hoveredNodeId, setHoveredNodeId] = useState(null);
 
-  if (!graphData) return null;
+  const effectiveData = graphData?.nodes?.length ? graphData : DEFAULT_GRAPH_DATA;
 
   const {
     nodes = [],
     edges = [],
     attack_path_node_ids = [],
     forecasted_path_node_ids = [],
-  } = graphData;
+  } = effectiveData;
 
   const coordsMap =
     SCENARIO_COORDINATES[activeScenario] || SCENARIO_COORDINATES.default;
@@ -92,21 +112,21 @@ export default function InteractiveNetworkGraph({
       <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
 
       {/* Top Explanation & Legend Bar */}
-      <div className="p-3.5 bg-cyber-surface/95 backdrop-blur-md border-b border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+      <div className="p-4 bg-cyber-surface/95 backdrop-blur-md border-b border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs sm:text-sm">
         <div className="flex items-center gap-2">
           <span className="w-6 h-6 rounded-md bg-sky-500/15 text-sky-400 flex items-center justify-center shrink-0">
-            <Info className="w-3.5 h-3.5" />
+            <Info className="w-4 h-4" />
           </span>
           <div>
-            <span className="text-white font-bold text-xs">What This Map Shows: </span>
-            <span className="text-slate-400 text-[11px]">
+            <span className="text-white font-bold text-xs sm:text-sm">What This Map Shows: </span>
+            <span className="text-slate-400 text-xs sm:text-sm">
               Active compromised systems and the future trajectory predicted by ThreatCast AI.
             </span>
           </div>
         </div>
 
         {/* Legend */}
-        <div className="flex flex-wrap items-center gap-3 text-[11px] font-mono text-slate-400">
+        <div className="flex flex-wrap items-center gap-3.5 text-xs font-mono text-slate-400">
           <span className="flex items-center gap-1.5 font-medium">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" /> Normal
           </span>
@@ -352,16 +372,16 @@ export default function InteractiveNetworkGraph({
               {/* Risk Badge on Node */}
               <g transform={`translate(${coords.x + 10}, ${coords.y - 18})`}>
                 <rect
-                  width="22"
-                  height="14"
-                  rx="4"
+                  width="24"
+                  height="16"
+                  rx="5"
                   fill={isCompromised ? '#ef4444' : isSuspicious ? '#f59e0b' : '#10b981'}
                 />
                 <text
-                  x="11"
-                  y="10"
+                  x="12"
+                  y="11.5"
                   fill="#ffffff"
-                  fontSize="8"
+                  fontSize="10"
                   fontFamily="monospace"
                   fontWeight="bold"
                   textAnchor="middle"
@@ -373,9 +393,9 @@ export default function InteractiveNetworkGraph({
               {/* Node Label Below */}
               <text
                 x={coords.x}
-                y={coords.y + 34}
-                fill="#f1f5f9"
-                fontSize="11"
+                y={coords.y + 36}
+                fill="#f8fafc"
+                fontSize="12.5"
                 fontFamily="sans-serif"
                 fontWeight="bold"
                 textAnchor="middle"
@@ -386,10 +406,11 @@ export default function InteractiveNetworkGraph({
               {/* IP / Status Subtitle */}
               <text
                 x={coords.x}
-                y={coords.y + 46}
+                y={coords.y + 50}
                 fill="#94a3b8"
-                fontSize="9"
+                fontSize="10"
                 fontFamily="monospace"
+                fontWeight="600"
                 textAnchor="middle"
               >
                 {node.state.toUpperCase()} • {node.ip}

@@ -92,16 +92,17 @@ export default {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
+      // Larger, bolder, clearer font sizing that fills the screen generously
       fontSize: {
-        '2xs': ['0.65rem', { lineHeight: '0.85rem' }],
-        'xs': ['0.75rem', { lineHeight: '1rem' }],
-        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
-        'base': ['1rem', { lineHeight: '1.5rem' }],
-        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
-        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
-        '2xl': ['1.5rem', { lineHeight: '2rem' }],
-        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
-        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
+        '2xs': ['0.75rem', { lineHeight: '1rem' }],       // 12px
+        'xs': ['0.875rem', { lineHeight: '1.25rem' }],    // 14px
+        'sm': ['0.975rem', { lineHeight: '1.45rem' }],    // 15.6px
+        'base': ['1.1rem', { lineHeight: '1.65rem' }],    // 17.6px
+        'lg': ['1.25rem', { lineHeight: '1.8rem' }],      // 20px
+        'xl': ['1.45rem', { lineHeight: '2rem' }],        // 23.2px
+        '2xl': ['1.75rem', { lineHeight: '2.3rem' }],     // 28px
+        '3xl': ['2.25rem', { lineHeight: '2.7rem' }],     // 36px
+        '4xl': ['2.85rem', { lineHeight: '3.2rem' }],     // 45.6px
       },
       boxShadow: {
         'soc-card': '0 4px 20px -2px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(30, 41, 59, 0.6)',
