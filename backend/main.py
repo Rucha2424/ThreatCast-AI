@@ -1,5 +1,16 @@
 import os
+import sys
+from pathlib import Path
 from datetime import datetime, timezone
+
+# Ensure project root is in sys.path regardless of execution directory
+_backend_dir = Path(__file__).resolve().parent
+_root_dir = _backend_dir.parent
+if str(_root_dir) not in sys.path:
+    sys.path.insert(0, str(_root_dir))
+if str(_backend_dir) not in sys.path:
+    sys.path.insert(0, str(_backend_dir))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
