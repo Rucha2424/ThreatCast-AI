@@ -1,13 +1,10 @@
-import React, { useState, lazy, Suspense } from 'react';
+import React, { useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import SimModal from '../common/SimModal';
 import SimulationResultModal from '../common/SimulationResultModal';
-import ThreeCanvasWrapper from '../3d/ThreeCanvasWrapper';
-
-const DashboardBackground3D = lazy(() => import('../3d/DashboardBackground3D'));
 
 export default function Layout({ onScenarioChange, lastUpdated, activeScenario }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -27,12 +24,7 @@ export default function Layout({ onScenarioChange, lastUpdated, activeScenario }
   };
 
   return (
-    <div className="min-h-screen bg-[#070a10] text-slate-100 flex relative selection:bg-sky-500 selection:text-white overflow-x-hidden">
-      {/* 3D Ambient Perspective & Particle Field in Background */}
-      <ThreeCanvasWrapper className="fixed inset-0 pointer-events-none z-0">
-        <DashboardBackground3D />
-      </ThreeCanvasWrapper>
-
+    <div className="min-h-screen bg-[#070a10] cyber-grid-bg text-slate-100 flex relative selection:bg-sky-500 selection:text-white overflow-x-hidden">
       {/* Sidebar Navigation */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
@@ -50,10 +42,10 @@ export default function Layout({ onScenarioChange, lastUpdated, activeScenario }
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.28, ease: 'easeOut' }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
             >
               <Outlet
                 key={`${activeScenario || 'none'}-${location.pathname}`}

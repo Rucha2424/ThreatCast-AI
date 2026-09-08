@@ -1,4 +1,4 @@
-﻿/** @type {import('tailwindcss').Config} */
+/** @type {import('tailwindcss').Config} */
 export default {
   content: [
     "./index.html",
@@ -64,7 +64,7 @@ export default {
             900: '#7f1d1d',
           },
         },
-        // Standard SOC Theme Mapping (Dark Charcoal + Electric Blue + Emerald/Threats)
+        // Standard SOC Theme Mapping
         soc: {
           navy: {
             950: '#030508',
@@ -86,38 +86,6 @@ export default {
             800: '#f1f5f9',
             900: '#f8fafc',
           },
-          ai: {
-            light: 'rgba(56, 189, 248, 0.12)',
-            border: '#0284c7',
-            DEFAULT: '#0ea5e9',
-            electric: '#38bdf8',
-            purple: '#818cf8',
-            glow: 'rgba(56, 189, 248, 0.25)',
-          },
-          cyan: {
-            light: 'rgba(56, 189, 248, 0.1)',
-            DEFAULT: '#38bdf8',
-            dark: '#0284c7',
-          },
-          threat: {
-            light: 'rgba(239, 68, 68, 0.12)',
-            border: '#dc2626',
-            DEFAULT: '#ef4444',
-            dark: '#b91c1c',
-            glow: 'rgba(239, 68, 68, 0.3)',
-          },
-          warning: {
-            light: 'rgba(245, 158, 11, 0.12)',
-            border: '#d97706',
-            DEFAULT: '#f59e0b',
-            dark: '#b45309',
-          },
-          secure: {
-            light: 'rgba(16, 185, 129, 0.12)',
-            border: '#059669',
-            DEFAULT: '#10b981',
-            dark: '#047857',
-          }
         }
       },
       fontFamily: {
@@ -125,33 +93,20 @@ export default {
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
       fontSize: {
-        '2xs': ['0.7rem', { lineHeight: '0.95rem' }],
-        'xs': ['0.8rem', { lineHeight: '1.15rem' }],
-        'sm': ['0.92rem', { lineHeight: '1.35rem' }],
-        'base': ['1.05rem', { lineHeight: '1.6rem' }],
-        'lg': ['1.18rem', { lineHeight: '1.75rem' }],
-        'xl': ['1.32rem', { lineHeight: '1.9rem' }],
-        '2xl': ['1.6rem', { lineHeight: '2.1rem' }],
-        '3xl': ['2rem', { lineHeight: '2.4rem' }],
-        '4xl': ['2.5rem', { lineHeight: '2.8rem' }],
+        '2xs': ['0.65rem', { lineHeight: '0.85rem' }],
+        'xs': ['0.75rem', { lineHeight: '1rem' }],
+        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
+        'base': ['1rem', { lineHeight: '1.5rem' }],
+        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
+        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+        '2xl': ['1.5rem', { lineHeight: '2rem' }],
+        '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
+        '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
       },
       boxShadow: {
         'soc-card': '0 4px 20px -2px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(30, 41, 59, 0.6)',
         'soc-card-hover': '0 8px 30px -4px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(56, 189, 248, 0.4), 0 0 20px -2px rgba(56, 189, 248, 0.15)',
-        'blue-glow': '0 0 25px -3px rgba(56, 189, 248, 0.35)',
-        'threat-glow': '0 0 25px -3px rgba(239, 68, 68, 0.35)',
-        'secure-glow': '0 0 25px -3px rgba(16, 185, 129, 0.35)',
       },
-      animation: {
-        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'float': 'float 6s ease-in-out infinite',
-      },
-      keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-6px)' },
-        }
-      }
     },
   },
   plugins: [],
