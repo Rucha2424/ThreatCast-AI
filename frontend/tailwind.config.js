@@ -133,6 +133,17 @@ export default {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
+      fontSize: {
+        '2xs': ['0.75rem', { lineHeight: '1.05rem' }],
+        'xs': ['0.845rem', { lineHeight: '1.25rem' }],
+        'sm': ['0.95rem', { lineHeight: '1.4rem' }],
+        'base': ['1.075rem', { lineHeight: '1.6rem' }],
+        'lg': ['1.2rem', { lineHeight: '1.75rem' }],
+        'xl': ['1.375rem', { lineHeight: '1.9rem' }],
+        '2xl': ['1.65rem', { lineHeight: '2.15rem' }],
+        '3xl': ['2.1rem', { lineHeight: '2.5rem' }],
+        '4xl': ['2.65rem', { lineHeight: '3rem' }],
+      },
       boxShadow: {
         'soc-card': '0 2px 10px -2px rgba(84, 46, 20, 0.06), 0 1px 3px rgba(84, 46, 20, 0.04)',
         'soc-card-hover': '0 8px 24px -4px rgba(84, 46, 20, 0.12), 0 2px 6px rgba(84, 46, 20, 0.06)',
