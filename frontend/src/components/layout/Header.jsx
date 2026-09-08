@@ -1,6 +1,7 @@
 import React from 'react';
-import { Menu, Zap, Clock } from 'lucide-react';
+import { Menu, Zap, Clock, Compass, HelpCircle } from 'lucide-react';
 import RefreshButton from '../common/RefreshButton';
+import { startOnboardingTour } from '../common/OnboardingTour';
 
 export default function Header({
   onToggleSidebar,
@@ -35,10 +36,20 @@ export default function Header({
         </div>
       </div>
 
-      <div className="flex items-center gap-3.5">
+      <div className="flex items-center gap-3">
+        {/* Guided Tour Trigger */}
+        <button
+          onClick={startOnboardingTour}
+          className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#ebdcc7] bg-white hover:bg-[#f5efe6] text-[#7a644c] hover:text-[#221207] text-xs font-mono font-medium transition-colors"
+          title="Take Guided Product Tour"
+        >
+          <Compass className="w-3.5 h-3.5 text-[#b45309]" />
+          <span>Tour</span>
+        </button>
+
         {/* Backend Timestamp */}
         {lastUpdated && (
-          <div className="hidden md:flex items-center gap-1.5 text-xs text-[#7a644c] font-mono">
+          <div className="hidden lg:flex items-center gap-1.5 text-xs text-[#7a644c] font-mono">
             <Clock className="w-3.5 h-3.5 text-[#b45309]" />
             <span>Updated: {new Date(lastUpdated).toLocaleTimeString()}</span>
           </div>
@@ -48,6 +59,7 @@ export default function Header({
 
         {/* Attack Simulation Modal Trigger */}
         <button
+          id="tour-sim-trigger"
           onClick={onOpenSimModal}
           className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#b45309] hover:bg-[#92400e] text-white text-xs font-bold shadow-sm transition-all active:scale-95 group font-mono"
         >

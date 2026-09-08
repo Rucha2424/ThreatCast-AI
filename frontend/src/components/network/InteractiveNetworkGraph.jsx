@@ -11,7 +11,10 @@ import {
   Cpu,
   Lock,
   Flame,
+  Info,
+  Sparkles,
 } from 'lucide-react';
+import InfoTooltip from '../common/InfoTooltip';
 
 // Scenario-specific dynamic topological coordinates
 const SCENARIO_COORDINATES = {
@@ -90,287 +93,325 @@ export default function InteractiveNetworkGraph({
   const viewBox = compact ? '0 0 920 500' : '0 0 920 520';
 
   return (
-    <div className="relative w-full bg-[#fdfcf9] rounded-2xl overflow-hidden border border-[#ebdcc7] shadow-sm select-none group">
+    <div className="relative w-full bg-[#fdfcf9] rounded-2xl overflow-hidden border border-[#ebdcc7] shadow-sm select-none group space-y-2">
       {/* Subtle Dot Grid Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(#ded0bc_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
 
-      {/* Top Legend Bar */}
-      <div className="absolute top-4 left-4 right-4 z-10 flex flex-wrap items-center justify-between gap-3 text-[11px] font-mono text-[#544230] bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-xl border border-[#ebdcc7] shadow-xs">
-        <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1.5 text-[#382819] font-medium">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#65a30d]" /> Normal
+      {/* Top Explanation & Legend Bar */}
+      <div className="p-3.5 bg-white/95 backdrop-blur-md border-b border-[#ebdcc7] flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-2">
+          <span className="w-6 h-6 rounded-md bg-[#fef3c7] text-[#b45309] flex items-center justify-center shrink-0">
+            <Info className="w-3.5 h-3.5" />
           </span>
-          <span className="flex items-center gap-1.5 text-[#382819] font-medium">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#d97706]" /> Suspicious
-          </span>
-          <span className="flex items-center gap-1.5 text-[#c2410c] font-bold">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#ea580c]" /> Compromised
-          </span>
-          <span className="flex items-center gap-1.5 text-[#b45309] font-bold">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#f59e0b]" /> Forecasted (T+1..3)
-          </span>
+          <div>
+            <span className="text-[#221207] font-bold text-xs">What This Map Shows: </span>
+            <span className="text-[#544230] text-[11px]">
+              Active compromised systems and the future trajectory predicted by ThreatCast AI.
+            </span>
+          </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          <span className="flex items-center gap-1.5 text-[#b45309] font-semibold">
-            <span className="w-5 h-1 bg-[#d97706] rounded-full" />
-            Active Vector
+        {/* Legend */}
+        <div className="flex flex-wrap items-center gap-3 text-[11px] font-mono text-[#544230]">
+          <span className="flex items-center gap-1.5 font-medium">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#65a30d]" /> Normal
           </span>
-          <span className="flex items-center gap-1.5 text-[#7a644c] font-semibold">
-            <span className="w-5 h-0.5 border-t-2 border-dashed border-[#d97706]" />
-            Predicted Synapse
+          <span className="flex items-center gap-1.5 font-medium">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#d97706]" /> Suspicious
+          </span>
+          <span className="flex items-center gap-1.5 font-medium">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#ea580c] ring-2 ring-[#ea580c]/30" /> Compromised
+          </span>
+          <span className="flex items-center gap-1.5 font-medium">
+            <span className="w-4 h-0.5 bg-[#ea580c]" /> Active Vector
+          </span>
+          <span className="flex items-center gap-1.5 font-medium">
+            <span className="w-4 h-0.5 border-b-2 border-dashed border-[#b45309]" /> Predicted Path
           </span>
         </div>
       </div>
 
-      {/* SVG Topology Canvas */}
+      {/* SVG Canvas */}
       <svg
         viewBox={viewBox}
-        className="w-full h-full relative z-0"
-        style={{ minHeight: `${height}px` }}
+        className="w-full h-auto cursor-default"
+        style={{ minHeight: compact ? '320px' : '480px' }}
       >
         <defs>
-          {/* Gradients for Edges */}
-          <linearGradient id="grad-attack-light" x1="0%" y1="0%" x2="100%" y2="100%">
+          {/* Active Gradient & Marker */}
+          <linearGradient id="activeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#ea580c" />
             <stop offset="100%" stopColor="#d97706" />
           </linearGradient>
 
-          <linearGradient id="grad-forecast-light" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="forecastGrad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#d97706" />
-            <stop offset="100%" stopColor="#f59e0b" />
+            <stop offset="100%" stopColor="#b45309" />
           </linearGradient>
 
-          <linearGradient id="grad-normal-light" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#ded0bc" />
-            <stop offset="100%" stopColor="#ccbaa2" />
-          </linearGradient>
-
-          {/* Marker Arrows */}
-          <marker id="marker-threat-light" markerWidth="9" markerHeight="9" refX="30" refY="4.5" orient="auto">
-            <path d="M 0 1 L 8 4.5 L 0 8 z" fill="#ea580c" />
+          <marker
+            id="arrowActive"
+            viewBox="0 0 10 10"
+            refX="22"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#ea580c" />
           </marker>
 
-          <marker id="marker-forecast-light" markerWidth="9" markerHeight="9" refX="30" refY="4.5" orient="auto">
-            <path d="M 0 1 L 8 4.5 L 0 8 z" fill="#d97706" />
+          <marker
+            id="arrowForecast"
+            viewBox="0 0 10 10"
+            refX="22"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#b45309" />
           </marker>
 
-          <marker id="marker-normal-light" markerWidth="7" markerHeight="7" refX="26" refY="3.5" orient="auto">
-            <path d="M 0 1 L 6 3.5 L 0 6 z" fill="#ccbaa2" />
-          </marker>
+          {/* Glow filters for active path */}
+          <filter id="glowActive" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+          </filter>
         </defs>
 
-        {/* 1. Render Clean Connecting Edges */}
-        {edges.map((edge) => {
-          const sourceCoord = coordsMap[edge.source] || { x: 200, y: 200 };
-          const targetCoord = coordsMap[edge.target] || { x: 450, y: 200 };
+        {/* 1. Normal / Background Edges */}
+        {edges.map((edge, idx) => {
+          const src = coordsMap[edge.source];
+          const tgt = coordsMap[edge.target];
+          if (!src || !tgt) return null;
 
-          const isAttack = edge.is_attack_path;
-          const isForecast = edge.is_forecasted_path;
+          const isAttackEdge = edge.is_attack_path;
+          const isForecastEdge = edge.is_forecasted_path;
 
-          const dx = targetCoord.x - sourceCoord.x;
-          const dy = targetCoord.y - sourceCoord.y;
-          const cx = (sourceCoord.x + targetCoord.x) / 2 - dy * 0.12;
-          const cy = (sourceCoord.y + targetCoord.y) / 2 + dx * 0.12;
-
-          const pathD = `M ${sourceCoord.x} ${sourceCoord.y} Q ${cx} ${cy} ${targetCoord.x} ${targetCoord.y}`;
-
-          let stroke = 'url(#grad-normal-light)';
-          let strokeWidth = 2;
-          let markerEnd = 'url(#marker-normal-light)';
-          let strokeDasharray = 'none';
-
-          if (isAttack) {
-            stroke = 'url(#grad-attack-light)';
-            strokeWidth = 3.5;
-            markerEnd = 'url(#marker-threat-light)';
-            strokeDasharray = '8 4';
-          } else if (isForecast) {
-            stroke = 'url(#grad-forecast-light)';
-            strokeWidth = 2.5;
-            markerEnd = 'url(#marker-forecast-light)';
-            strokeDasharray = '6 4';
-          }
-
-          const midX = (sourceCoord.x + targetCoord.x) / 2 + (cx - (sourceCoord.x + targetCoord.x) / 2) * 0.5;
-          const midY = (sourceCoord.y + targetCoord.y) / 2 + (cy - (sourceCoord.y + targetCoord.y) / 2) * 0.5;
+          if (isAttackEdge || isForecastEdge) return null;
 
           return (
-            <g key={edge.id} className="transition-all duration-500 ease-in-out">
-              {/* Path */}
-              <path
-                d={pathD}
-                fill="none"
-                stroke={stroke}
-                strokeWidth={strokeWidth}
-                strokeDasharray={strokeDasharray}
-                markerEnd={markerEnd}
+            <g key={edge.id || idx}>
+              <line
+                x1={src.x}
+                y1={src.y}
+                x2={tgt.x}
+                y2={tgt.y}
+                stroke="#ded0bc"
+                strokeWidth="1.5"
+                strokeDasharray="4 3"
+                opacity="0.7"
               />
+            </g>
+          );
+        })}
 
-              {/* Protocol Badge */}
-              <rect
-                x={midX - 30}
-                y={midY - 10}
-                width="60"
-                height="20"
-                rx="6"
-                fill="#ffffff"
-                stroke={isAttack ? '#ea580c' : isForecast ? '#d97706' : '#ded0bc'}
-                strokeWidth="1.2"
-                className="shadow-xs"
+        {/* 2. Forecasted Path Edges (T+1..3) */}
+        {edges.map((edge, idx) => {
+          const src = coordsMap[edge.source];
+          const tgt = coordsMap[edge.target];
+          if (!src || !tgt) return null;
+
+          const isForecastEdge = edge.is_forecasted_path;
+          if (!isForecastEdge) return null;
+
+          return (
+            <g key={edge.id || `f-${idx}`}>
+              <line
+                x1={src.x}
+                y1={src.y}
+                x2={tgt.x}
+                y2={tgt.y}
+                stroke="url(#forecastGrad)"
+                strokeWidth="3"
+                strokeDasharray="6 4"
+                markerEnd="url(#arrowForecast)"
+                className="animate-pulse"
+                opacity="0.9"
               />
+              {/* Midpoint Label */}
               <text
-                x={midX}
-                y={midY + 3.5}
-                fill={isAttack ? '#c2410c' : isForecast ? '#b45309' : '#7a644c'}
-                fontSize="9.5"
-                fontFamily="JetBrains Mono, monospace"
-                textAnchor="middle"
+                x={(src.x + tgt.x) / 2}
+                y={(src.y + tgt.y) / 2 - 8}
+                fill="#b45309"
+                fontSize="10"
+                fontFamily="monospace"
                 fontWeight="bold"
+                textAnchor="middle"
+                className="bg-white"
               >
-                {edge.protocol}
+                Predicted Next Hop
               </text>
             </g>
           );
         })}
 
-        {/* 2. Render Topology Nodes */}
+        {/* 3. Active Observed Attack Edges (T_0) */}
+        {edges.map((edge, idx) => {
+          const src = coordsMap[edge.source];
+          const tgt = coordsMap[edge.target];
+          if (!src || !tgt) return null;
+
+          const isAttackEdge = edge.is_attack_path;
+          if (!isAttackEdge) return null;
+
+          return (
+            <g key={edge.id || `a-${idx}`}>
+              <line
+                x1={src.x}
+                y1={src.y}
+                x2={tgt.x}
+                y2={tgt.y}
+                stroke="url(#activeGrad)"
+                strokeWidth="3.5"
+                markerEnd="url(#arrowActive)"
+                filter="url(#glowActive)"
+              />
+              {/* Active Traversing Pulse */}
+              <circle r="4" fill="#ea580c">
+                <animateMotion
+                  path={`M ${src.x} ${src.y} L ${tgt.x} ${tgt.y}`}
+                  dur="2s"
+                  repeatCount="indefinite"
+                />
+              </circle>
+            </g>
+          );
+        })}
+
+        {/* 4. Nodes */}
         {nodes.map((node) => {
-          const coord = coordsMap[node.id] || { x: 450, y: 250 };
+          const coords = coordsMap[node.id];
+          if (!coords) return null;
+
           const isSelected = selectedNodeId === node.id;
           const isHovered = hoveredNodeId === node.id;
           const isInAttackPath = attack_path_node_ids.includes(node.id);
-          const isForecastTarget = forecasted_path_node_ids.includes(node.id);
+          const isInForecastPath = forecasted_path_node_ids.includes(node.id);
 
-          const Icon = ICON_MAP[node.type] || Server;
+          const isCompromised = node.state === 'compromised';
+          const isSuspicious = node.state === 'suspicious';
 
-          let ringColor = '#ded0bc';
-          let bgColor = '#ffffff';
-          let iconColor = '#544230';
+          let nodeFill = '#ffffff';
+          let nodeStroke = '#ded0bc';
+          let ringColor = 'transparent';
 
-          if (node.state === 'compromised' || isInAttackPath) {
-            ringColor = '#ea580c';
-            bgColor = '#fff7ed';
-            iconColor = '#c2410c';
-          } else if (node.state === 'suspicious') {
-            ringColor = '#d97706';
-            bgColor = '#fffbeb';
-            iconColor = '#b45309';
-          } else if (node.state === 'target' || isForecastTarget) {
-            ringColor = '#f59e0b';
-            bgColor = '#fefce8';
-            iconColor = '#92400e';
+          if (isCompromised) {
+            nodeFill = '#fff7ed';
+            nodeStroke = '#ea580c';
+            ringColor = 'rgba(234, 88, 12, 0.25)';
+          } else if (isSuspicious || isInForecastPath) {
+            nodeFill = '#fffbeb';
+            nodeStroke = '#d97706';
+            ringColor = 'rgba(217, 119, 6, 0.2)';
           } else {
-            ringColor = '#84cc16';
-            bgColor = '#f7fee7';
-            iconColor = '#4d7c0f';
+            nodeFill = '#ffffff';
+            nodeStroke = '#a3e635';
           }
+
+          const IconComponent = ICON_MAP[node.type] || Laptop;
 
           return (
             <g
               key={node.id}
+              className="cursor-pointer transition-transform duration-200"
               onClick={() => onSelectNode && onSelectNode(node)}
               onMouseEnter={() => setHoveredNodeId(node.id)}
               onMouseLeave={() => setHoveredNodeId(null)}
-              className="cursor-pointer transition-all duration-500 ease-in-out"
-              transform={`translate(${coord.x}, ${coord.y})`}
             >
-              {/* Selected Ring */}
-              {isSelected && (
+              {/* Outer Pulse Ring for Compromised / Selected */}
+              {(isCompromised || isSelected) && (
                 <circle
-                  r="34"
-                  fill="none"
-                  stroke="#b45309"
-                  strokeWidth="2.5"
-                  strokeDasharray="5 3"
+                  cx={coords.x}
+                  cy={coords.y}
+                  r="30"
+                  fill={ringColor}
+                  className="animate-ping opacity-30"
                 />
               )}
 
-              {/* Node Base Circle */}
+              {/* Node Outer Circle */}
               <circle
-                r="24"
-                fill={bgColor}
-                stroke={ringColor}
-                strokeWidth={isSelected ? 3 : 2}
-                className="shadow-sm transition-all duration-200"
+                cx={coords.x}
+                cy={coords.y}
+                r={isSelected ? '24' : isHovered ? '22' : '20'}
+                fill={nodeFill}
+                stroke={isSelected ? '#b45309' : nodeStroke}
+                strokeWidth={isSelected ? '3.5' : '2.5'}
+                className="transition-all duration-200 shadow-md"
               />
 
-              {/* Center Icon */}
-              <foreignObject x="-12" y="-12" width="24" height="24" className="pointer-events-none">
-                <div className="w-full h-full flex items-center justify-center" style={{ color: iconColor }}>
-                  <Icon className="w-4 h-4" />
+              {/* Node Center Icon */}
+              <foreignObject
+                x={coords.x - 10}
+                y={coords.y - 10}
+                width="20"
+                height="20"
+                className="pointer-events-none"
+              >
+                <div
+                  className={`w-full h-full flex items-center justify-center ${
+                    isCompromised
+                      ? 'text-[#ea580c]'
+                      : isSuspicious || isInForecastPath
+                      ? 'text-[#d97706]'
+                      : 'text-[#65a30d]'
+                  }`}
+                >
+                  <IconComponent className="w-4 h-4" />
                 </div>
               </foreignObject>
 
-              {/* Risk Score Pill */}
-              <rect
-                x="12"
-                y="-26"
-                width="28"
-                height="15"
-                rx="4"
-                fill={
-                  node.risk_score > 75
-                    ? '#ea580c'
-                    : node.risk_score > 40
-                    ? '#d97706'
-                    : '#65a30d'
-                }
-                stroke="#ffffff"
-                strokeWidth="1.5"
-              />
-              <text
-                x="26"
-                y="-15"
-                fill="#ffffff"
-                fontSize="8.5"
-                fontWeight="800"
-                fontFamily="JetBrains Mono, monospace"
-                textAnchor="middle"
-              >
-                {node.risk_score}
-              </text>
+              {/* Risk Badge on Node */}
+              <g transform={`translate(${coords.x + 10}, ${coords.y - 18})`}>
+                <rect
+                  width="22"
+                  height="14"
+                  rx="4"
+                  fill={isCompromised ? '#ea580c' : isSuspicious ? '#d97706' : '#65a30d'}
+                />
+                <text
+                  x="11"
+                  y="10"
+                  fill="#ffffff"
+                  fontSize="8"
+                  fontFamily="monospace"
+                  fontWeight="bold"
+                  textAnchor="middle"
+                >
+                  {node.risk_score}
+                </text>
+              </g>
 
-              {/* Node Title */}
+              {/* Node Label Below */}
               <text
-                x="0"
-                y="38"
-                fill="#301a0a"
+                x={coords.x}
+                y={coords.y + 34}
+                fill="#221207"
                 fontSize="11"
-                fontWeight="800"
+                fontFamily="sans-serif"
+                fontWeight="bold"
                 textAnchor="middle"
-                className="font-mono tracking-wide"
               >
-                {node.id.toUpperCase()}
+                {node.label.split(' ')[0]}
               </text>
 
-              {/* Node IP */}
+              {/* IP / Status Subtitle */}
               <text
-                x="0"
-                y="50"
+                x={coords.x}
+                y={coords.y + 46}
                 fill="#7a644c"
                 fontSize="9"
-                fontFamily="JetBrains Mono, monospace"
+                fontFamily="monospace"
                 textAnchor="middle"
-                fontWeight="600"
               >
-                {node.ip}
+                {node.state.toUpperCase()} • {node.ip}
               </text>
             </g>
           );
         })}
       </svg>
-
-      {/* Bottom Status Bar */}
-      <div className="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between text-xs text-[#544230] bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-xl border border-[#ebdcc7] font-mono shadow-xs">
-        <span className="flex items-center gap-2">
-          <Activity className="w-3.5 h-3.5 text-[#b45309]" />
-          <span>Click any node to inspect telemetry, observed attacks & predicted next actions.</span>
-        </span>
-        <span className="text-[#b45309] font-bold tracking-wider">
-          High-Risk Nodes: {graphData.high_risk_nodes_count || 0}
-        </span>
-      </div>
     </div>
   );
 }

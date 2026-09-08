@@ -9,17 +9,31 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts';
+import InfoTooltip from '../common/InfoTooltip';
+import SecurityInsightBanner from '../common/SecurityInsightBanner';
 
 export default function NetworkTrafficChart({ trafficSeries = [] }) {
   if (!trafficSeries || trafficSeries.length === 0) return null;
+
+  const latest = trafficSeries[trafficSeries.length - 1];
+  const hasAnomaly = latest?.anomalous_mbps > 5;
 
   return (
     <div className="p-6 md:p-7 rounded-2xl bg-white border border-[#ebdcc7] shadow-xs space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-bold text-[#221207] tracking-tight">
-            Network Bandwidth Throughput & Anomaly Telemetry
-          </h3>
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-bold text-[#221207] tracking-tight">
+              Network Bandwidth Throughput & Anomaly Telemetry
+            </h3>
+            <InfoTooltip
+              title="Throughput & Anomalous Bandwidth"
+              whatItMeasures="Ingress, egress, and anomalous bandwidth spikes (Mbps) across network gateways."
+              whyItMatters="High anomalous egress spikes indicate potential bulk database staging or data exfiltration."
+              interpretation="Anomalous bandwidth exceeding 5 Mbps warrants immediate socket inspection."
+              size="sm"
+            />
+          </div>
           <p className="text-xs text-[#7a644c]">
             Live neural flow telemetry (Mbps) across ingress, egress, and anomalous streams.
           </p>
@@ -76,7 +90,7 @@ export default function NetworkTrafficChart({ trafficSeries = [] }) {
             <Area
               type="monotone"
               dataKey="bytes_in_mbps"
-              name="Ingress Traffic"
+              name="Ingress Traffic (Mbps)"
               stroke="#a37a58"
               strokeWidth={2}
               fillOpacity={1}
@@ -85,7 +99,7 @@ export default function NetworkTrafficChart({ trafficSeries = [] }) {
             <Area
               type="monotone"
               dataKey="bytes_out_mbps"
-              name="Egress Traffic"
+              name="Egress Traffic (Mbps)"
               stroke="#d97706"
               strokeWidth={2}
               fillOpacity={1}
@@ -94,7 +108,7 @@ export default function NetworkTrafficChart({ trafficSeries = [] }) {
             <Area
               type="monotone"
               dataKey="anomalous_mbps"
-              name="Anomalous Bandwidth"
+              name="Anomalous Bandwidth (Mbps)"
               stroke="#ea580c"
               strokeWidth={2.5}
               fillOpacity={1}
@@ -103,6 +117,21 @@ export default function NetworkTrafficChart({ trafficSeries = [] }) {
           </AreaChart>
         </ResponsiveContainer>
       </div>
+
+      <SecurityInsightBanner
+        title="Key Bandwidth Insight"
+        insight={
+          hasAnomaly
+            ? `Anomalous flow rate detected at ${latest.anomalous_mbps} Mbps, representing unauthorized cross-subnet socket activity.`
+            : 'Network flow distributions reflect normal operational bounds with zero unauthorized egress bandwidth.'
+        }
+        recommendation={
+          hasAnomaly
+            ? 'Inspect Gateway-01 routing table and verify destination IP whitelist.'
+            : 'No bandwidth throttle required.'
+        }
+        type={hasAnomaly ? 'warning' : 'success'}
+      />
     </div>
   );
 }

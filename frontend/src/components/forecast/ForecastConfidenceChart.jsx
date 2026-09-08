@@ -8,6 +8,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
+import InfoTooltip from '../common/InfoTooltip';
+import SecurityInsightBanner from '../common/SecurityInsightBanner';
 
 export default function ForecastConfidenceChart({ futureStages = [] }) {
   if (!futureStages || futureStages.length === 0) return null;
@@ -20,6 +22,8 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
     tactic: stg.tactic,
     time: stg.estimated_time_to_impact,
   }));
+
+  const nearestStage = data[0];
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -40,9 +44,18 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
     <div className="p-6 md:p-7 rounded-2xl bg-white border border-[#ebdcc7] shadow-xs space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-bold text-[#221207] tracking-tight">
-            Forecast Confidence Decay Curve
-          </h3>
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-bold text-[#221207] tracking-tight">
+              Forecast Confidence Decay Curve
+            </h3>
+            <InfoTooltip
+              title="Confidence Decay Across Horizons"
+              whatItMeasures="Confidence probability at T+1, T+2, and T+3."
+              whyItMatters="Predictions closer in time (T+1) have the highest certainty (>88%), making them the most reliable targets for automated defensive blocking."
+              interpretation="Natural temporal decay occurs as future possibilities branch out."
+              size="sm"
+            />
+          </div>
           <p className="text-xs text-[#7a644c]">
             Neural model certainty distribution across forecasted time horizons (T+1 to T+3).
           </p>
@@ -87,6 +100,15 @@ export default function ForecastConfidenceChart({ futureStages = [] }) {
           </AreaChart>
         </ResponsiveContainer>
       </div>
+
+      {nearestStage && (
+        <SecurityInsightBanner
+          title="Key Forecast Insight"
+          insight={`ThreatCast AI exhibits highest certainty at T+1 (${nearestStage.confidencePct}% for ${nearestStage.stageName}) within an estimated ${nearestStage.time}.`}
+          recommendation="Intervening at T+1 collapses the remaining forecasted attack steps (T+2 and T+3) before target assets can be breached."
+          type="info"
+        />
+      )}
     </div>
   );
 }

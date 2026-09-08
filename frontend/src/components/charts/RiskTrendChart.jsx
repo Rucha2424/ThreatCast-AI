@@ -9,17 +9,31 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts';
+import InfoTooltip from '../common/InfoTooltip';
+import SecurityInsightBanner from '../common/SecurityInsightBanner';
 
 export default function RiskTrendChart({ riskTrend = [] }) {
   if (!riskTrend || riskTrend.length === 0) return null;
+
+  const latest = riskTrend[riskTrend.length - 1];
+  const isElevated = latest?.risk_score > 60;
 
   return (
     <div className="p-6 md:p-7 rounded-2xl bg-white border border-[#ebdcc7] shadow-xs space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-bold text-[#221207] tracking-tight">
-            Temporal Network Risk Score & Threat Count
-          </h3>
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-bold text-[#221207] tracking-tight">
+              Temporal Network Risk Score & Threat Count
+            </h3>
+            <InfoTooltip
+              title="Temporal Risk Score Evolution"
+              whatItMeasures="Rolling network risk index (0-100) and correlated threat event counts over time."
+              whyItMatters="Shows whether active threat mitigation is lowering exposure or if adversary activity is escalating."
+              interpretation="Upward slopes indicate active lateral spread or staging."
+              size="sm"
+            />
+          </div>
           <p className="text-xs text-[#7a644c]">
             Aggregated threat score evolution over neural observation windows.
           </p>
@@ -73,7 +87,7 @@ export default function RiskTrendChart({ riskTrend = [] }) {
               yAxisId="left"
               type="monotone"
               dataKey="risk_score"
-              name="Composite Risk Score"
+              name="Composite Risk Score (0-100)"
               stroke="#EA580C"
               strokeWidth={3}
               dot={{ r: 4, fill: '#EA580C' }}
@@ -82,7 +96,7 @@ export default function RiskTrendChart({ riskTrend = [] }) {
               yAxisId="right"
               type="monotone"
               dataKey="threat_events"
-              name="Threat Events"
+              name="Threat Events Count"
               stroke="#D97706"
               strokeWidth={2}
               strokeDasharray="4 4"
@@ -91,6 +105,21 @@ export default function RiskTrendChart({ riskTrend = [] }) {
           </LineChart>
         </ResponsiveContainer>
       </div>
+
+      <SecurityInsightBanner
+        title="Key Risk Takeaway"
+        insight={
+          isElevated
+            ? `Risk score is currently elevated at ${latest.risk_score}/100 with ${latest.threat_events} active threat events in the latest window.`
+            : 'Network risk score remains within controlled baseline thresholds with low anomalous event frequency.'
+        }
+        recommendation={
+          isElevated
+            ? 'Execute proactive isolation on high-risk nodes to bend the risk curve downward.'
+            : 'Maintain continuous temporal baseline monitoring.'
+        }
+        type={isElevated ? 'warning' : 'success'}
+      />
     </div>
   );
 }

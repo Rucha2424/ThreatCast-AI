@@ -3,10 +3,12 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import SimModal from '../common/SimModal';
+import SimulationResultModal from '../common/SimulationResultModal';
 
 export default function Layout({ onScenarioChange, lastUpdated, activeScenario }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [simModalOpen, setSimModalOpen] = useState(false);
+  const [resultModalScenario, setResultModalScenario] = useState(null);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const handleRefresh = async () => {
@@ -37,16 +39,30 @@ export default function Layout({ onScenarioChange, lastUpdated, activeScenario }
         <main className="flex-1 p-4 md:p-8 max-w-7xl w-full mx-auto space-y-6">
           <Outlet
             key={`${activeScenario}-${refreshTrigger}`}
-            context={{ refreshTrigger, onRefresh: handleRefresh, activeScenario }}
+            context={{
+              refreshTrigger,
+              onRefresh: handleRefresh,
+              activeScenario,
+              openSimModal: () => setSimModalOpen(true),
+              showResultModal: (sc) => setResultModalScenario(sc),
+            }}
           />
         </main>
       </div>
 
-      {/* Simulation Modal */}
+      {/* Attack Simulation Playbook Modal */}
       <SimModal
         isOpen={simModalOpen}
         onClose={() => setSimModalOpen(false)}
         onSimulated={handleSimulated}
+        onShowResult={(sc) => setResultModalScenario(sc)}
+      />
+
+      {/* Post-Simulation Result Narrative Modal */}
+      <SimulationResultModal
+        isOpen={!!resultModalScenario}
+        onClose={() => setResultModalScenario(null)}
+        scenarioId={resultModalScenario || activeScenario || 'default'}
       />
     </div>
   );

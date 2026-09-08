@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
-import { Sparkles, Clock, ArrowRight, ShieldAlert, CheckCircle2, ChevronRight, Info, Zap } from 'lucide-react';
+import {
+  Sparkles,
+  Clock,
+  ArrowRight,
+  ShieldAlert,
+  CheckCircle2,
+  ChevronRight,
+  Info,
+  Zap,
+  AlertOctagon,
+} from 'lucide-react';
 import { formatConfidence } from '../../utils/formatters';
+import InfoTooltip from '../common/InfoTooltip';
+import ProgressiveDisclosure from '../common/ProgressiveDisclosure';
 
 export default function AttackProgressionTimeline({ forecastData, onSelectStage }) {
   const [activeStageId, setActiveStageId] = useState(null);
@@ -9,7 +21,10 @@ export default function AttackProgressionTimeline({ forecastData, onSelectStage 
 
   const current = forecastData.current_state;
   const futureStages = forecastData.future_stages || [];
-  const allStages = [current, ...futureStages];
+  const allStages = [current, ...futureStages].filter(Boolean);
+
+  const selectedStage =
+    allStages.find((s) => s.stage_id === activeStageId) || allStages[0];
 
   const handleStageClick = (stage) => {
     setActiveStageId(stage.stage_id);
@@ -17,19 +32,30 @@ export default function AttackProgressionTimeline({ forecastData, onSelectStage 
   };
 
   return (
-    <div className="p-6 md:p-7 rounded-2xl bg-white border border-[#ebdcc7] shadow-xs space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#ebdcc7] pb-4">
+    <div
+      id="tour-forecast-timeline"
+      className="p-6 md:p-7 rounded-2xl bg-white border border-[#ebdcc7] shadow-xs space-y-6"
+    >
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#ebdcc7] pb-4">
         <div>
           <div className="flex items-center gap-2.5">
-            <h3 className="text-base font-bold text-[#221207] tracking-tight">
+            <h3 className="text-base font-bold text-[#221207] tracking-tight flex items-center gap-2">
               Attack Progression Forecast Timeline
             </h3>
             <span className="px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-[#fef3c7] text-[#b45309] border border-[#fde68a]">
-              K=3 Horizon
+              K=3 Multi-Step Horizon
             </span>
+            <InfoTooltip
+              title="K=3 Attack Forecasting"
+              whatItMeasures="Projects the attacker's trajectory 3 discrete steps into the future (T+1, T+2, T+3) before target compromise occurs."
+              whyItMatters="Traditional IDS is reactive (alerts after the damage). K=3 forecasting gives defenders lead time to pre-emptively block the attack path."
+              interpretation="T_0 = Observed State, T+1 = Next Imminent Step, T+2 = Secondary Objective, T+3 = Final Impact/Exfiltration."
+              size="sm"
+            />
           </div>
           <p className="text-xs text-[#544230] mt-0.5">
-            Step from current observed state into forecasted multi-step attack futures.
+            Step from the current observed state into forecasted multi-step attack futures. Click any stage to inspect.
           </p>
         </div>
 
@@ -43,11 +69,11 @@ export default function AttackProgressionTimeline({ forecastData, onSelectStage 
         </div>
       </div>
 
-      {/* Interactive Responsive Stepper */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+      {/* Interactive Responsive Stepper Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 relative">
         {allStages.map((stage, idx) => {
           const isObserved = stage.state_type === 'observed';
-          const isSelected = activeStageId === stage.stage_id;
+          const isSelected = selectedStage?.stage_id === stage.stage_id;
 
           return (
             <div
@@ -82,7 +108,7 @@ export default function AttackProgressionTimeline({ forecastData, onSelectStage 
                 </span>
               </div>
 
-              {/* Stage Tactic & Name */}
+              {/* Stage Name */}
               <div className="space-y-1.5 flex-1">
                 <h4
                   className={`text-sm font-bold leading-snug transition-colors ${
@@ -96,9 +122,12 @@ export default function AttackProgressionTimeline({ forecastData, onSelectStage 
                 </p>
               </div>
 
-              {/* Estimated Time & Node Count */}
+              {/* Estimated Time Window & Node Count */}
               <div className="mt-4 pt-3 border-t border-[#ebdcc7] text-[10px] font-mono flex items-center justify-between text-[#7a644c]">
-                <span className="text-[#544230] font-semibold">{stage.estimated_time_to_impact}</span>
+                <span className="text-[#544230] font-semibold flex items-center gap-1">
+                  <Clock className="w-3 h-3 text-[#b45309]" />
+                  {stage.estimated_time_to_impact}
+                </span>
                 <span className="text-[#b45309] font-bold">{stage.affected_nodes?.length || 0} Assets</span>
               </div>
             </div>
@@ -106,12 +135,68 @@ export default function AttackProgressionTimeline({ forecastData, onSelectStage 
         })}
       </div>
 
-      {/* Narrative Context */}
+      {/* Selected Stage Deep Explanation Drawer */}
+      {selectedStage && (
+        <div className="p-5 rounded-xl bg-[#fdfcf9] border border-[#ebdcc7] space-y-4 animate-in fade-in duration-150">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#ebdcc7] pb-3">
+            <div className="flex items-center gap-2">
+              <span className="px-2.5 py-0.5 rounded text-xs font-mono font-bold bg-[#fef3c7] text-[#b45309] border border-[#fde68a]">
+                {selectedStage.horizon}
+              </span>
+              <h4 className="text-sm font-bold text-[#221207]">
+                {selectedStage.stage_name} — Plain-English Explanation
+              </h4>
+            </div>
+            <span className="text-xs font-mono text-[#7a644c]">
+              Target Assets: <strong className="text-[#221207]">{selectedStage.affected_nodes?.join(', ') || 'N/A'}</strong>
+            </span>
+          </div>
+
+          <p className="text-xs md:text-sm text-[#42240f] leading-relaxed font-medium">
+            {selectedStage.description}
+          </p>
+
+          {/* Recommended Action */}
+          <div className="p-3.5 rounded-lg bg-[#fffbeb] border border-[#fde68a] text-xs text-[#78350f] flex items-start gap-2.5">
+            <AlertOctagon className="w-4 h-4 text-[#d97706] shrink-0 mt-0.5" />
+            <div>
+              <strong className="block text-[10px] uppercase font-mono font-bold text-[#b45309]">
+                Recommended Proactive Mitigation:
+              </strong>
+              <span className="text-[#544230] leading-relaxed">{selectedStage.recommended_mitigation}</span>
+            </div>
+          </div>
+
+          {/* Progressive Disclosure for MITRE ID & Probability */}
+          <ProgressiveDisclosure
+            title="Technical Technique Identifiers & Probability Distribution"
+            badge="Model Evidence"
+            defaultOpen={false}
+          >
+            <div className="space-y-2 font-mono text-[11px] text-[#544230]">
+              <div className="flex justify-between border-b border-[#f5efe6] pb-1">
+                <span className="text-[#7a644c]">MITRE Technique ID:</span>
+                <span className="font-bold text-[#221207]">{selectedStage.technique_id}</span>
+              </div>
+              <div className="flex justify-between border-b border-[#f5efe6] pb-1">
+                <span className="text-[#7a644c]">MITRE Tactic:</span>
+                <span className="font-bold text-[#221207]">{selectedStage.tactic}</span>
+              </div>
+              <div className="flex justify-between pt-1">
+                <span className="text-[#7a644c]">Estimated Time Window:</span>
+                <span className="font-bold text-[#b45309]">{selectedStage.estimated_time_to_impact}</span>
+              </div>
+            </div>
+          </ProgressiveDisclosure>
+        </div>
+      )}
+
+      {/* Narrative Context Summary */}
       {forecastData.summary_narrative && (
         <div className="p-4 rounded-xl bg-[#fcfaf7] border border-[#ebdcc7] text-xs text-[#544230] leading-relaxed flex items-start gap-3">
           <Zap className="w-4 h-4 text-[#d97706] shrink-0 mt-0.5" />
           <div>
-            <strong className="text-[#221207] font-mono">Forecasting Engine Analysis: </strong>
+            <strong className="text-[#221207] font-mono">Forecasting Engine Security Analysis: </strong>
             {forecastData.summary_narrative}
           </div>
         </div>
