@@ -1,0 +1,80 @@
+{
+  "model": "CTU13 Horizon-Specific Temporal Infiltration Risk World Model",
+  "architecture": "shared feature projection + shared temporal encoder + shared autoregressive latent predictor + three horizon-specific risk heads",
+  "dataset": "CTU13",
+  "seed": 42,
+  "device": "cpu",
+  "features": [
+    "Flow_Count",
+    "Total_Packets",
+    "Total_Bytes",
+    "Total_Source_Bytes",
+    "Avg_Duration",
+    "Avg_Packets_Per_Flow",
+    "Avg_Bytes_Per_Flow",
+    "Flow_Count_Change",
+    "Total_Packets_Change",
+    "Total_Bytes_Change",
+    "Total_Source_Bytes_Change",
+    "Avg_Duration_Change"
+  ],
+  "input_dim": 12,
+  "sequence_length": 5,
+  "forecast_horizon": 3,
+  "latent_dimension": 64,
+  "epochs_configured": 60,
+  "best_epoch": 9,
+  "batch_size": 32,
+  "learning_rate": 0.0005,
+  "optimizer": "AdamW",
+  "weight_decay": 0.0001,
+  "latent_loss": "MSE",
+  "risk_loss": "BCEWithLogitsLoss",
+  "latent_loss_weight": 0.5,
+  "risk_loss_weight": 2.0,
+  "positive_class_weight": 1.0,
+  "gradient_clip_norm": 1.0,
+  "early_stopping_patience": 12,
+  "train_scenarios": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10,
+    11
+  ],
+  "validation_scenarios": [
+    12
+  ],
+  "test_scenarios": [
+    13
+  ],
+  "split_strategy": "scenario-held-out chronological windows",
+  "sampling_strategy": "scenario-balanced weighted random sampling",
+  "best_validation_mean_pr_auc": 0.7654411912388485,
+  "final_validation_mean_pr_auc": 0.7654411912388485,
+  "validation_metrics": [
+    {
+      "horizon": 1,
+      "roc_auc": 0.5965909090909091,
+      "pr_auc": 0.7685599608858108
+    },
+    {
+      "horizon": 2,
+      "roc_auc": 0.5782930910829548,
+      "pr_auc": 0.7722202309018831
+    },
+    {
+      "horizon": 3,
+      "roc_auc": 0.5814009661835748,
+      "pr_auc": 0.7555433819288515
+    }
+  ],
+  "checkpoint": "ctu13_horizon_risk_world_model.pt",
+  "scenario_13_policy": "Scenario 13 is completely excluded from training, checkpoint selection, and threshold selection.",
+  "production_policy": "This experimental checkpoint does not replace the current production checkpoint."
+}

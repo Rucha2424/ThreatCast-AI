@@ -1,0 +1,97 @@
+{
+  "model": "CTU13 Weakly-Supervised MITRE Stage Head",
+  "dataset": "CTU13",
+  "supervision": "weakly_supervised",
+  "label_source": "Documented CTU13 activity-to-ATT&CK-tactic interpretation",
+  "ground_truth_mitre_labels": false,
+  "architecture": "Frozen CTU13 risk world-model 64-D current latent -> 32-D hidden -> 3-output multi-label stage head",
+  "class_names": [
+    "Discovery",
+    "Command and Control",
+    "Impact"
+  ],
+  "input_latent_dimension": 64,
+  "input_sequence_length": 5,
+  "feature_count": 12,
+  "features": [
+    "Flow_Count",
+    "Total_Packets",
+    "Total_Bytes",
+    "Total_Source_Bytes",
+    "Avg_Duration",
+    "Avg_Packets_Per_Flow",
+    "Avg_Bytes_Per_Flow",
+    "Flow_Count_Change",
+    "Total_Packets_Change",
+    "Total_Bytes_Change",
+    "Total_Source_Bytes_Change",
+    "Avg_Duration_Change"
+  ],
+  "seed": 42,
+  "device": "cpu",
+  "epochs_configured": 60,
+  "best_epoch": 1,
+  "batch_size": 32,
+  "learning_rate": 0.001,
+  "optimizer": "AdamW",
+  "weight_decay": 0.0001,
+  "early_stopping_patience": 10,
+  "stage_train_scenarios": [
+    1,
+    2,
+    3,
+    4,
+    8,
+    9
+  ],
+  "stage_validation_scenarios": [
+    5,
+    6,
+    10,
+    11
+  ],
+  "stage_test_scenarios": [
+    13
+  ],
+  "risk_model_train_scenarios": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10,
+    11
+  ],
+  "risk_model_test_scenario": [
+    13
+  ],
+  "scenario_13_used_for_training": false,
+  "scenario_13_used_for_model_selection": false,
+  "scenario_13_used_for_threshold_selection": false,
+  "validation_macro_f1_at_0_5": 0.8262108262108262,
+  "validation_micro_f1_at_0_5": 0.8690095846645367,
+  "selected_validation_thresholds": {
+    "Discovery": {
+      "threshold": 0.1,
+      "validation_f1": 0.897196261682243
+    },
+    "Command and Control": {
+      "threshold": 0.1,
+      "validation_f1": 1.0
+    },
+    "Impact": {
+      "threshold": 0.1,
+      "validation_f1": 0.9914529914529915
+    }
+  },
+  "test_macro_f1": 1.0,
+  "test_micro_f1": 1.0,
+  "test_macro_precision": 1.0,
+  "test_macro_recall": 1.0,
+  "test_hamming_loss": 0.0,
+  "checkpoint": "ctu13_stage_head.pt",
+  "methodology_note": "Stage labels are weak scenario/activity-derived labels. They are not ground-truth timestamped MITRE ATT&CK annotations. Test metrics therefore measure consistency with the weak label construction and must not be presented as ground-truth MITRE classification performance."
+}

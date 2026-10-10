@@ -1,0 +1,201 @@
+{
+  "model": "CTU13 Temporal Infiltration Risk World Model",
+  "dataset": "CTU13",
+  "features": [
+    "Flow_Count",
+    "Total_Packets",
+    "Total_Bytes",
+    "Total_Source_Bytes",
+    "Avg_Duration",
+    "Avg_Packets_Per_Flow",
+    "Avg_Bytes_Per_Flow",
+    "Flow_Count_Change",
+    "Total_Packets_Change",
+    "Total_Bytes_Change",
+    "Total_Source_Bytes_Change",
+    "Avg_Duration_Change"
+  ],
+  "sequence_length": 5,
+  "forecast_horizon": 3,
+  "train_scenarios": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10,
+    11
+  ],
+  "validation_scenarios": [
+    12
+  ],
+  "test_scenarios": [
+    13
+  ],
+  "threshold_selection": {
+    "dataset": "validation_only",
+    "criterion": "maximize F1 subject to validation FPR constraint",
+    "maximum_validation_fpr": 0.1,
+    "threshold_grid_start": 0.001,
+    "threshold_grid_end": 0.999,
+    "threshold_grid_step": 0.001,
+    "scenario_13_used_for_selection": false
+  },
+  "validation_results": {
+    "T+1": {
+      "samples": 136,
+      "positive_samples": 88,
+      "negative_samples": 48,
+      "positive_prevalence": 0.6470588235294118,
+      "threshold": 0.924,
+      "accuracy": 0.5,
+      "precision": 0.8571428571428571,
+      "recall": 0.2727272727272727,
+      "f1": 0.41379310344827586,
+      "fpr": 0.08333333333333333,
+      "roc_auc": 0.7021780303030303,
+      "pr_auc": 0.8087362284237516,
+      "tn": 44,
+      "fp": 4,
+      "fn": 64,
+      "tp": 24
+    },
+    "T+2": {
+      "samples": 136,
+      "positive_samples": 89,
+      "negative_samples": 47,
+      "positive_prevalence": 0.6544117647058824,
+      "threshold": 0.9420000000000001,
+      "accuracy": 0.47794117647058826,
+      "precision": 0.8461538461538461,
+      "recall": 0.24719101123595505,
+      "f1": 0.3826086956521739,
+      "fpr": 0.0851063829787234,
+      "roc_auc": 0.6925651446330385,
+      "pr_auc": 0.795682481232574,
+      "tn": 43,
+      "fp": 4,
+      "fn": 67,
+      "tp": 22
+    },
+    "T+3": {
+      "samples": 136,
+      "positive_samples": 90,
+      "negative_samples": 46,
+      "positive_prevalence": 0.6617647058823529,
+      "threshold": 0.937,
+      "accuracy": 0.5147058823529411,
+      "precision": 0.875,
+      "recall": 0.3111111111111111,
+      "f1": 0.45901639344262296,
+      "fpr": 0.08695652173913043,
+      "roc_auc": 0.6275362318840579,
+      "pr_auc": 0.7961890388136256,
+      "tn": 42,
+      "fp": 4,
+      "fn": 62,
+      "tp": 28
+    }
+  },
+  "threshold_selection_methods": {
+    "T+1": "max_f1_subject_to_validation_fpr_constraint",
+    "T+2": "max_f1_subject_to_validation_fpr_constraint",
+    "T+3": "max_f1_subject_to_validation_fpr_constraint"
+  },
+  "frozen_thresholds": {
+    "T+1": 0.924,
+    "T+2": 0.9420000000000001,
+    "T+3": 0.937
+  },
+  "test_results": {
+    "T+1": {
+      "samples": 122,
+      "positive_samples": 117,
+      "negative_samples": 5,
+      "positive_prevalence": 0.9590163934426229,
+      "threshold": 0.924,
+      "accuracy": 0.040983606557377046,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "fpr": 0.0,
+      "roc_auc": 0.9846153846153847,
+      "pr_auc": 0.9993430495601677,
+      "tn": 5,
+      "fp": 0,
+      "fn": 117,
+      "tp": 0
+    },
+    "T+2": {
+      "samples": 122,
+      "positive_samples": 118,
+      "negative_samples": 4,
+      "positive_prevalence": 0.9672131147540983,
+      "threshold": 0.9420000000000001,
+      "accuracy": 0.03278688524590164,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "fpr": 0.0,
+      "roc_auc": 0.8453389830508475,
+      "pr_auc": 0.9937647326380965,
+      "tn": 4,
+      "fp": 0,
+      "fn": 118,
+      "tp": 0
+    },
+    "T+3": {
+      "samples": 122,
+      "positive_samples": 118,
+      "negative_samples": 4,
+      "positive_prevalence": 0.9672131147540983,
+      "threshold": 0.937,
+      "accuracy": 0.03278688524590164,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "fpr": 0.0,
+      "roc_auc": 0.09322033898305085,
+      "pr_auc": 0.9173924095050877,
+      "tn": 4,
+      "fp": 0,
+      "fn": 118,
+      "tp": 0
+    }
+  },
+  "test_probability_summary": {
+    "T+1": {
+      "min": 0.02287423238158226,
+      "max": 0.024885335937142372,
+      "mean": 0.023989154407601864,
+      "attack_mean": 0.024030273270785298,
+      "benign_mean": 0.023026973009109497
+    },
+    "T+2": {
+      "min": 0.02360844798386097,
+      "max": 0.024766456335783005,
+      "mean": 0.024019694948171983,
+      "attack_mean": 0.02402574597400124,
+      "benign_mean": 0.023841189686208963
+    },
+    "T+3": {
+      "min": 0.022767886519432068,
+      "max": 0.023037580773234367,
+      "mean": 0.022851425238320084,
+      "attack_mean": 0.02284932589568829,
+      "benign_mean": 0.022913355845957994
+    }
+  },
+  "scientific_limitations": [
+    "Thresholds are selected using validation data only.",
+    "Scenario 13 remains completely held out from threshold selection.",
+    "The operating criterion constrains validation FPR to at most 10%.",
+    "F1 is optimized only among thresholds satisfying the validation FPR constraint.",
+    "ROC-AUC and PR-AUC are threshold-independent ranking metrics.",
+    "Scenario 13 has high attack prevalence and relatively few benign samples, so its FPR estimate may be unstable.",
+    "This evaluation changes threshold selection only; it does not retrain or modify the world-model weights."
+  ]
+}

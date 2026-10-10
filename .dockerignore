@@ -1,0 +1,107 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python environments
+.venv
+.venv*
+venv
+env
+ENV
+
+# Python caches
+__pycache__
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache
+.mypy_cache
+.ruff_cache
+
+# Python build artifacts
+build
+dist
+*.egg-info
+
+# Frontend dependencies/build output
+frontend/node_modules
+frontend/dist
+frontend/.vite
+frontend/.cache
+
+# JavaScript caches
+node_modules
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# IDE/editor files
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs
+
+# Temporary files
+tmp
+temp
+*.tmp
+*.temp
+*.zip
+
+# Test/generated artifacts that are not required by the backend image
+attribution_test.json
+create_flagged_flow_test_pcap.py
+apply_sensitivity_integration.py
+packet_prediction_attribution.py
+backend/ml/packet_prediction_attribution.py.backup_before_sensitivity
+python
+
+# Synthetic/demo test captures
+threatcast_flagged_flow_test.pcap
+
+# Frontend-only source/configuration
+frontend
+
+# Documentation
+REPRODUCIBILITY.md
+*.md
+
+# Docker/local development files
+docker-compose.override.yml
+
+# Large raw research datasets - not required inside runtime image
+data/DAPT2020
+data/CTU13/scenario1
+data/CTU13/scenario2
+data/CTU13/scenario3
+data/CTU13/scenario4
+data/CTU13/scenario5
+data/CTU13/scenario6
+data/CTU13/scenario7
+data/CTU13/scenario8
+data/CTU13/scenario9
+data/CTU13/scenario10
+data/CTU13/scenario11
+data/CTU13/scenario12
+data/CTU13/scenario13
+
+# Local virtual environment - never copy host Python packages into Docker
+.venv/
+
+# Runtime model artifacts required by the backend and the reproducible
+# Neo4j prediction import.  These are existing trained artifacts, not build
+# outputs.
+!lstm_early_warning_multiscenario.keras
+!lstm_early_warning_scaler.pkl
+!world_model/checkpoints/
+!world_model/checkpoints/**

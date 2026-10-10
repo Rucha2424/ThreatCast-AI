@@ -1,0 +1,18 @@
+Scenario,Timestamp,Prediction_Probability,Predicted_Warning,Actual_Warning,Top_1_Feature,Top_1_SHAP,Top_1_Direction,Top_2_Feature,Top_2_SHAP,Top_2_Direction,Top_3_Feature,Top_3_SHAP,Top_3_Direction
+12,2011-08-19 10:33:13.757874,0.124285504,1,0,Avg_Bytes_Per_Flow,0.024699844419956207,toward_warning,Total_Bytes_Change,-0.02314046844257973,away_from_warning,Avg_Packets_Per_Flow,0.021227523777633907,toward_warning
+12,2011-08-19 10:33:43.755079,0.1415698,1,0,Avg_Duration,0.04517249437049031,toward_warning,Avg_Packets_Per_Flow,0.03905408503487706,toward_warning,Total_Packets_Change,-0.02438243560027331,away_from_warning
+12,2011-08-19 10:35:43.752517,0.227873,1,0,Avg_Duration_Change,0.01147936872439459,toward_warning,Avg_Duration,0.0037845840444788335,toward_warning,Total_Bytes_Change,-0.0031346376606961714,away_from_warning
+12,2011-08-19 10:36:13.765325,0.37971056,1,0,Avg_Duration,0.026381926611065865,toward_warning,Avg_Duration_Change,0.01872219853103161,toward_warning,Flow_Count,0.007226196877309121,toward_warning
+12,2011-08-19 10:36:43.811535,0.39370793,1,0,Avg_Duration,0.06645294399932027,toward_warning,Avg_Duration_Change,0.03495201021432877,toward_warning,Flow_Count,0.007115412852726877,toward_warning
+12,2011-08-19 10:37:13.765243,0.18925999,1,1,Avg_Duration_Change,0.028293079137802123,toward_warning,Avg_Duration,0.0036080099642276766,toward_warning,Total_Source_Bytes,0.0004656076111132279,toward_warning
+12,2011-08-19 10:38:13.757653,0.11011773,1,1,Avg_Duration,0.009555846150033177,toward_warning,Avg_Duration_Change,0.009202211489900946,toward_warning,Flow_Count,0.0021287116280291228,toward_warning
+12,2011-08-19 10:38:43.813478,0.6002721,1,1,Avg_Duration,0.09296096302568913,toward_warning,Avg_Duration_Change,0.018714821245521308,toward_warning,Flow_Count,0.007850322290323675,toward_warning
+12,2011-08-19 10:39:13.786022,0.32767487,1,1,Avg_Duration,0.04346711728721857,toward_warning,Avg_Duration_Change,0.015339243720518425,toward_warning,Flow_Count,0.00670423686678987,toward_warning
+13,2011-08-15 17:13:40.449530,0.31293863,1,1,Avg_Duration,0.02890987731516361,toward_warning,Flow_Count,0.018994655320420863,toward_warning,Avg_Packets_Per_Flow,0.00453326286515221,toward_warning
+13,2011-08-15 17:14:10.507047,0.22495432,1,1,Avg_Duration,0.025602597510442138,toward_warning,Flow_Count,0.012651153851766139,toward_warning,Avg_Packets_Per_Flow,0.007855783123522997,toward_warning
+13,2011-08-15 17:16:40.451673,0.1684408,1,0,Avg_Duration_Change,-0.0058705443516373634,away_from_warning,Avg_Duration,0.002574355830438435,toward_warning,Avg_Packets_Per_Flow,-0.0007174646663770546,away_from_warning
+13,2011-08-15 17:17:10.460206,0.41610387,1,1,Avg_Duration,0.0651019599288702,toward_warning,Avg_Duration_Change,0.012746404623612761,toward_warning,Flow_Count,0.005600006703753024,toward_warning
+13,2011-08-15 17:17:40.460115,0.25501814,1,1,Avg_Duration,0.04058381617069244,toward_warning,Avg_Duration_Change,0.0013789080549031496,toward_warning,Avg_Packets_Per_Flow,-0.000963306927587837,away_from_warning
+13,2011-08-15 17:18:10.451490,0.14695863,1,1,Avg_Duration,0.02169396048411727,toward_warning,Flow_Count,-0.0022352186468197035,away_from_warning,Avg_Duration_Change,0.0009683009062428028,toward_warning
+13,2011-08-15 17:19:10.491257,0.17307341,1,1,Avg_Duration,0.022034377907402813,toward_warning,Flow_Count,-0.0050085196271538734,away_from_warning,Avg_Duration_Change,-0.003528267191722989,away_from_warning
+13,2011-08-15 18:15:40.484278,0.22928481,1,0,Avg_Duration,0.03797296401608037,toward_warning,Avg_Duration_Change,0.017871376173570753,toward_warning,Avg_Packets_Per_Flow,0.007496044491563225,toward_warning

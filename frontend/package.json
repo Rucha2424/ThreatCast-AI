@@ -1,0 +1,30 @@
+{
+  "name": "threatcast-ai-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --watch src --watch public --ext js,jsx,ts,tsx,css,json --exec \"vite --host 0.0.0.0\"",
+    "dev:vite": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "lucide-react": "^0.359.0",
+    "motion": "^13.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.7.0",
+    "react-router-dom": "^6.22.3",
+    "recharts": "^2.12.3"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.18",
+    "nodemon": "^3.1.10",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "vite": "^5.1.6"
+  }
+}

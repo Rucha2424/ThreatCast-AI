@@ -1,0 +1,510 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --tc-bg-deep: #030405;
+  --tc-bg: #080a0d;
+  --tc-card: #0d1115;
+  --tc-card-elevated: #151a20;
+
+  --tc-silver: #b8c0c8;
+  --tc-chrome: #e8edf2;
+  --tc-dark-chrome: #59636d;
+
+  --tc-cyan: #00e5ff;
+  --tc-violet: #a855f7;
+  --tc-green: #00ff9c;
+  --tc-amber: #ffb000;
+  --tc-red: #ff1744;
+
+  --tc-text: #f1f5f9;
+  --tc-muted: #718096;
+
+  --tc-border: rgba(184, 192, 200, 0.14);
+  --tc-border-bright: rgba(184, 192, 200, 0.26);
+
+  --tc-cyan-glow: 0 0 20px rgba(0, 229, 255, 0.18);
+  --tc-amber-glow: 0 0 24px rgba(255, 176, 0, 0.2);
+  --tc-red-glow: 0 0 24px rgba(255, 23, 68, 0.2);
+  --tc-violet-glow: 0 0 24px rgba(168, 85, 247, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--tc-bg-deep);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(0, 229, 255, 0.035),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(168, 85, 247, 0.025),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(255, 176, 0, 0.018),
+      transparent 30%
+    ),
+    var(--tc-bg);
+
+  color: var(--tc-text);
+
+  font-family:
+    'Inter',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(0, 229, 255, 0.24);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050608;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #303841;
+  border-radius: 999px;
+  border: 2px solid #050608;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--tc-dark-chrome);
+}
+
+/* =========================================================
+   THREATCAST METALLIC SURFACES
+   ========================================================= */
+
+.tc-metal {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(232, 237, 242, 0.055),
+      rgba(89, 99, 109, 0.018) 42%,
+      rgba(0, 0, 0, 0.12)
+    ),
+    var(--tc-card);
+
+  border: 1px solid var(--tc-border);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 12px 40px rgba(0, 0, 0, 0.24);
+
+  backdrop-filter: blur(12px);
+}
+
+.tc-metal:hover {
+  border-color: var(--tc-border-bright);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 16px 48px rgba(0, 0, 0, 0.32);
+}
+
+.tc-chrome-text {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #e8edf2 30%,
+    #aeb7c0 58%,
+    #f4f7fa 75%,
+    #8d98a2 100%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tc-chrome-border {
+  border: 1px solid transparent;
+
+  background:
+    linear-gradient(var(--tc-card), var(--tc-card)) padding-box,
+    linear-gradient(
+      135deg,
+      rgba(232, 237, 242, 0.5),
+      rgba(89, 99, 109, 0.15),
+      rgba(232, 237, 242, 0.32)
+    ) border-box;
+}
+
+/* =========================================================
+   NEON EFFECTS
+   ========================================================= */
+
+.tc-neon-cyan {
+  color: var(--tc-cyan);
+  text-shadow:
+    0 0 6px rgba(0, 229, 255, 0.55),
+    0 0 18px rgba(0, 229, 255, 0.25);
+}
+
+.tc-neon-amber {
+  color: var(--tc-amber);
+  text-shadow:
+    0 0 6px rgba(255, 176, 0, 0.55),
+    0 0 18px rgba(255, 176, 0, 0.25);
+}
+
+.tc-neon-red {
+  color: var(--tc-red);
+  text-shadow:
+    0 0 6px rgba(255, 23, 68, 0.55),
+    0 0 18px rgba(255, 23, 68, 0.25);
+}
+
+.tc-neon-green {
+  color: var(--tc-green);
+  text-shadow:
+    0 0 6px rgba(0, 255, 156, 0.55),
+    0 0 18px rgba(0, 255, 156, 0.25);
+}
+
+.tc-neon-violet {
+  color: var(--tc-violet);
+  text-shadow:
+    0 0 6px rgba(168, 85, 247, 0.55),
+    0 0 18px rgba(168, 85, 247, 0.25);
+}
+
+/* =========================================================
+   STATUS DOTS
+   ========================================================= */
+
+.tc-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.tc-status-dot.cyan {
+  background: var(--tc-cyan);
+  box-shadow:
+    0 0 6px rgba(0, 229, 255, 0.9),
+    0 0 14px rgba(0, 229, 255, 0.45);
+  animation: tc-breathe-cyan 2.2s ease-in-out infinite;
+}
+
+.tc-status-dot.green {
+  background: var(--tc-green);
+  box-shadow:
+    0 0 6px rgba(0, 255, 156, 0.9),
+    0 0 14px rgba(0, 255, 156, 0.4);
+  animation: tc-breathe-green 2.2s ease-in-out infinite;
+}
+
+.tc-status-dot.amber {
+  background: var(--tc-amber);
+  box-shadow:
+    0 0 6px rgba(255, 176, 0, 0.9),
+    0 0 14px rgba(255, 176, 0, 0.4);
+  animation: tc-breathe-amber 1.5s ease-in-out infinite;
+}
+
+.tc-status-dot.red {
+  background: var(--tc-red);
+  box-shadow:
+    0 0 6px rgba(255, 23, 68, 0.95),
+    0 0 16px rgba(255, 23, 68, 0.5);
+  animation: tc-breathe-red 1s ease-in-out infinite;
+}
+
+/* =========================================================
+   GRID / TECHNICAL BACKGROUND
+   ========================================================= */
+
+.tc-grid {
+  background-image:
+    linear-gradient(
+      rgba(184, 192, 200, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(184, 192, 200, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 42px 42px;
+}
+
+.tc-grid-fade {
+  position: relative;
+}
+
+.tc-grid-fade::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at center,
+      transparent 0%,
+      rgba(3, 4, 5, 0.08) 48%,
+      rgba(3, 4, 5, 0.92) 100%
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   SCANLINE / DATA EFFECT
+   ========================================================= */
+
+.tc-scanline {
+  position: relative;
+  overflow: hidden;
+}
+
+.tc-scanline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -100%;
+  height: 40%;
+
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 229, 255, 0.035),
+    transparent
+  );
+
+  pointer-events: none;
+
+  animation: tc-scan 6s linear infinite;
+}
+
+/* =========================================================
+   3D DEPTH
+   ========================================================= */
+
+.tc-3d {
+  transform-style: preserve-3d;
+  perspective: 1200px;
+}
+
+.tc-3d-card {
+  transform:
+    perspective(1200px)
+    rotateX(0deg)
+    rotateY(0deg)
+    translateZ(0);
+
+  transition:
+    transform 450ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 450ms ease,
+    border-color 450ms ease;
+}
+
+.tc-3d-card:hover {
+  transform:
+    perspective(1200px)
+    rotateX(1.2deg)
+    rotateY(-1.2deg)
+    translateZ(8px);
+}
+
+/* =========================================================
+   NEON LINE
+   ========================================================= */
+
+.tc-neon-line {
+  height: 1px;
+  width: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 229, 255, 0.65),
+    rgba(232, 237, 242, 0.45),
+    rgba(0, 229, 255, 0.65),
+    transparent
+  );
+
+  box-shadow:
+    0 0 8px rgba(0, 229, 255, 0.22);
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes tc-breathe-cyan {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes tc-breathe-green {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes tc-breathe-amber {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.18);
+  }
+}
+
+@keyframes tc-breathe-red {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
+@keyframes tc-scan {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(400%);
+  }
+}
+
+@keyframes tc-pulse-ring {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.65;
+  }
+
+  70% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
+}
+
+.tc-pulse-ring {
+  position: relative;
+}
+
+.tc-pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+
+  border: 1px solid currentColor;
+  border-radius: inherit;
+
+  opacity: 0.35;
+
+  animation: tc-pulse-ring 2.4s ease-out infinite;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  .tc-3d-card:hover {
+    transform: none;
+  }
+
+  .tc-grid {
+    background-size: 30px 30px;
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "experiment": "CTU13 apples-to-apples baseline benchmark",
+  "seed": 42,
+  "dataset": "CTU13",
+  "feature_names": [
+    "Flow_Count",
+    "Total_Packets",
+    "Total_Bytes",
+    "Total_Source_Bytes",
+    "Avg_Duration",
+    "Avg_Packets_Per_Flow",
+    "Avg_Bytes_Per_Flow",
+    "Flow_Count_Change",
+    "Total_Packets_Change",
+    "Total_Bytes_Change",
+    "Total_Source_Bytes_Change",
+    "Avg_Duration_Change"
+  ],
+  "feature_count": 12,
+  "sequence_length": 5,
+  "forecast_horizon": 3,
+  "train_scenarios": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10,
+    11
+  ],
+  "validation_scenarios": [
+    12
+  ],
+  "test_scenarios": [
+    13
+  ],
+  "train_windows": 906,
+  "validation_windows": 136,
+  "test_windows": 122,
+  "models": [
+    "persistence",
+    "static_logistic_regression",
+    "temporal_logistic_regression",
+    "ctu13_temporal_world_model"
+  ],
+  "threshold_selection": "validation-only, maximize F1 subject to FPR <= 0.10",
+  "scenario_13_used_for_training": false,
+  "scenario_13_used_for_model_selection": false,
+  "scenario_13_used_for_threshold_selection": false,
+  "raw_world_model_probabilities": true,
+  "results_csv": "E:\\Projects\\SIH\\world_model\\checkpoints\\ctu13_risk\\benchmark\\apples_to_apples_results.csv",
+  "temporal_improvement_csv": "E:\\Projects\\SIH\\world_model\\checkpoints\\ctu13_risk\\benchmark\\temporal_improvement_results.csv"
+}

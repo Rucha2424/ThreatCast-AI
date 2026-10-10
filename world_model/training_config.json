@@ -1,0 +1,102 @@
+{
+  "project": "ThreatCast",
+  "component": "Research World Model",
+  "version": "1.0",
+
+  "dataset": {
+    "name": "DAPT2020 Monday PCAP packet graph dataset",
+    "source_graph_file": "world_model/packet_graphs.pt",
+    "graph_snapshots": 930,
+    "graph_construction": "Packet-level network graphs generated from DAPT2020 PCAP"
+  },
+
+  "graph_features": {
+    "node_feature_count": 2,
+    "node_features": [
+      "packets",
+      "bytes"
+    ]
+  },
+
+  "graph_encoder": {
+    "architecture": "GraphSAGEEncoder",
+    "input_features": 2,
+    "hidden_dimension": 64,
+    "output_dimension": 64,
+    "pooling": "Mean pooling"
+  },
+
+  "temporal_model": {
+    "architecture": "TemporalStateEncoder",
+    "input_dimension": 64,
+    "hidden_dimension": 64,
+    "sequence_length": 5
+  },
+
+  "latent_predictor": {
+    "architecture": "LatentStatePredictor",
+    "latent_dimension": 64,
+    "forecast_horizon": 1
+  },
+
+  "training": {
+    "epochs": 30,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "optimizer": "Adam",
+    "loss_function": "Mean Squared Error",
+    "gradient_clipping": 1.0,
+    "training_shuffle": true,
+    "random_seed": 42
+  },
+
+  "data_split": {
+    "method": "Chronological 80/20 split",
+    "training_snapshots": "0:744",
+    "validation_snapshots": "744:930",
+    "training_samples": 739,
+    "validation_samples": 186
+  },
+
+  "normalization": {
+    "method": "Standardization using global node-feature mean and standard deviation",
+    "scaler_file": "world_model/checkpoints/feature_scaler.pt"
+  },
+
+  "reproducibility": {
+    "python_random_seed": 42,
+    "numpy_random_seed": 42,
+    "torch_random_seed": 42,
+    "cuda_seed": 42,
+    "deterministic_algorithms": true
+  },
+
+  "device": {
+    "configured_device": "cuda if available, otherwise cpu",
+    "verified_environment": "CPU",
+    "verified_pytorch_version": "2.14.0+cpu",
+    "cuda_available": false
+  },
+
+  "checkpoints": {
+    "graph_encoder": "world_model/checkpoints/graph_encoder.pt",
+    "temporal_encoder": "world_model/checkpoints/temporal_encoder.pt",
+    "latent_predictor": "world_model/checkpoints/latent_predictor.pt",
+    "feature_scaler": "world_model/checkpoints/feature_scaler.pt",
+    "training_metadata": "world_model/checkpoints/training_metadata.pt"
+  },
+
+  "reproduction_command": "python world_model\\train_world_model.py",
+
+  "evaluation": {
+    "validation_metric": "MSE",
+    "checkpoint_selection": "Lowest validation loss"
+  },
+
+  "important_scope": {
+    "purpose": "Learn temporal network-state transition dynamics",
+    "current_output": "Predicted next latent network state",
+    "infiltration_risk_head": "Not included in this training configuration",
+    "mitre_stage_head": "Not included in this training configuration"
+  }
+}

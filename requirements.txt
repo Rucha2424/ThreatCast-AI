@@ -1,0 +1,17 @@
+# Runtime dependencies used by root training/creation/inspection scripts
+# and the FastAPI backend.
+--extra-index-url https://download.pytorch.org/whl/cpu
+fastapi==0.141.1
+joblib==1.6.0
+neo4j==6.3.0
+numpy==2.4.6
+pandas==2.3.3
+pydantic==2.13.5
+pydantic-settings==2.13.1
+python-multipart==0.0.32
+scapy==2.7.0
+scikit-learn==1.9.0
+shap==0.51.0
+tensorflow==2.21.0
+torch==2.14.0+cpu
+uvicorn[standard]==0.52.4

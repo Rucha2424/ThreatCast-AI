@@ -1,0 +1,17 @@
+# Schema: category,raw_unit_pattern,standard_uom,description
+# Controlled Vocabulary for Unit of Measure Standardization
+category,raw_unit_pattern,standard_uom,description
+Dimension,"in|""|inch|inches",in,Length / Width / Height / Diameter
+Dimension,ft|'|foot|feet,ft,Length / Height in feet
+Dimension,mm|millimeter|millimeters,mm,Metric millimeters
+Dimension,cm|centimeter|centimeters,cm,Metric centimeters
+Electrical,v|volt|volts|vac|vdc,V,Electrical Voltage
+Electrical,a|amp|amps|ampere|amperes,A,Electrical Current / Amperage
+Electrical,w|watt|watts,W,Electrical Power
+Electrical,kw-hr|kwh|kilowatt-hour,kW-hr,Annual Energy Usage
+Acoustic,dba|db|decibel|decibels,dBA,A-weighted Sound Level
+Speed,rpm|revolutions per minute,rpm,Rotational Speed
+Quantity,pc|pcs|piece|pieces,pc,Individual Item Piece
+Quantity,pk|pack|pkg|package,pk,Multi-Pack
+Weight,lb|lbs|pound|pounds,lb,Weight in pounds
+Weight,oz|ounce|ounces,oz,Weight in ounces

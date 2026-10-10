@@ -1,0 +1,189 @@
+======================================================================
+SCENARIO 12 RICH-FEATURE LSTM
+======================================================================
+
+Dataset shape: (143, 46)
+
+Number of model features: 42
+
+Model features:
+ 1. Flow_Count
+ 2. Total_Packets
+ 3. Total_Bytes
+ 4. Total_Source_Bytes
+ 5. Avg_Duration
+ 6. Avg_Packets_Per_Flow
+ 7. Avg_Bytes_Per_Flow
+ 8. Unique_Source_Hosts
+ 9. Unique_Destination_Hosts
+10. Unique_Communication_Pairs
+11. Unique_Source_Ports
+12. Unique_Destination_Ports
+13. UDP_Ratio
+14. TCP_Ratio
+15. ICMP_Ratio
+16. Unique_Connection_States
+17. Unique_Directions
+18. External_Destination_Flow_Count
+19. Destination_Diversity
+20. Source_Diversity
+21. Communication_Density
+22. Flow_Count_Change
+23. Total_Packets_Change
+24. Total_Bytes_Change
+25. Total_Source_Bytes_Change
+26. Avg_Duration_Change
+27. Avg_Packets_Per_Flow_Change
+28. Avg_Bytes_Per_Flow_Change
+29. Unique_Source_Hosts_Change
+30. Unique_Destination_Hosts_Change
+31. Unique_Communication_Pairs_Change
+32. Unique_Source_Ports_Change
+33. Unique_Destination_Ports_Change
+34. UDP_Ratio_Change
+35. TCP_Ratio_Change
+36. ICMP_Ratio_Change
+37. Unique_Connection_States_Change
+38. Unique_Directions_Change
+39. External_Destination_Flow_Count_Change
+40. Destination_Diversity_Change
+41. Source_Diversity_Change
+42. Communication_Density_Change
+
+X shape: (143, 42)
+y shape: (143,)
+
+Target distribution:
+0    106
+1     37
+Name: count, dtype: int64
+
+Scaler saved: lstm_scenario12_rich_scaler.pkl
+
+Sequence shape: (139, 5, 42)
+Sequence targets: (139,)
+
+Training sequences: 97
+Testing sequences : 42
+
+Training target distribution:
+0    68
+1    29
+Name: count, dtype: int64
+
+Testing target distribution:
+0    34
+1     8
+Name: count, dtype: int64
+
+Class weights: {0: 1.0, 1: np.float64(2.3448275862068964)}
+Model: "sequential"
++--------------------------------------------------------------------------+
+| Layer (type)                    | Output Shape           |       Param # |
+|---------------------------------+------------------------+---------------|
+| lstm (LSTM)                     | (None, 64)             |        27,392 |
+|---------------------------------+------------------------+---------------|
+| dropout (Dropout)               | (None, 64)             |             0 |
+|---------------------------------+------------------------+---------------|
+| dense (Dense)                   | (None, 32)             |         2,080 |
+|---------------------------------+------------------------+---------------|
+| dropout_1 (Dropout)             | (None, 32)             |             0 |
+|---------------------------------+------------------------+---------------|
+| dense_1 (Dense)                 | (None, 1)              |            33 |
++--------------------------------------------------------------------------+
+ Total params: 29,505 (115.25 KB)
+ Trainable params: 29,505 (115.25 KB)
+ Non-trainable params: 0 (0.00 B)
+
+======================================================================
+TRAINING
+======================================================================
+Epoch 1/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m8s[0m 2s/step - AUC: 0.3590 - Precision: 0.2143 - Recall: 1.0000 - accuracy: 0.3125 - loss: 0.9549
+[1m5/5[0m [32m====================[0m[37m[0m [1m3s[0m 161ms/step - AUC: 0.5053 - Precision: 0.2745 - Recall: 0.7000 - accuracy: 0.4416 - loss: 0.9460 - val_AUC: 0.5960 - val_Precision: 0.6250 - val_Recall: 0.5556 - val_accuracy: 0.6500 - val_loss: 0.6872
+Epoch 2/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 36ms/step - AUC: 0.7396 - Precision: 0.3000 - Recall: 0.7500 - accuracy: 0.5000 - loss: 0.8945
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 21ms/step - AUC: 0.7237 - Precision: 0.3750 - Recall: 0.7500 - accuracy: 0.6104 - loss: 0.8906 - val_AUC: 0.4343 - val_Precision: 0.6000 - val_Recall: 0.3333 - val_accuracy: 0.6000 - val_loss: 0.6919
+Epoch 3/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 25ms/step - AUC: 0.6984 - Precision: 0.7143 - Recall: 0.7143 - accuracy: 0.7500 - loss: 1.0667
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 19ms/step - AUC: 0.7035 - Precision: 0.4118 - Recall: 0.7000 - accuracy: 0.6623 - loss: 0.8937 - val_AUC: 0.4192 - val_Precision: 0.4000 - val_Recall: 0.2222 - val_accuracy: 0.5000 - val_loss: 0.6964
+Epoch 4/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 27ms/step - AUC: 0.8273 - Precision: 0.6250 - Recall: 1.0000 - accuracy: 0.8125 - loss: 0.9138
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 22ms/step - AUC: 0.8272 - Precision: 0.5172 - Recall: 0.7500 - accuracy: 0.7532 - loss: 0.8506 - val_AUC: 0.3737 - val_Precision: 0.4000 - val_Recall: 0.2222 - val_accuracy: 0.5000 - val_loss: 0.6985
+Epoch 5/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 31ms/step - AUC: 0.9167 - Precision: 0.6250 - Recall: 0.8333 - accuracy: 0.7500 - loss: 0.9035
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 21ms/step - AUC: 0.8386 - Precision: 0.5217 - Recall: 0.6000 - accuracy: 0.7532 - loss: 0.8366 - val_AUC: 0.3384 - val_Precision: 0.2857 - val_Recall: 0.2222 - val_accuracy: 0.4000 - val_loss: 0.7020
+Epoch 6/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 29ms/step - AUC: 0.8091 - Precision: 0.6667 - Recall: 0.8000 - accuracy: 0.8125 - loss: 0.9144
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 22ms/step - AUC: 0.7860 - Precision: 0.5238 - Recall: 0.5500 - accuracy: 0.7532 - loss: 0.8417 - val_AUC: 0.3283 - val_Precision: 0.2857 - val_Recall: 0.2222 - val_accuracy: 0.4000 - val_loss: 0.7051
+Epoch 7/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 30ms/step - AUC: 0.9818 - Precision: 0.8333 - Recall: 1.0000 - accuracy: 0.9375 - loss: 0.7985
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 20ms/step - AUC: 0.8596 - Precision: 0.6000 - Recall: 0.6000 - accuracy: 0.7922 - loss: 0.8119 - val_AUC: 0.2980 - val_Precision: 0.2500 - val_Recall: 0.2222 - val_accuracy: 0.3500 - val_loss: 0.7084
+Epoch 8/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 28ms/step - AUC: 0.0000e+00 - Precision: 0.0000e+00 - Recall: 0.0000e+00 - accuracy: 0.9375 - loss: 0.5852
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 23ms/step - AUC: 0.8860 - Precision: 0.5769 - Recall: 0.7500 - accuracy: 0.7922 - loss: 0.7670 - val_AUC: 0.2626 - val_Precision: 0.3000 - val_Recall: 0.3333 - val_accuracy: 0.3500 - val_loss: 0.7121
+Epoch 9/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 33ms/step - AUC: 1.0000 - Precision: 0.7500 - Recall: 1.0000 - accuracy: 0.9375 - loss: 0.6286
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 22ms/step - AUC: 0.9044 - Precision: 0.6538 - Recall: 0.8500 - accuracy: 0.8442 - loss: 0.7268 - val_AUC: 0.2778 - val_Precision: 0.3333 - val_Recall: 0.3333 - val_accuracy: 0.4000 - val_loss: 0.7164
+Epoch 10/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 31ms/step - AUC: 0.8727 - Precision: 0.6667 - Recall: 0.8000 - accuracy: 0.8125 - loss: 0.7520
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 21ms/step - AUC: 0.9263 - Precision: 0.6800 - Recall: 0.8500 - accuracy: 0.8571 - loss: 0.6781 - val_AUC: 0.2475 - val_Precision: 0.3000 - val_Recall: 0.3333 - val_accuracy: 0.3500 - val_loss: 0.7226
+Epoch 11/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 29ms/step - AUC: 0.8929 - Precision: 0.5000 - Recall: 1.0000 - accuracy: 0.8750 - loss: 0.6125
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 20ms/step - AUC: 0.9022 - Precision: 0.7083 - Recall: 0.8500 - accuracy: 0.8701 - loss: 0.6671 - val_AUC: 0.2273 - val_Precision: 0.3000 - val_Recall: 0.3333 - val_accuracy: 0.3500 - val_loss: 0.7304
+Epoch 12/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 25ms/step - AUC: 0.8727 - Precision: 0.6667 - Recall: 0.8000 - accuracy: 0.8125 - loss: 0.7220
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 18ms/step - AUC: 0.9404 - Precision: 0.8095 - Recall: 0.8500 - accuracy: 0.9091 - loss: 0.6081 - val_AUC: 0.2071 - val_Precision: 0.3000 - val_Recall: 0.3333 - val_accuracy: 0.3500 - val_loss: 0.7395
+Epoch 13/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 28ms/step - AUC: 1.0000 - Precision: 1.0000 - Recall: 1.0000 - accuracy: 1.0000 - loss: 0.5691
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 24ms/step - AUC: 0.9425 - Precision: 0.7083 - Recall: 0.8500 - accuracy: 0.8701 - loss: 0.5717 - val_AUC: 0.2020 - val_Precision: 0.3000 - val_Recall: 0.3333 - val_accuracy: 0.3500 - val_loss: 0.7507
+Epoch 14/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 34ms/step - AUC: 0.9487 - Precision: 0.7500 - Recall: 1.0000 - accuracy: 0.9375 - loss: 0.4740
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 23ms/step - AUC: 0.9338 - Precision: 0.7083 - Recall: 0.8500 - accuracy: 0.8701 - loss: 0.5440 - val_AUC: 0.1919 - val_Precision: 0.3000 - val_Recall: 0.3333 - val_accuracy: 0.3500 - val_loss: 0.7623
+Epoch 15/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 52ms/step - AUC: 0.7692 - Precision: 0.2500 - Recall: 0.3333 - accuracy: 0.6875 - loss: 0.6663
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 29ms/step - AUC: 0.9474 - Precision: 0.7143 - Recall: 0.7500 - accuracy: 0.8571 - loss: 0.5051 - val_AUC: 0.1818 - val_Precision: 0.2727 - val_Recall: 0.3333 - val_accuracy: 0.3000 - val_loss: 0.7700
+Epoch 16/100
+
+[1m1/5[0m [32m====[0m[37m================[0m [1m0s[0m 29ms/step - AUC: 1.0000 - Precision: 0.6667 - Recall: 1.0000 - accuracy: 0.9375 - loss: 0.2525
+[1m5/5[0m [32m====================[0m[37m[0m [1m0s[0m 19ms/step - AUC: 0.9382 - Precision: 0.7500 - Recall: 0.9000 - accuracy: 0.8961 - loss: 0.4629 - val_AUC: 0.1717 - val_Precision: 0.2500 - val_Recall: 0.3333 - val_accuracy: 0.2500 - val_loss: 0.7775
+
+======================================================================
+SCENARIO 12 RICH-FEATURE RESULTS
+======================================================================
+
+Best threshold : 0.46
+Accuracy       : 0.2381
+Precision      : 0.2000
+Recall         : 1.0000
+F1 Score       : 0.3333
+FPR            : 0.9412
+ROC-AUC        : 0.3456
+PR-AUC         : 0.1567
+
+Confusion Matrix:
+TN = 2
+FP = 32
+FN = 0
+TP = 8
+
+Model saved: lstm_scenario12_rich.keras
+
+======================================================================
+EXPERIMENT COMPLETE
+======================================================================

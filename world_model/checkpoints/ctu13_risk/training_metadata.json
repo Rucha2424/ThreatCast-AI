@@ -1,0 +1,105 @@
+{
+  "model": "CTU13 Temporal Infiltration Risk World Model",
+  "dataset": "CTU13",
+  "seed": 42,
+  "device": "cpu",
+  "features": [
+    "Flow_Count",
+    "Total_Packets",
+    "Total_Bytes",
+    "Total_Source_Bytes",
+    "Avg_Duration",
+    "Avg_Packets_Per_Flow",
+    "Avg_Bytes_Per_Flow",
+    "Flow_Count_Change",
+    "Total_Packets_Change",
+    "Total_Bytes_Change",
+    "Total_Source_Bytes_Change",
+    "Avg_Duration_Change"
+  ],
+  "input_dim": 12,
+  "sequence_length": 5,
+  "forecast_horizon": 3,
+  "latent_dimension": 64,
+  "epochs_configured": 60,
+  "minimum_epochs": 10,
+  "best_epoch": 10,
+  "batch_size": 32,
+  "learning_rate": 0.0005,
+  "optimizer": "AdamW",
+  "weight_decay": 0.0001,
+  "latent_loss": "MSE",
+  "risk_loss": "BCEWithLogitsLoss",
+  "latent_loss_weight": 0.5,
+  "risk_loss_weight": 2.0,
+  "positive_class_weight": 1.0,
+  "gradient_clip_norm": 1.0,
+  "early_stopping_patience": 12,
+  "checkpoint_selection": "validation_mean_pr_auc",
+  "train_scenarios": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10,
+    11
+  ],
+  "validation_scenarios": [
+    12
+  ],
+  "test_scenarios": [
+    13
+  ],
+  "split_strategy": "scenario-held-out chronological windows",
+  "sampling_strategy": "scenario-balanced weighted random sampling",
+  "best_validation_mean_pr_auc": 0.7768344157770201,
+  "best_validation_metrics": {
+    "latent_loss": 0.15097173259538763,
+    "risk_loss": 1.5331535427009357,
+    "combined_loss": 3.1417929775574627,
+    "mean_pr_auc": 0.7768344157770201,
+    "mean_roc_auc": 0.6405139270069234,
+    "horizon_metrics": {
+      "T+1": {
+        "roc_auc": 0.6200284090909092,
+        "pr_auc": 0.7678004681162027
+      },
+      "T+2": {
+        "roc_auc": 0.6449916327994263,
+        "pr_auc": 0.7734632639916104
+      },
+      "T+3": {
+        "roc_auc": 0.6565217391304348,
+        "pr_auc": 0.7892395152232473
+      }
+    }
+  },
+  "final_validation_metrics": {
+    "latent_loss": 0.15097173259538763,
+    "risk_loss": 1.5331535427009357,
+    "combined_loss": 3.1417929775574627,
+    "mean_pr_auc": 0.7768344157770201,
+    "mean_roc_auc": 0.6405139270069234,
+    "horizon_metrics": {
+      "T+1": {
+        "roc_auc": 0.6200284090909092,
+        "pr_auc": 0.7678004681162027
+      },
+      "T+2": {
+        "roc_auc": 0.6449916327994263,
+        "pr_auc": 0.7734632639916104
+      },
+      "T+3": {
+        "roc_auc": 0.6565217391304348,
+        "pr_auc": 0.7892395152232473
+      }
+    }
+  },
+  "checkpoint": "ctu13_risk_world_model.pt",
+  "scope_note": "Scenario 13 is never used during training or checkpoint selection.",
+  "test_note": "Scenario 13 must only be evaluated by the separate evaluation script after training is complete."
+}

@@ -1,0 +1,11 @@
+0: Dur
+1: Sport
+2: Dport
+3: sTos
+4: dTos
+5: TotPkts
+6: TotBytes
+7: SrcBytes
+8: Proto
+9: Dir
+10: State
